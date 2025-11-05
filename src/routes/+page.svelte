@@ -1,18 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	interface constraints {
-		video: boolean;
-		audio: boolean;
-	}
+	let video: HTMLVideoElement | null = null;
 
-	onMount(() => {
-		const openMediaDevices = async (constraints: constraints) => {
-			return await navigator.mediaDevices.getUserMedia(constraints);
-		};
-
+	onMount(async () => {
 		try {
-			const stream = openMediaDevices({ video: true, audio: true });
+			const constraints = { video: true, audio: true };
+			const stream = await navigator.mediaDevices.getUserMedia(constraints);
+			if (video != null) {
+				video.srcObject = stream;
+			}
 			console.log('Got MediaStream:', stream);
 		} catch (error) {
 			console.error('Error accessing media devices.', error);
@@ -20,5 +17,6 @@
 	});
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<video bind:this={video} id="local-video" autoplay playsinline controls={false}>
+	<track kind="captions" />
+</video>
