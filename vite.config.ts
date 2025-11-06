@@ -4,6 +4,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { type ViteDevServer } from 'vite';
 
 import { Server } from 'socket.io';
+import { handleSignalling } from './server/handleSignalling';
 
 const webSocketServer = {
 	name: 'webSocketServer',
@@ -13,7 +14,7 @@ const webSocketServer = {
 		const io = new Server(server.httpServer);
 
 		io.on('connection', (socket) => {
-			socket.emit('eventFromServer', 'Hello, World');
+			handleSignalling(io, socket);
 		});
 	}
 };
