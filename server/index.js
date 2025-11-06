@@ -1,3 +1,4 @@
+// TODO: add dotenv so that environment variables work for the server
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
