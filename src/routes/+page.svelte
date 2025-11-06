@@ -1,5 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { io } from 'socket.io-client';
+
+	const socket = io();
+	socket.on('eventFromServer', (message) => {
+		console.log(message);
+	});
 
 	let localVideo: HTMLVideoElement | null = null;
 	let remoteVideo: HTMLVideoElement | null = null;
