@@ -1,41 +1,17 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { METERED_USERNAME, METERED_CREDENTIAL } from '$env/static/private';
-
-	const servers = {
-		iceServers: [
-			{
-				urls: 'stun:stun.relay.metered.ca:80'
-			},
-			{
-				urls: 'turn:standard.relay.metered.ca:80',
-				username: `${METERED_USERNAME}`,
-				credential: `${METERED_CREDENTIAL}`
-			},
-			{
-				urls: 'turn:standard.relay.metered.ca:80?transport=tcp',
-				username: `${METERED_USERNAME}`,
-				credential: `${METERED_CREDENTIAL}`
-			},
-			{
-				urls: 'turn:standard.relay.metered.ca:443',
-				username: `${METERED_USERNAME}`,
-				credential: `${METERED_CREDENTIAL}`
-			},
-			{
-				urls: 'turns:standard.relay.metered.ca:443?transport=tcp',
-				username: `${METERED_USERNAME}`,
-				credential: `${METERED_CREDENTIAL}`
-			}
-		]
-	};
-
-	let pc = new RTCPeerConnection(servers);
 
 	let localVideo: HTMLVideoElement | null = null;
 	let remoteVideo: HTMLVideoElement | null = null;
 
 	onMount(async () => {
+		const response = await fetch(
+			`https://peer-talk.metered.live/api/v1/turn/credentials?apiKey=${import.meta.env.VITE_METERED_API_KEY}`
+		);
+		const iceServers = await response.json();
+
+		let pc = new RTCPeerConnection(iceServers);
+
 		try {
 			const constraints = { video: true, audio: true };
 			const localStream = await navigator.mediaDevices.getUserMedia(constraints);
