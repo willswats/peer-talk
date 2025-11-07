@@ -4,7 +4,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 
 import { handler } from '../build/handler.js';
-import { handleSignalling } from './handleSignalling.js';
+import { handleSignalling } from './handleSignalling.ts';
 
 const port = 3000;
 const app = express();
@@ -16,8 +16,6 @@ io.on('connection', (socket) => {
 	handleSignalling(io, socket);
 });
 
-// SvelteKit should handle everything else using Express middleware
-// https://github.com/sveltejs/kit/tree/master/packages/adapter-node#custom-server
 app.use(handler);
 
 server.listen(port);
