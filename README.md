@@ -12,7 +12,7 @@ A web application for peer-to-peer text and voice communication with an open mar
 
 ## Production
 
-```
+```bash
 npm build
 npm start
 ```
