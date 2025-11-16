@@ -61,27 +61,34 @@
 		socket.emit('join-room', room);
 
 		pc!.onicecandidate = (event) => {
-			if (event.candidate) {
-				socket.emit('ice-candidate', event.candidate, room, socket.id);
-			}
+			event.candidate && socket.emit('ice-candidate', event.candidate, room, socket.id);
 		};
 
 		// Create and send offer
 		const offerDescription = await pc!.createOffer();
 		await pc!.setLocalDescription(offerDescription);
-		socket.emit('offer', pc!.localDescription, room);
+		const offer = {
+			sdp: offerDescription.sdp,
+			type: offerDescription.type
+		};
+
+		socket.emit('offer', offer, room);
 		console.log('Offer sent to room');
 
-		// Listen for answers (caller only needs to listen for answers)
+		// Listen for answers
 		socket.on('answer', async (answer) => {
 			console.log('Received answer');
-			await pc!.setRemoteDescription(new RTCSessionDescription(answer));
-			console.log('Remote description set from answer');
+			if (!pc!.currentRemoteDescription) {
+				const answerDescription = new RTCSessionDescription(answer);
+				await pc!.setRemoteDescription(answerDescription);
+				console.log('Remote description set from answer');
+			}
 		});
 
 		// Listen for ICE candidates
 		socket.on('ice-candidate', (candidate) => {
-			pc!.addIceCandidate(new RTCIceCandidate(candidate));
+			const iceCandidate = new RTCIceCandidate(candidate);
+			pc!.addIceCandidate(iceCandidate);
 		});
 	}
 
