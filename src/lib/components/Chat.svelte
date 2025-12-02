@@ -16,21 +16,15 @@
 		return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 	}
 
-	function appendMessage(text: string, type: string, timestamp: string) {
-		const messageElement = document.createElement('div');
+	function appendMessage(text: string, type: string) {
+		const messageElement = document.createElement('p');
 		messageElement.classList.add(type); // 'sent' or 'received'
 		messageElement.innerText = text;
-
-		const timestampElement = document.createElement('div');
-		timestampElement.classList.add('timestamp');
-		timestampElement.innerText = timestamp;
-
-		messageElement.appendChild(timestampElement);
 		messageContainer!.appendChild(messageElement);
 	}
 
 	function appendSystemMessage(text: string) {
-		const systemMessage = document.createElement('div');
+		const systemMessage = document.createElement('p');
 		systemMessage.classList.add('system-message');
 		systemMessage.innerText = text;
 		messageContainer!.appendChild(systemMessage);
@@ -42,7 +36,7 @@
 		const message = messageInput!.value;
 
 		// Show the message in your chat window
-		appendMessage(`You: ${message}`, 'sent', getTime());
+		appendMessage(`You (${getTime()}): ${message}`, 'sent');
 
 		// Send the message to the server
 		socket.emit('send-chat-message', message);
@@ -57,7 +51,7 @@
 		socket.emit('new-user', name);
 
 		socket.on('chat-message', (data) => {
-			appendMessage(`${data.name}: ${data.message}`, 'received', data.time);
+			appendMessage(`${data.name} (${data.time}): ${data.message}`, 'received');
 		});
 
 		// Notify when a user connects to the chat
