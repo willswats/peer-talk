@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { io } from 'socket.io-client';
 	import { onMount } from 'svelte';
+	import Chat from '$lib/components/Chat.svelte';
 
 	// Global state
 	let pc: RTCPeerConnection | null = null;
 	let localStream: MediaStream | null = $state(null);
 	let remoteStream: MediaStream | null = $state(null);
 	const room = 'default-room';
-	let messageContainer: HTMLParagraphElement | null = null;
-	let messageInput: HTMLInputElement | null = null;
 
 	const socket = io();
 	socket.on('eventFromServer', (message) => {
@@ -16,63 +15,7 @@
 	});
 	socket.emit('join-room', room);
 
-	function getTime() {
-		return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-	}
-
-	function appendMessage(text: string, type: string, timestamp: string) {
-		const messageElement = document.createElement('div');
-		messageElement.classList.add(type); // 'sent' or 'received'
-		messageElement.innerText = text;
-
-		const timestampElement = document.createElement('div');
-		timestampElement.classList.add('timestamp');
-		timestampElement.innerText = timestamp;
-
-		messageElement.appendChild(timestampElement);
-		messageContainer!.appendChild(messageElement);
-	}
-
-	function appendSystemMessage(text: string) {
-		const systemMessage = document.createElement('div');
-		systemMessage.classList.add('system-message');
-		systemMessage.innerText = text;
-		messageContainer!.appendChild(systemMessage);
-	}
-
-	function handleMessageSubmit(event: SubmitEvent) {
-		event.preventDefault();
-
-		const message = messageInput!.value;
-
-		// Show the message in your chat window
-		appendMessage(`You: ${message}`, 'sent', getTime());
-
-		// Send the message to the server
-		socket.emit('send-chat-message', message);
-
-		// Clear the input box
-		messageInput!.value = '';
-	}
-
 	onMount(async () => {
-		const name = window.prompt('What is your name?');
-		socket.emit('new-user', name);
-
-		socket.on('chat-message', (data) => {
-			appendMessage(`${data.name}: ${data.message}`, 'received', data.time);
-		});
-
-		// Notify when a user connects to the chat
-		socket.on('user-connected', (name) => {
-			appendSystemMessage(`${getTime()} - ${name} joined`);
-		});
-
-		// Notify when a user disconnects from the chat
-		socket.on('user-disconnected', (name) => {
-			appendSystemMessage(`${getTime()} - ${name} disconnected`);
-		});
-
 		const getIceServers = async () => {
 			const response = await fetch(
 				`https://peer-talk.metered.live/api/v1/turn/credentials?apiKey=${import.meta.env.VITE_METERED_API_KEY}`
@@ -194,7 +137,4 @@
 	<track kind="captions" />
 </video>
 
-<p bind:this={messageContainer} id="message-container"></p>
-<form onsubmit={handleMessageSubmit} id="send-container">
-	<input bind:this={messageInput} id="message-input" />
-</form>
+<Chat />
