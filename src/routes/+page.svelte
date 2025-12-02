@@ -70,4 +70,4 @@
 	});
 </script>
 
-<Video {pc} {room} />
+<Video {pc} {room} {socket} />

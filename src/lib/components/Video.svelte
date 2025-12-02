@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { io } from 'socket.io-client';
+	import type { Socket } from 'socket.io-client';
 
 	interface Props {
 		pc: RTCPeerConnection | null;
 		room: String;
+		socket: Socket;
 	}
 
-	let { pc, room }: Props = $props();
-
-	const socket = io();
+	let { pc, room, socket }: Props = $props();
 
 	let localStream: MediaStream | null = $state(null);
 	let remoteStream: MediaStream | null = $state(null);
