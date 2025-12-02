@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { Socket } from 'socket.io-client';
+	import { generateRandomUsername } from '$lib/utils/generateRandomUsername';
 
 	interface Props {
 		socket: Socket;
@@ -51,7 +52,8 @@
 	}
 
 	onMount(() => {
-		const name = window.prompt('What is your name?');
+		// TODO: replace this with an actual username system
+		const name = generateRandomUsername();
 		socket.emit('new-user', name);
 
 		socket.on('chat-message', (data) => {
