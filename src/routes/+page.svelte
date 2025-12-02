@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { io } from 'socket.io-client';
 	import { onMount } from 'svelte';
+
 	import Chat from '$lib/components/Chat.svelte';
 	import Video from '$lib/components/Video.svelte';
 
@@ -37,34 +38,6 @@
 			if (pc!.currentRemoteDescription) {
 				const iceCandidate = new RTCIceCandidate(candidate);
 				pc!.addIceCandidate(iceCandidate);
-			}
-		});
-
-		// Listen for answers
-		socket.on('answer', async (answer) => {
-			console.log('Received answer');
-			if (!pc!.currentRemoteDescription) {
-				const answerDescription = new RTCSessionDescription(answer);
-				await pc!.setRemoteDescription(answerDescription);
-				console.log('Remote description set from answer');
-			}
-		});
-
-		// Listen for offers from callers
-		socket.on('offer', async (offer, socketId) => {
-			console.log('offer event received');
-			try {
-				await pc!.setRemoteDescription(new RTCSessionDescription(offer));
-				console.log('Remote description set from offer');
-
-				const answer = await pc!.createAnswer();
-				await pc!.setLocalDescription(answer);
-				console.log('Answer created and set as local description');
-
-				socket.emit('answer', pc!.localDescription, room, socketId);
-				console.log('Answer sent to:', socketId);
-			} catch (error) {
-				console.error('Error handling offer:', error);
 			}
 		});
 	});

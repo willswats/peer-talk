@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { Socket } from 'socket.io-client';
 
 	interface Props {
@@ -15,6 +16,36 @@
 	// HTML elements
 	let localVideo: HTMLVideoElement | null = null;
 	let remoteVideo: HTMLVideoElement | null = null;
+
+	onMount(async () => {
+		// Listen for answers
+		socket.on('answer', async (answer) => {
+			console.log('Received answer');
+			if (!pc!.currentRemoteDescription) {
+				const answerDescription = new RTCSessionDescription(answer);
+				await pc!.setRemoteDescription(answerDescription);
+				console.log('Remote description set from answer');
+			}
+		});
+
+		// Listen for offers from callers
+		socket.on('offer', async (offer, socketId) => {
+			console.log('offer event received');
+			try {
+				await pc!.setRemoteDescription(new RTCSessionDescription(offer));
+				console.log('Remote description set from offer');
+
+				const answer = await pc!.createAnswer();
+				await pc!.setLocalDescription(answer);
+				console.log('Answer created and set as local description');
+
+				socket.emit('answer', pc!.localDescription, room, socketId);
+				console.log('Answer sent to:', socketId);
+			} catch (error) {
+				console.error('Error handling offer:', error);
+			}
+		});
+	});
 
 	async function handleWebCamButtonClick() {
 		try {
