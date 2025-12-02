@@ -1,8 +1,12 @@
 <script lang="ts">
-	import { io } from 'socket.io-client';
 	import { onMount } from 'svelte';
+	import type { Socket } from 'socket.io-client';
 
-	const socket = io();
+	interface Props {
+		socket: Socket;
+	}
+
+	let { socket }: Props = $props();
 
 	let messageContainer: HTMLParagraphElement | null = null;
 	let messageInput: HTMLInputElement | null = null;

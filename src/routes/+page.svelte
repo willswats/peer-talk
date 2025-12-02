@@ -71,3 +71,4 @@
 </script>
 
 <Video {pc} {room} {socket} />
+<Chat {socket} />
