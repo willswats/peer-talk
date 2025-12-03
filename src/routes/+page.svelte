@@ -43,5 +43,13 @@
 	});
 </script>
 
-<Video {pc} {room} {socket} />
-<Chat {socket} />
+<main>
+	<Video {pc} {room} {socket} />
+	<Chat {socket} />
+</main>
+
+<style>
+	main {
+		margin: 2rem;
+	}
+</style>

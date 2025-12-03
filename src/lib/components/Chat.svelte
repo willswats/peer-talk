@@ -66,7 +66,36 @@
 	});
 </script>
 
-<p bind:this={messageContainer} id="message-container"></p>
-<form onsubmit={handleMessageSubmit} id="send-container">
-	<input bind:this={messageInput} id="message-input" />
-</form>
+<section id="chat-container">
+	<p bind:this={messageContainer} id="message-container"></p>
+	<form onsubmit={handleMessageSubmit} id="send-container">
+		<input bind:this={messageInput} id="message-input" />
+	</form>
+</section>
+
+<style>
+	#chat-container {
+		display: flex;
+		flex-direction: column;
+		background-color: #2a2a2a;
+		border-radius: 25px;
+		padding: 2rem;
+		height: 20rem;
+	}
+
+	#message-container {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		font-size: 1.2rem;
+		overflow-y: scroll;
+	}
+
+	#message-input {
+		color: #fff;
+		background-color: #3a3a3a;
+		font-size: 1.2rem;
+		padding: 0.5rem;
+		width: 100%;
+	}
+</style>

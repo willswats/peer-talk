@@ -86,22 +86,58 @@
 	async function handleAnswerButtonClick() {}
 
 	$effect(() => {
-		console.log('CHANGE!');
 		localVideo!.srcObject = localStream;
 		remoteVideo!.srcObject = remoteStream;
-		// console.log(localVideo?.srcObject);
-		// console.log(remoteVideo?.srcObject);
 	});
 </script>
 
-<button onclick={handleWebCamButtonClick} id="webcam-button">Webcam</button>
-<button onclick={handleCallButtonClick} id="call-button">Call</button>
-<button onclick={handleAnswerButtonClick} id="answer-button">Answer</button>
-<button id="hangup-button">Hangup</button>
+<section id="videos-container">
+	<video bind:this={localVideo} id="local-video" autoplay playsinline controls={false}>
+		<track kind="captions" />
+	</video>
+	<video bind:this={remoteVideo} id="remote-video" autoplay playsinline controls={false}>
+		<track kind="captions" />
+	</video>
+</section>
 
-<video bind:this={localVideo} id="local-video" autoplay playsinline controls={false}>
-	<track kind="captions" />
-</video>
-<video bind:this={remoteVideo} id="remote-video" autoplay playsinline controls={false}>
-	<track kind="captions" />
-</video>
+<section id="buttons-container">
+	<button onclick={handleWebCamButtonClick} id="webcam-button">Webcam</button>
+	<button onclick={handleCallButtonClick} id="call-button">Call</button>
+	<button onclick={handleAnswerButtonClick} id="answer-button">Answer</button>
+	<button id="hangup-button">Hangup</button>
+</section>
+
+<style>
+	#videos-container {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 1rem;
+	}
+
+	video:first-of-type {
+		margin-right: 1rem;
+	}
+
+	video {
+		border-radius: 20px;
+		border: 5px solid #2a2a2a;
+	}
+
+	#buttons-container {
+		display: flex;
+		margin-bottom: 1rem;
+	}
+
+	button {
+		color: #fff;
+		background-color: #2a2a2a;
+		font-size: 1.5rem;
+		border-radius: 20px;
+		padding: 1rem;
+		margin-right: 0.5rem;
+	}
+
+	button:hover {
+		background-color: #3a3a3a;
+	}
+</style>
