@@ -5,9 +5,10 @@
 
 	interface Props {
 		socket: Socket;
+		room: string | undefined;
 	}
 
-	let { socket }: Props = $props();
+	let { socket, room }: Props = $props();
 
 	let messageContainer: HTMLParagraphElement | null = null;
 	let messageInput: HTMLInputElement | null = null;
@@ -44,17 +45,13 @@
 		appendMessage(`You (${getTime()}): ${message}`, 'sent');
 
 		// Send the message to the server
-		socket.emit('send-chat-message', message);
+		socket.emit('send-chat-message', message, room);
 
 		// Clear the input box
 		messageInput.value = '';
 	}
 
 	onMount(() => {
-		// TODO: replace this with an actual username system
-		const name = generateRandomUsername();
-		socket.emit('new-user', name);
-
 		socket.on('chat-message', (data) => {
 			appendMessage(`${data.name} (${data.time}): ${data.message}`, 'received');
 		});
@@ -65,9 +62,9 @@
 		});
 
 		// Notify when a user disconnects from the chat
-		socket.on('user-disconnected', (name) => {
-			appendSystemMessage(`${getTime()} - ${name} disconnected`);
-		});
+		// socket.on('user-disconnected', (name) => {
+		// 	appendSystemMessage(`${getTime()} - ${name} disconnected`);
+		// });
 	});
 </script>
 

@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { getIceServers } from '$lib/utils/getIceServers';
 	import { validate as uuidvalidate } from 'uuid';
+	import { generateRandomUsername } from '$lib/utils/generateRandomUsername';
 
 	import Chat from '$lib/components/Chat.svelte';
 	import Video from '$lib/components/Video.svelte';
@@ -24,7 +25,8 @@
 			if (room === undefined) throw new Error('Error: room is undefined');
 			roomValid = uuidvalidate(room);
 
-			socket.emit('join-room', room);
+			const username = generateRandomUsername();
+			socket.emit('join-room', room, username);
 
 			const iceServers = await getIceServers();
 			pc = new RTCPeerConnection(iceServers);
@@ -57,7 +59,7 @@
 {#if roomValid}
 	<main>
 		<Video {pc} {room} {socket} />
-		<Chat {socket} />
+		<Chat {socket} {room} />
 	</main>
 {:else}
 	<main>
