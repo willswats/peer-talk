@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { getIceServers } from '$lib/utils/getIceServers';
+	import { validate as uuidvalidate } from 'uuid';
 
 	import Chat from '$lib/components/Chat.svelte';
 	import Video from '$lib/components/Video.svelte';
@@ -10,6 +11,7 @@
 	// Global state
 	let pc: RTCPeerConnection | null = $state(null);
 	let room: string | undefined = $state(undefined);
+	let roomValid = $state(false);
 	const socket = io();
 
 	socket.on('eventFromServer', (message) => {
@@ -20,6 +22,7 @@
 		try {
 			room = $page.params.roomId;
 			if (room === undefined) throw new Error('Error: room is undefined');
+			roomValid = uuidvalidate(room);
 
 			socket.emit('join-room', room);
 
@@ -51,10 +54,16 @@
 	});
 </script>
 
-<main>
-	<Video {pc} {room} {socket} />
-	<Chat {socket} />
-</main>
+{#if roomValid}
+	<main>
+		<Video {pc} {room} {socket} />
+		<Chat {socket} />
+	</main>
+{:else}
+	<main>
+		<p>Invalid room</p>
+	</main>
+{/if}
 
 <style>
 	main {
