@@ -4,7 +4,7 @@
 
 	interface Props {
 		pc: RTCPeerConnection | null;
-		room: String;
+		room: string | undefined;
 		socket: Socket;
 	}
 
@@ -21,10 +21,16 @@
 		// Listen for answers
 		socket.on('answer', async (answer) => {
 			console.log('Received answer');
-			if (!pc!.currentRemoteDescription) {
-				const answerDescription = new RTCSessionDescription(answer);
-				await pc!.setRemoteDescription(answerDescription);
-				console.log('Remote description set from answer');
+			try {
+				if (pc === null) throw new Error('Error: peer connection is null');
+
+				if (!pc.currentRemoteDescription) {
+					const answerDescription = new RTCSessionDescription(answer);
+					await pc.setRemoteDescription(answerDescription);
+					console.log('Remote description set from answer');
+				}
+			} catch (error) {
+				console.error('Error handling answer:', error);
 			}
 		});
 
@@ -32,14 +38,16 @@
 		socket.on('offer', async (offer, socketId) => {
 			console.log('offer event received');
 			try {
-				await pc!.setRemoteDescription(new RTCSessionDescription(offer));
+				if (pc === null) throw new Error('Error: peer connection is null');
+
+				await pc.setRemoteDescription(new RTCSessionDescription(offer));
 				console.log('Remote description set from offer');
 
-				const answer = await pc!.createAnswer();
-				await pc!.setLocalDescription(answer);
+				const answer = await pc.createAnswer();
+				await pc.setLocalDescription(answer);
 				console.log('Answer created and set as local description');
 
-				socket.emit('answer', pc!.localDescription, room, socketId);
+				socket.emit('answer', pc.localDescription, room, socketId);
 				console.log('Answer sent to:', socketId);
 			} catch (error) {
 				console.error('Error handling offer:', error);
@@ -49,19 +57,23 @@
 
 	async function handleWebCamButtonClick() {
 		try {
+			if (pc === null) throw new Error('Error: peer connection is null');
+
 			const constraints = { video: true, audio: true };
 			localStream = await navigator.mediaDevices.getUserMedia(constraints);
 			remoteStream = new MediaStream();
 
 			// Push audio/video to the peer connection
 			localStream.getTracks().forEach((track) => {
-				pc!.addTrack(track, localStream!);
+				pc.addTrack(track, localStream!);
 			});
 
 			// Pull tracks from remote stream, add to video stream
-			pc!.ontrack = (event) => {
+			pc.ontrack = (event) => {
 				event.streams[0].getTracks().forEach((track) => {
-					remoteStream!.addTrack(track);
+					if (remoteStream === null) throw new Error('Error: remote stream is null');
+
+					remoteStream.addTrack(track);
 				});
 			};
 
@@ -73,8 +85,10 @@
 
 	async function handleCallButtonClick() {
 		// Create and send offer
-		const offerDescription = await pc!.createOffer();
-		await pc!.setLocalDescription(offerDescription);
+		if (pc === null) throw new Error('Error: peer connection is null');
+
+		const offerDescription = await pc.createOffer();
+		await pc.setLocalDescription(offerDescription);
 		const offer = {
 			sdp: offerDescription.sdp,
 			type: offerDescription.type
@@ -86,8 +100,10 @@
 	async function handleAnswerButtonClick() {}
 
 	$effect(() => {
-		localVideo!.srcObject = localStream;
-		remoteVideo!.srcObject = remoteStream;
+		if (localVideo !== null && remoteVideo !== null) {
+			localVideo.srcObject = localStream;
+			remoteVideo.srcObject = remoteStream;
+		}
 	});
 </script>
 

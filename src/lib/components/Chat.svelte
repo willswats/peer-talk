@@ -17,21 +17,26 @@
 	}
 
 	function appendMessage(text: string, type: string) {
+		if (messageContainer === null) return;
+
 		const messageElement = document.createElement('p');
 		messageElement.classList.add(type); // 'sent' or 'received'
 		messageElement.innerText = text;
-		messageContainer!.appendChild(messageElement);
+		messageContainer.appendChild(messageElement);
 	}
 
 	function appendSystemMessage(text: string) {
+		if (messageContainer === null) return;
+
 		const systemMessage = document.createElement('p');
 		systemMessage.classList.add('system-message');
 		systemMessage.innerText = text;
-		messageContainer!.appendChild(systemMessage);
+		messageContainer.appendChild(systemMessage);
 	}
 
 	function handleMessageSubmit(event: SubmitEvent) {
 		event.preventDefault();
+		if (messageInput === null) return;
 
 		const message = messageInput!.value;
 
@@ -42,7 +47,7 @@
 		socket.emit('send-chat-message', message);
 
 		// Clear the input box
-		messageInput!.value = '';
+		messageInput.value = '';
 	}
 
 	onMount(() => {
