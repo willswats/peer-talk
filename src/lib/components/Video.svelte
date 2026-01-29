@@ -83,7 +83,7 @@
 		}
 	}
 
-	async function handleCallButtonClick() {
+	async function handleJoinRoomButtonClick() {
 		// Create and send offer
 		if (pc === null) throw new Error('Error: peer connection is null');
 
@@ -96,8 +96,6 @@
 
 		socket.emit('offer', offer, room);
 	}
-
-	async function handleAnswerButtonClick() {}
 
 	$effect(() => {
 		if (localVideo !== null && remoteVideo !== null) {
@@ -118,9 +116,8 @@
 
 <section id="buttons-container">
 	<button onclick={handleWebCamButtonClick} id="webcam-button">Webcam</button>
-	<button onclick={handleCallButtonClick} id="call-button">Call</button>
-	<button onclick={handleAnswerButtonClick} id="answer-button">Answer</button>
-	<button id="hangup-button">Hangup</button>
+	<button onclick={handleJoinRoomButtonClick} id="join-button">Join Room</button>
+	<button id="disconnect-button">Disconnect</button>
 </section>
 
 <style>
