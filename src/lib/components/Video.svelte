@@ -10,7 +10,8 @@
 
 	let { pc, room, socket }: Props = $props();
 
-	let localStream: MediaStream | null = $state(null);
+	let localVideoStream: MediaStream | null = $state(null);
+	let localAudioStream: MediaStream | null = $state(null);
 	let remoteStream: MediaStream | null = $state(null);
 
 	// HTML elements
@@ -53,31 +54,57 @@
 				console.error('Error handling offer:', error);
 			}
 		});
+
+		// Pull tracks from remote stream, add to video stream
+		function getRemoteStreams() {
+			try {
+				if (pc === null) throw new Error('Error: peer connection is null');
+
+				remoteStream = new MediaStream();
+				pc.ontrack = (event) => {
+					event.streams[0].getTracks().forEach((track) => {
+						if (remoteStream === null) throw new Error('Error: remote stream is null');
+
+						remoteStream.addTrack(track);
+					});
+				};
+			} catch (error) {
+				console.error('Error adding remote stream.', error);
+			}
+		}
+
+		getRemoteStreams();
 	});
 
 	async function handleWebCamButtonClick() {
 		try {
 			if (pc === null) throw new Error('Error: peer connection is null');
 
-			const constraints = { video: true, audio: true };
-			localStream = await navigator.mediaDevices.getUserMedia(constraints);
-			remoteStream = new MediaStream();
+			const constraints = { video: true, audio: false };
+			localVideoStream = await navigator.mediaDevices.getUserMedia(constraints);
 
-			// Push audio/video to the peer connection
-			localStream.getTracks().forEach((track) => {
-				pc.addTrack(track, localStream!);
+			localVideoStream.getTracks().forEach((track) => {
+				if (localVideoStream === null) throw new Error('Error: remote stream is null');
+
+				pc.addTrack(track, localVideoStream);
 			});
+		} catch (error) {
+			console.error('Error accessing media devices.', error);
+		}
+	}
 
-			// Pull tracks from remote stream, add to video stream
-			pc.ontrack = (event) => {
-				event.streams[0].getTracks().forEach((track) => {
-					if (remoteStream === null) throw new Error('Error: remote stream is null');
+	async function handleMicButtonClick() {
+		try {
+			if (pc === null) throw new Error('Error: peer connection is null');
 
-					remoteStream.addTrack(track);
-				});
-			};
+			const constraints = { video: false, audio: true };
+			localAudioStream = await navigator.mediaDevices.getUserMedia(constraints);
 
-			console.log('Got MediaStream:', localStream);
+			localAudioStream.getTracks().forEach((track) => {
+				if (localVideoStream === null) throw new Error('Error: remote stream is null');
+
+				pc.addTrack(track, localVideoStream);
+			});
 		} catch (error) {
 			console.error('Error accessing media devices.', error);
 		}
@@ -99,7 +126,7 @@
 
 	$effect(() => {
 		if (localVideo !== null && remoteVideo !== null) {
-			localVideo.srcObject = localStream;
+			localVideo.srcObject = localVideoStream;
 			remoteVideo.srcObject = remoteStream;
 		}
 	});
@@ -116,6 +143,7 @@
 
 <section id="buttons-container">
 	<button onclick={handleWebCamButtonClick} id="webcam-button">Webcam</button>
+	<button onclick={handleMicButtonClick} id="mic-button">Microphone</button>
 	<button onclick={handleJoinRoomButtonClick} id="join-button">Join Room</button>
 	<button id="disconnect-button">Disconnect</button>
 </section>
