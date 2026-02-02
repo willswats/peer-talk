@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Video from '$lib/components/Video.svelte';
+
 	interface Props {
 		pc: RTCPeerConnection | null;
 	}
@@ -24,15 +26,7 @@
 			console.error('Error accessing media devices.', error);
 		}
 	}
-
-	$effect(() => {
-		if (localVideoElement !== null) {
-			localVideoElement.srcObject = localVideoStream;
-		}
-	});
 </script>
 
-<video bind:this={localVideoElement} id="local-video" autoplay playsinline controls={false}>
-	<track kind="captions" />
-</video>
+<Video videoStream={localVideoStream} videoElement={localVideoElement} />
 <button onclick={handleWebCamButtonClick} id="webcam-button">Webcam</button>

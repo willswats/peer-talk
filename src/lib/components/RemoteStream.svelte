@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Video from '$lib/components/Video.svelte';
 
 	interface Props {
 		pc: RTCPeerConnection | null;
@@ -17,7 +18,6 @@
 
 			remoteStream = new MediaStream();
 			pc.ontrack = (event) => {
-				console.log(event.streams);
 				event.streams[0].getTracks().forEach((track) => {
 					if (remoteStream === null) throw new Error('Remote stream is null');
 
@@ -28,14 +28,6 @@
 			console.error('Error adding remote stream.', error);
 		}
 	});
-
-	$effect(() => {
-		if (remoteVideoElement !== null) {
-			remoteVideoElement.srcObject = remoteStream;
-		}
-	});
 </script>
 
-<video bind:this={remoteVideoElement} id="remote-video" autoplay playsinline controls={false}>
-	<track kind="captions" />
-</video>
+<Video videoStream={remoteStream} videoElement={remoteVideoElement} />
