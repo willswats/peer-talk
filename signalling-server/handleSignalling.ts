@@ -43,10 +43,12 @@ export const handleSignalling = (io: Server, socket: Socket) => {
 		});
 	});
 
-	socket.on('disconnect', (room) => {
+	socket.on('disconnect', () => {
 		console.log('User disconnected:', socket.id);
 		// Notify others that the user has left
-		socket.to(room).emit('user-disconnected', users[socket.id]);
+
+		// TODO: make this work per room for disconnect (don't know how to pass room to it)
+		// socket.to(room).emit('user-disconnected', users[socket.id]);
 		// Remove the user from the users object
 		delete users[socket.id];
 	});
