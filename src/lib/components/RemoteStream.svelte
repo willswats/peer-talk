@@ -13,13 +13,13 @@
 	onMount(async () => {
 		// Pull tracks from remote stream, add to video stream
 		try {
-			if (pc === null) throw new Error('Error: peer connection is null');
+			if (pc === null) throw new Error('Peer connection is null');
 
 			remoteStream = new MediaStream();
 			pc.ontrack = (event) => {
 				console.log(event.streams);
 				event.streams[0].getTracks().forEach((track) => {
-					if (remoteStream === null) throw new Error('Error: remote stream is null');
+					if (remoteStream === null) throw new Error('Remote stream is null');
 
 					remoteStream.addTrack(track);
 				});

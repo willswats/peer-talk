@@ -45,7 +45,7 @@
 		// Listen for ICE candidates
 		socket.on('ice-candidate', (candidate) => {
 			try {
-				if (pc === null) throw new Error('Error: peer connection is null');
+				if (pc === null) throw new Error('Peer connection is null');
 
 				if (pc.currentRemoteDescription) {
 					const iceCandidate = new RTCIceCandidate(candidate);
@@ -60,7 +60,7 @@
 		socket.on('answer', async (answer) => {
 			console.log('Received answer');
 			try {
-				if (pc === null) throw new Error('Error: peer connection is null');
+				if (pc === null) throw new Error('Peer connection is null');
 
 				if (!pc.currentRemoteDescription) {
 					const answerDescription = new RTCSessionDescription(answer);
@@ -76,7 +76,7 @@
 		socket.on('offer', async (offer, socketId) => {
 			console.log('offer event received');
 			try {
-				if (pc === null) throw new Error('Error: peer connection is null');
+				if (pc === null) throw new Error('Peer connection is null');
 
 				await pc.setRemoteDescription(new RTCSessionDescription(offer));
 				console.log('Remote description set from offer');

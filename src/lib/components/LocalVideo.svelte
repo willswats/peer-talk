@@ -10,13 +10,13 @@
 
 	async function handleWebCamButtonClick() {
 		try {
-			if (pc === null) throw new Error('Error: peer connection is null');
+			if (pc === null) throw new Error('Peer connection is null');
 
 			const constraints = { video: true, audio: false };
 			localVideoStream = await navigator.mediaDevices.getUserMedia(constraints);
 
 			localVideoStream.getTracks().forEach((track) => {
-				if (localVideoStream === null) throw new Error('Error: remote stream is null');
+				if (localVideoStream === null) throw new Error('Remote stream is null');
 
 				pc.addTrack(track, localVideoStream);
 			});

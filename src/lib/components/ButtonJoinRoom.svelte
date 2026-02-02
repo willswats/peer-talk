@@ -11,7 +11,7 @@
 
 	async function handleJoinRoomButtonClick() {
 		// Create and send offer
-		if (pc === null) throw new Error('Error: peer connection is null');
+		if (pc === null) throw new Error('Peer connection is null');
 
 		const offerDescription = await pc.createOffer();
 		await pc.setLocalDescription(offerDescription);
