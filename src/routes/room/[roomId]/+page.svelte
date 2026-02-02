@@ -6,8 +6,11 @@
 	import { validate as uuidvalidate } from 'uuid';
 	import { generateRandomUsername } from '$lib/utils/generateRandomUsername';
 
+	import LocalVideo from '$lib/components/LocalVideo.svelte';
+	import RemoteStream from '$lib/components/RemoteStream.svelte';
 	import Chat from '$lib/components/Chat.svelte';
-	import Video from '$lib/components/Video.svelte';
+	import ButtonMicrophone from '$lib/components/ButtonMicrophone.svelte';
+	import ButtonJoinRoom from '$lib/components/ButtonJoinRoom.svelte';
 
 	// Global state
 	let pc: RTCPeerConnection | null = $state(null);
@@ -22,7 +25,6 @@
 	onMount(async () => {
 		try {
 			room = $page.params.roomId;
-			if (room === undefined) throw new Error('Error: room is undefined');
 			roomValid = uuidvalidate(room);
 
 			const username = generateRandomUsername();
@@ -53,15 +55,54 @@
 				console.error('Error listening for ICE candidates:', error);
 			}
 		});
+
+		// Listen for answers
+		socket.on('answer', async (answer) => {
+			console.log('Received answer');
+			try {
+				if (pc === null) throw new Error('Error: peer connection is null');
+
+				if (!pc.currentRemoteDescription) {
+					const answerDescription = new RTCSessionDescription(answer);
+					await pc.setRemoteDescription(answerDescription);
+					console.log('Remote description set from answer');
+				}
+			} catch (error) {
+				console.error('Error handling answer:', error);
+			}
+		});
+
+		// Listen for offers from callers
+		socket.on('offer', async (offer, socketId) => {
+			console.log('offer event received');
+			try {
+				if (pc === null) throw new Error('Error: peer connection is null');
+
+				await pc.setRemoteDescription(new RTCSessionDescription(offer));
+				console.log('Remote description set from offer');
+
+				const answer = await pc.createAnswer();
+				await pc.setLocalDescription(answer);
+				console.log('Answer created and set as local description');
+
+				socket.emit('answer', pc.localDescription, room, socketId);
+				console.log('Answer sent to:', socketId);
+			} catch (error) {
+				console.error('Error handling offer:', error);
+			}
+		});
 	});
 </script>
 
-{#if roomValid}
+{#if pc && roomValid}
 	<main>
-		<Video {pc} {room} {socket} />
+		<LocalVideo {pc} />
+		<RemoteStream {pc} />
+		<ButtonMicrophone {pc} />
+		<ButtonJoinRoom {pc} {room} {socket} />
 		<Chat {socket} {room} />
 	</main>
-{:else}
+{:else if !roomValid}
 	<main>
 		<p>Invalid room</p>
 	</main>

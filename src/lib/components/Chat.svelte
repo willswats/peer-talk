@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { Socket } from 'socket.io-client';
-	import { generateRandomUsername } from '$lib/utils/generateRandomUsername';
 
 	interface Props {
 		socket: Socket;
