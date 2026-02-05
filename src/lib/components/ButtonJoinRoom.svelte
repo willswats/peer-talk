@@ -24,4 +24,6 @@
 	}
 </script>
 
-<button onclick={handleJoinRoomButtonClick} id="join-button">Join Room</button>
+<button onclick={handleJoinRoomButtonClick} id="join-button"
+	>Send offer (todo: remove this button)</button
+>
