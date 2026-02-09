@@ -1,15 +1,14 @@
 <script lang="ts">
 	interface Props {
 		videoStream: MediaStream | null;
-		videoElement: HTMLVideoElement | null;
 	}
 
-	let { videoStream, videoElement }: Props = $props();
+	let { videoStream }: Props = $props();
+
+	let videoElement: HTMLVideoElement;
 
 	$effect(() => {
-		if (videoElement !== null) {
-			videoElement.srcObject = videoStream;
-		}
+		videoElement.srcObject = videoStream;
 	});
 </script>
 

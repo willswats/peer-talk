@@ -11,9 +11,7 @@
 	}
 	let peers: peers = {};
 
-	let localVideoElement: HTMLVideoElement | null = $state(null);
 	let remoteStream: MediaStream | null = $state(null);
-	let remoteVideoElement: HTMLVideoElement | null = $state(null);
 
 	const socket = io();
 
@@ -143,8 +141,8 @@
 </script>
 
 <main>
-	<Video videoStream={localVideoStream} videoElement={localVideoElement} />
-	<Video videoStream={remoteStream} videoElement={remoteVideoElement} />
+	<Video videoStream={localVideoStream} />
+	<Video videoStream={remoteStream} />
 	<Chat {socket} />
 </main>
 
