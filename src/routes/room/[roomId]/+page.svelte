@@ -10,14 +10,14 @@
 	let localVideoStream: MediaStream | null = $state(null);
 
 	let username: string = $state('');
-	let room: string | undefined = $state(undefined);
+	let roomId: string | undefined = $state(undefined);
 	let roomValid: boolean = $state(false);
 
 	let joinRoomButtonPressed: boolean = $state(false);
 
 	onMount(() => {
-		room = $page.params.roomId;
-		roomValid = uuidvalidate(room);
+		roomId = $page.params.roomId;
+		roomValid = uuidvalidate(roomId);
 
 		if (roomValid) {
 			username = generateRandomUsername();
@@ -30,7 +30,7 @@
 		<p>Invalid room</p>
 	</main>
 {:else if joinRoomButtonPressed}
-	<Room {username} {room} {localMicStream} {localVideoStream} />
+	<Room {username} {roomId} {localMicStream} {localVideoStream} />
 {:else}
 	<JoinSettings
 		bind:joinRoomButtonPressed

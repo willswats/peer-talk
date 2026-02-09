@@ -7,49 +7,37 @@ export const handleSignalling = (io: Server, socket: Socket) => {
 	const users: users = {};
 	console.log('User connected:', socket.id);
 
-	socket.on('offer', (offer, room) => {
-		console.log(`Received offer from ${socket.id} in room ${room}`);
-
-		socket.to(room).emit('offer', offer, socket.id);
-	});
-
-	socket.on('answer', (answer, room, senderId) => {
-		console.log(`Received answer from ${socket.id} in room ${room}`);
-
-		io.to(senderId).emit('answer', answer);
-	});
-
-	socket.on('ice-candidate', (candidate, room, senderId) => {
-		console.log(`Received ICE candidate from ${socket.id} in room ${room}`);
-
-		io.to(senderId).emit('ice-candidate', candidate);
-	});
-
-	socket.on('join-room', (room, username) => {
-		socket.join(room);
+	socket.on('join-room', (roomId, username) => {
+		socket.join(roomId);
 		users[socket.id] = username;
 
-		socket.to(room).emit('user-connected', username);
-		console.log(`Socket ${socket.id} joined room ${room}`);
-	});
+		socket.to(roomId).emit('user-connected', socket.id);
+		console.log(`User ${socket.id} joined room ${roomId}`);
 
-	socket.on('send-chat-message', (message, room) => {
-		const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-		socket.to(room).emit('chat-message', {
-			message: message,
-			name: users[socket.id],
-			time: timestamp
+		// ICE candidates, offers, answers
+		socket.on('signal', (data) => {
+			console.log(`Signal from ${socket.id} to ${data.target}`);
+			io.to(data.target).emit('signal', {
+				signal: data.signal,
+				from: socket.id
+			});
 		});
-	});
 
-	socket.on('disconnect', () => {
-		console.log('User disconnected:', socket.id);
-		// Notify others that the user has left
+		socket.on('send-chat-message', (message) => {
+			const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-		// TODO: make this work per room for disconnect (don't know how to pass room to it)
-		// socket.to(room).emit('user-disconnected', users[socket.id]);
-		// Remove the user from the users object
-		delete users[socket.id];
+			socket.to(roomId).emit('chat-message', {
+				message: message,
+				name: users[socket.id],
+				time: timestamp
+			});
+		});
+
+		socket.on('disconnect', () => {
+			console.log(`User ${socket.id} disconnected`);
+
+			delete users[socket.id];
+			socket.to(roomId).emit('user-disconnected', socket.id);
+		});
 	});
 };

@@ -4,10 +4,9 @@
 
 	interface Props {
 		socket: Socket;
-		room: string | undefined;
 	}
 
-	let { socket, room }: Props = $props();
+	let { socket }: Props = $props();
 
 	let messageContainer: HTMLParagraphElement | null = null;
 	let messageInput: HTMLInputElement | null = null;
@@ -25,15 +24,6 @@
 		messageContainer.appendChild(messageElement);
 	}
 
-	function appendSystemMessage(text: string) {
-		if (messageContainer === null) return;
-
-		const systemMessage = document.createElement('p');
-		systemMessage.classList.add('system-message');
-		systemMessage.innerText = text;
-		messageContainer.appendChild(systemMessage);
-	}
-
 	function handleMessageSubmit(event: SubmitEvent) {
 		event.preventDefault();
 		if (messageInput === null) return;
@@ -44,7 +34,7 @@
 		appendMessage(`You (${getTime()}): ${message}`, 'sent');
 
 		// Send the message to the server
-		socket.emit('send-chat-message', message, room);
+		socket.emit('send-chat-message', message);
 
 		// Clear the input box
 		messageInput.value = '';
@@ -54,16 +44,6 @@
 		socket.on('chat-message', (data) => {
 			appendMessage(`${data.name} (${data.time}): ${data.message}`, 'received');
 		});
-
-		// Notify when a user connects to the chat
-		socket.on('user-connected', (name) => {
-			appendSystemMessage(`${getTime()} - ${name} joined`);
-		});
-
-		// Notify when a user disconnects from the chat
-		// socket.on('user-disconnected', (name) => {
-		// 	appendSystemMessage(`${getTime()} - ${name} disconnected`);
-		// });
 	});
 </script>
 
