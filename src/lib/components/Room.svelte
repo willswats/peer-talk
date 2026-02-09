@@ -118,15 +118,9 @@
 			});
 		}
 
-		const remoteStream = new MediaStream();
 		pc.ontrack = (event) => {
-			event.streams[0].getTracks().forEach((track) => {
-				if (remoteStream) {
-					remoteStream.addTrack(track);
-				}
-			});
+			remoteStreams.push(event.streams[0]);
 		};
-		remoteStreams.push(remoteStream);
 
 		pc.onicecandidate = (event) => {
 			if (event.candidate) {
