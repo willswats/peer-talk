@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { io } from 'socket.io-client';
-	import { getIceServers } from '$lib/utils/getIceServers';
 
 	import Video from './Video.svelte';
 	import Chat from './Chat.svelte';
@@ -45,7 +44,6 @@
 		}
 	});
 
-	// Handle the reception of a signal (offer, answer, ICE candidate)
 	socket.on('signal', async (data) => {
 		const { signal, from } = data;
 
@@ -100,9 +98,12 @@
 	});
 
 	function createPeerConnection(socketId: string) {
-		// TODO: change back to other server
 		const pc = new RTCPeerConnection({
-			iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+			iceServers: [
+				{
+					urls: 'stun:stun.relay.metered.ca:80'
+				}
+			]
 		});
 
 		if (localMicStream !== null) {
@@ -127,7 +128,6 @@
 		};
 		remoteStreams.push(remoteStream);
 
-		// Handle ICE candidates
 		pc.onicecandidate = (event) => {
 			if (event.candidate) {
 				console.log('Sending ICE candidate to user:', socketId);
@@ -135,14 +135,14 @@
 			}
 		};
 
-		peers[socketId] = pc; // Store the peer connection
+		peers[socketId] = pc;
 		return pc;
 	}
 </script>
 
 <main>
 	<Video videoStream={localVideoStream} />
-	{#each remoteStreams as remoteStream}
+	{#each remoteStreams as remoteStream (remoteStream.id)}
 		<Video videoStream={remoteStream} />
 	{/each}
 	<Chat {socket} />

@@ -15,8 +15,6 @@
 		username = $bindable()
 	}: Props = $props();
 
-	let localVideoElement: HTMLVideoElement | null = $state(null);
-
 	async function handleVideoButtonPressed() {
 		try {
 			const videoConstraints = { video: true, audio: false };
@@ -36,7 +34,7 @@
 	}
 </script>
 
-<Video videoStream={localVideoStream} videoElement={localVideoElement} />
+<Video videoStream={localVideoStream} />
 <button onclick={handleVideoButtonPressed}>Video</button>
 <button onclick={handleMicButtonPressed}>Microphone</button>
 <input type="text" bind:value={username} />
