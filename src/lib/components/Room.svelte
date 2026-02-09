@@ -9,9 +9,9 @@
 	interface peers {
 		[key: string]: RTCPeerConnection;
 	}
-	let peers: peers = {};
 
-	let remoteStream: MediaStream | null = $state(null);
+	let peers: peers = {};
+	let remoteStreams: MediaStream[] = $state([]);
 
 	const socket = io();
 
@@ -117,15 +117,15 @@
 			});
 		}
 
-		remoteStream = new MediaStream();
+		const remoteStream = new MediaStream();
 		pc.ontrack = (event) => {
-			remoteStream = event.streams[0];
 			event.streams[0].getTracks().forEach((track) => {
 				if (remoteStream) {
 					remoteStream.addTrack(track);
 				}
 			});
 		};
+		remoteStreams.push(remoteStream);
 
 		// Handle ICE candidates
 		pc.onicecandidate = (event) => {
@@ -142,7 +142,9 @@
 
 <main>
 	<Video videoStream={localVideoStream} />
-	<Video videoStream={remoteStream} />
+	{#each remoteStreams as remoteStream}
+		<Video videoStream={remoteStream} />
+	{/each}
 	<Chat {socket} />
 </main>
 
