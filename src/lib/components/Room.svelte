@@ -17,6 +17,9 @@
 	let peerTracks: peerTracks = {}; // used to identify which tracks belong to which peer (for deletion)
 	let remoteStreams: MediaStream[] = $state([]);
 
+	let localVideoEnabled = $state(true);
+	let localMicEnabled = $state(true);
+
 	const socket = io();
 
 	interface Props {
@@ -146,6 +149,20 @@
 		peers[socketId] = pc;
 		return pc;
 	}
+
+	function muteMicrophone() {
+		if (localMicStream !== null) {
+			localMicEnabled = !localMicEnabled;
+			localMicStream.getAudioTracks()[0].enabled = localMicEnabled;
+		}
+	}
+
+	function toggleVideo() {
+		if (localVideoStream !== null) {
+			localVideoEnabled = !localVideoEnabled;
+			localVideoStream.getVideoTracks()[0].enabled = localVideoEnabled;
+		}
+	}
 </script>
 
 <main>
@@ -154,6 +171,8 @@
 		<Video videoStream={remoteStream} />
 	{/each}
 	<Chat {socket} />
+	<button onclick={muteMicrophone}>Mute</button>
+	<button onclick={toggleVideo}>Toggle video</button>
 </main>
 
 <style>

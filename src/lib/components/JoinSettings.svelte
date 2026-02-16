@@ -15,6 +15,7 @@
 		username = $bindable()
 	}: Props = $props();
 
+	// TODO: ensure user agrees to one of these
 	async function handleVideoButtonPressed() {
 		try {
 			const videoConstraints = { video: true, audio: false };
