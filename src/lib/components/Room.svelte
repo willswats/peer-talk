@@ -9,7 +9,12 @@
 		[key: string]: RTCPeerConnection;
 	}
 
+	interface peerTracks {
+		[key: string]: string;
+	}
+
 	let peers: peers = {};
+	let peerTracks: peerTracks = {}; // used to identify which tracks belong to which peer (for deletion)
 	let remoteStreams: MediaStream[] = $state([]);
 
 	const socket = io();
@@ -95,6 +100,13 @@
 			peers[socketId].close();
 			delete peers[socketId];
 		}
+
+		// Remove the track from remoteStreams, then cleanup peerTracks (svelte then removes the element)
+		const trackId = peerTracks[socketId];
+		remoteStreams = remoteStreams.filter(function (remoteStream) {
+			return remoteStream.id !== trackId;
+		});
+		delete peerTracks[socketId];
 	});
 
 	function createPeerConnection(socketId: string) {
@@ -119,7 +131,9 @@
 		}
 
 		pc.ontrack = (event) => {
-			remoteStreams.push(event.streams[0]);
+			const stream = event.streams[0];
+			remoteStreams.push(stream);
+			peerTracks[socketId] = stream.id;
 		};
 
 		pc.onicecandidate = (event) => {
