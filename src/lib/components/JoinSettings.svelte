@@ -15,8 +15,7 @@
 		username = $bindable()
 	}: Props = $props();
 
-	// TODO: ensure user agrees to one of these
-	async function handleVideoButtonPressed() {
+	async function handleOnClickVideo() {
 		try {
 			const videoConstraints = { video: true, audio: false };
 			localVideoStream = await navigator.mediaDevices.getUserMedia(videoConstraints);
@@ -25,7 +24,7 @@
 		}
 	}
 
-	async function handleMicButtonPressed() {
+	async function handleOnClickMic() {
 		try {
 			const micConstraints = { video: false, audio: true };
 			localMicStream = await navigator.mediaDevices.getUserMedia(micConstraints);
@@ -33,10 +32,17 @@
 			console.log('Error getting permissions', error);
 		}
 	}
+
+	function handleOnClickJoinRoom() {
+		// TODO: add error message
+		if (localVideoStream !== null || localMicStream !== null) {
+			joinRoomButtonPressed = true;
+		}
+	}
 </script>
 
 <Video videoStream={localVideoStream} />
-<button onclick={handleVideoButtonPressed}>Video</button>
-<button onclick={handleMicButtonPressed}>Microphone</button>
+<button onclick={handleOnClickVideo}>Video</button>
+<button onclick={handleOnClickMic}>Microphone</button>
 <input type="text" bind:value={username} />
-<button onclick={() => (joinRoomButtonPressed = true)}>Join Room</button>
+<button onclick={handleOnClickJoinRoom}>Join Room</button>
