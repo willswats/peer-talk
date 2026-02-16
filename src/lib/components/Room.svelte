@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { io } from 'socket.io-client';
+	import { goto } from '$app/navigation';
 
 	import Video from './Video.svelte';
 	import Chat from './Chat.svelte';
@@ -150,18 +151,23 @@
 		return pc;
 	}
 
-	function muteMicrophone() {
+	function handleOnClickMuteMic() {
 		if (localMicStream !== null) {
 			localMicEnabled = !localMicEnabled;
 			localMicStream.getAudioTracks()[0].enabled = localMicEnabled;
 		}
 	}
 
-	function toggleVideo() {
+	function handleOnClickToggleVideo() {
 		if (localVideoStream !== null) {
 			localVideoEnabled = !localVideoEnabled;
 			localVideoStream.getVideoTracks()[0].enabled = localVideoEnabled;
 		}
+	}
+
+	function handleOnClickDisconnect() {
+		socket.disconnect();
+		goto('/');
 	}
 </script>
 
@@ -171,8 +177,9 @@
 		<Video videoStream={remoteStream} />
 	{/each}
 	<Chat {socket} />
-	<button onclick={muteMicrophone}>Mute</button>
-	<button onclick={toggleVideo}>Toggle video</button>
+	<button onclick={handleOnClickMuteMic}>Mute</button>
+	<button onclick={handleOnClickToggleVideo}>Toggle video</button>
+	<button onclick={handleOnClickDisconnect}>Disconnect</button>
 </main>
 
 <style>
