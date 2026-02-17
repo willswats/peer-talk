@@ -171,19 +171,52 @@
 	}
 </script>
 
-<main>
-	<Video videoStream={localVideoStream} />
-	{#each remoteStreams as remoteStream (remoteStream.id)}
-		<Video videoStream={remoteStream} />
-	{/each}
-	<Chat {socket} />
-	<button onclick={handleOnClickMuteMic}>Mute</button>
-	<button onclick={handleOnClickToggleVideo}>Toggle video</button>
-	<button onclick={handleOnClickDisconnect}>Disconnect</button>
+<main id="room">
+	<section>
+		<div>
+			<Video videoStream={localVideoStream} />
+			{#each remoteStreams as remoteStream (remoteStream.id)}
+				<Video videoStream={remoteStream} />
+			{/each}
+		</div>
+		<div id="">
+			<button onclick={handleOnClickMuteMic}>Mute</button>
+			<button onclick={handleOnClickToggleVideo}>Toggle video</button>
+			<button onclick={handleOnClickDisconnect}>Disconnect</button>
+		</div>
+		<Chat {socket} />
+	</section>
 </main>
 
 <style>
-	main {
+	#room {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		flex-grow: 1;
 		margin: 2rem;
+	}
+
+	section {
+		display: flex;
+		flex-direction: column;
+		background-color: #2a2a2a;
+		border-radius: 25px;
+		padding: 2rem;
+	}
+
+	div {
+		margin-bottom: 0.5rem;
+	}
+
+	button {
+		background-color: #3a3a3a;
+		border-radius: 25px;
+		padding: 0.5rem 1rem;
+	}
+
+	button:hover {
+		background-color: #4a4a4a;
 	}
 </style>

@@ -15,3 +15,9 @@
 <video bind:this={videoElement} autoplay playsinline controls={false}>
 	<track kind="captions" />
 </video>
+
+<style>
+	video {
+		background-color: #000;
+	}
+</style>
