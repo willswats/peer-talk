@@ -208,12 +208,12 @@
 
 	#room__videos {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
 		gap: 0.5rem;
+		grid-template-columns: 1fr;
 	}
 
 	#room__buttons {
-		margin-bottom: 0.5rem;
+		margin: 0.5rem 0;
 	}
 
 	button {
@@ -224,5 +224,12 @@
 
 	button:hover {
 		background-color: #4a4a4a;
+	}
+
+	@media screen and (min-width: 768px) {
+		#room__videos {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
 	}
 </style>

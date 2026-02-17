@@ -35,7 +35,7 @@
 		background-color: #2a2a2a;
 		border-radius: 25px;
 		padding: 2rem;
-		width: 45rem;
+		width: 20rem;
 	}
 
 	div {
@@ -52,9 +52,9 @@
 		background-color: #4a4a4a;
 	}
 
-	@media screen and (width <= 768px) {
+	@media screen and (min-width: 768px) {
 		section {
-			width: 20rem;
+			width: 45rem;
 		}
 	}
 </style>
