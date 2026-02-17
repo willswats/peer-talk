@@ -58,7 +58,7 @@
 	#chat-container {
 		display: flex;
 		flex-direction: column;
-		background-color: #2a2a2a;
+		background-color: #3a3a3a;
 		border-radius: 25px;
 		padding: 2rem;
 		height: 20rem;
@@ -74,7 +74,7 @@
 
 	#message-input {
 		color: #fff;
-		background-color: #3a3a3a;
+		background-color: #4a4a4a;
 		font-size: 1.2rem;
 		padding: 0.5rem;
 		width: 100%;

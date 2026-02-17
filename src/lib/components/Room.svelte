@@ -172,14 +172,14 @@
 </script>
 
 <main id="room">
-	<section>
-		<div>
+	<section id="room__container">
+		<div id="room__videos">
 			<Video videoStream={localVideoStream} />
 			{#each remoteStreams as remoteStream (remoteStream.id)}
 				<Video videoStream={remoteStream} />
 			{/each}
 		</div>
-		<div id="">
+		<div id="room__buttons">
 			<button onclick={handleOnClickMuteMic}>Mute</button>
 			<button onclick={handleOnClickToggleVideo}>Toggle video</button>
 			<button onclick={handleOnClickDisconnect}>Disconnect</button>
@@ -198,7 +198,7 @@
 		margin: 2rem;
 	}
 
-	section {
+	#room__container {
 		display: flex;
 		flex-direction: column;
 		background-color: #2a2a2a;
@@ -206,7 +206,12 @@
 		padding: 2rem;
 	}
 
-	div {
+	#room__videos {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	#room__buttons {
 		margin-bottom: 0.5rem;
 	}
 
