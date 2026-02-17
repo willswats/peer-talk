@@ -8,7 +8,7 @@
 
 	let { socket }: Props = $props();
 
-	let messageContainer: HTMLParagraphElement | null = null;
+	let messageContainer: HTMLOListElement | null = null;
 	let messageInput: HTMLInputElement | null = null;
 
 	function getTime() {
@@ -18,10 +18,10 @@
 	function appendMessage(text: string, type: string) {
 		if (messageContainer === null) return;
 
-		const messageElement = document.createElement('p');
+		const messageElement = document.createElement('li');
 		messageElement.classList.add(type); // 'sent' or 'received'
 		messageElement.innerText = text;
-		messageContainer.appendChild(messageElement);
+		messageContainer.insertBefore(messageElement, messageContainer.firstChild);
 	}
 
 	function handleMessageSubmit(event: SubmitEvent) {
@@ -47,15 +47,15 @@
 	});
 </script>
 
-<section id="chat-container">
-	<p bind:this={messageContainer} id="message-container"></p>
-	<form onsubmit={handleMessageSubmit} id="send-container">
-		<input bind:this={messageInput} id="message-input" />
+<section id="chat">
+	<ol bind:this={messageContainer} id="chat__message-container"></ol>
+	<form onsubmit={handleMessageSubmit}>
+		<input bind:this={messageInput} id="chat__message-input" />
 	</form>
 </section>
 
 <style>
-	#chat-container {
+	#chat {
 		display: flex;
 		flex-direction: column;
 		background-color: #3a3a3a;
@@ -64,15 +64,16 @@
 		height: 20rem;
 	}
 
-	#message-container {
+	#chat__message-container {
 		display: flex;
-		flex-direction: column;
-		flex-grow: 1;
+		flex-direction: column-reverse;
 		font-size: 1.2rem;
-		overflow-y: scroll;
+		width: 100%;
+		height: 100%;
+		overflow-y: auto;
 	}
 
-	#message-input {
+	#chat__message-input {
 		color: #fff;
 		background-color: #4a4a4a;
 		font-size: 1.2rem;
