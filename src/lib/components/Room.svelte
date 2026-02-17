@@ -209,6 +209,7 @@
 	#room__videos {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
+		gap: 0.5rem;
 	}
 
 	#room__buttons {
