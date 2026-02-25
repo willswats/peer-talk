@@ -32,6 +32,19 @@
 
 	const { username, roomId, localMicStream, localVideoStream }: Props = $props();
 
+	const marketplaceApps = [
+		{
+			url: 'https://opentogethertube.com'
+		},
+		{
+			url: 'https://wbo.ophir.dev'
+		}
+	];
+	// TODO: have a list of iframe elements that get created when reading from marketplaceApps
+	// log the url of the iframes, whenever the url changes update the iframe url for all users
+	// alternatively just update it when the id appears and no more updating after that (first one could cause issues
+	// if one user starts clicking everywhere)
+
 	socket.on('eventFromServer', (message) => {
 		console.log(message);
 	});
@@ -169,6 +182,10 @@
 		socket.disconnect();
 		goto('/');
 	}
+
+	$effect(() => {
+		console.log(document.getElementById('opentogethertube').contentWindow.location.href);
+	});
 </script>
 
 <main id="room">
@@ -185,6 +202,24 @@
 			<button onclick={handleOnClickDisconnect}>Disconnect</button>
 		</div>
 		<Chat {socket} />
+
+		<iframe
+			id="wbo"
+			title="WBO"
+			width="500"
+			height="500"
+			allow="fullscreen"
+			src={`https://wbo.ophir.dev/boards/${roomId}`}
+		>
+		</iframe>
+		<iframe
+			id="opentogethertube"
+			title="OpenTogetherTube"
+			src={`https://opentogethertube.com/`}
+			width="500"
+			height="500"
+			allow="fullscreen"
+		></iframe>
 	</section>
 </main>
 
