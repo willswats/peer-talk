@@ -7,37 +7,37 @@
 
 	const { roomId }: Props = $props();
 
-	interface embededApp {
+	interface embeddedApp {
 		id: string;
 		title: string;
 		url: string;
 		userConsent: boolean;
 	}
 
-	let embededApps: embededApp[] = $state([]);
+	let embeddedApps: embeddedApp[] = $state([]);
 
 	for (let app of apps) {
 		app.url += roomId;
-		embededApps.push({ ...app, userConsent: false });
+		embeddedApps.push({ ...app, userConsent: false });
 	}
 </script>
 
 <section>
-	{#each embededApps as embededApp (embededApp.id)}
-		{#if embededApp.userConsent}
+	{#each embeddedApps as embeddedApp (embeddedApp.id)}
+		{#if embeddedApp.userConsent}
 			<div>
 				<iframe
-					id={embededApp.id}
-					title={embededApp.title}
+					id={embeddedApp.id}
+					title={embeddedApp.title}
 					width="500"
 					height="500"
 					allow="fullscreen"
-					src={embededApp.url}
+					src={embeddedApp.url}
 				>
 				</iframe>
 				<button
 					onclick={() => {
-						const iframe = document.querySelector(`#${embededApp.id}`);
+						const iframe = document.querySelector(`#${embeddedApp.id}`);
 						if (iframe) {
 							iframe.requestFullscreen();
 						}
@@ -46,11 +46,11 @@
 			</div>
 		{:else}
 			<div>
-				<p>{embededApp.title}</p>
+				<p>{embeddedApp.title}</p>
 				<p>Press the button if you consent to rendering the app</p>
 				<button
 					onclick={() => {
-						const app = embededApps.find((app) => app.id === embededApp.id);
+						const app = embeddedApps.find((app) => app.id === embeddedApp.id);
 						if (app) {
 							console.log(app);
 							app.userConsent = true;

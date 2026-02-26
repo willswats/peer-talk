@@ -4,7 +4,7 @@
 
 	import Video from './Video.svelte';
 	import Chat from './Chat.svelte';
-	import EmbededApps from './EmbededApps.svelte';
+	import EmbeddedApps from './EmbeddedApps.svelte';
 
 	// Global state
 	interface peers {
@@ -186,7 +186,7 @@
 			<button onclick={handleOnClickDisconnect}>Disconnect</button>
 		</div>
 		<Chat {socket} />
-		<EmbededApps {roomId} />
+		<EmbeddedApps {roomId} />
 	</section>
 </main>
 
