@@ -29,6 +29,14 @@
 </script>
 
 {#each embededApps as embededApp (embededApp.id)}
+	<button
+		onclick={() => {
+			const iframe = document.querySelector(`#${embededApp.id}`);
+			if (iframe) {
+				iframe.requestFullscreen();
+			}
+		}}>Fullscreen</button
+	>
 	<iframe
 		id={embededApp.id}
 		title={embededApp.title}
