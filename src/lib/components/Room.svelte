@@ -186,7 +186,7 @@
 			<button onclick={handleOnClickDisconnect}>Disconnect</button>
 		</div>
 		<Chat {socket} />
-		<EmbededApps />
+		<EmbededApps {roomId} />
 	</section>
 </main>
 

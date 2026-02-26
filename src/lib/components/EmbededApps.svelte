@@ -1,9 +1,6 @@
 <script lang="ts">
 	interface Props {
 		roomId: string | undefined;
-		username: string;
-		localMicStream: MediaStream | null;
-		localVideoStream: MediaStream | null;
 	}
 
 	const { roomId }: Props = $props();
@@ -28,22 +25,27 @@
 	];
 </script>
 
-{#each embededApps as embededApp (embededApp.id)}
-	<button
-		onclick={() => {
-			const iframe = document.querySelector(`#${embededApp.id}`);
-			if (iframe) {
-				iframe.requestFullscreen();
-			}
-		}}>Fullscreen</button
-	>
-	<iframe
-		id={embededApp.id}
-		title={embededApp.title}
-		width="500"
-		height="500"
-		allow="fullscreen"
-		src={embededApp.url}
-	>
-	</iframe>
-{/each}
+<section>
+	{#each embededApps as embededApp (embededApp.id)}
+		<button
+			onclick={() => {
+				const iframe = document.querySelector(`#${embededApp.id}`);
+				if (iframe) {
+					iframe.requestFullscreen();
+				}
+			}}>Fullscreen</button
+		>
+		<iframe
+			id={embededApp.id}
+			title={embededApp.title}
+			width="500"
+			height="500"
+			allow="fullscreen"
+			src={embededApp.url}
+		>
+		</iframe>
+	{/each}
+</section>
+
+<style>
+</style>
