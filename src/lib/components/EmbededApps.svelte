@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { apps } from '@/apps.json';
+
 	interface Props {
 		roomId: string | undefined;
 	}
@@ -12,20 +14,12 @@
 		userConsent: boolean;
 	}
 
-	let embededApps: embededApp[] = $state([
-		{
-			id: 'wbo',
-			title: 'WBO',
-			url: `https://wbo.ophir.dev/boards/${roomId}`,
-			userConsent: false
-		},
-		{
-			id: 'etherpad',
-			title: 'Etherpad',
-			url: `https://etherpad.communitydata.science/p/${roomId}`,
-			userConsent: false
-		}
-	]);
+	let embededApps: embededApp[] = $state([]);
+
+	for (let app of apps) {
+		app.url += roomId;
+		embededApps.push({ ...app, userConsent: false });
+	}
 </script>
 
 <section>

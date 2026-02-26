@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "id": "wbo",
+      "title": "WBO",
+      "url": "https://wbo.ophir.dev/boards/"
+    },
+    {
+      "id": "etherpad",
+      "title": "Etherpad",
+      "url": "https://etherpad.communitydata.science/p/"
+    }
+  ]
+}
