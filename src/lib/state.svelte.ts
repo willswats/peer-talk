@@ -20,7 +20,7 @@ interface peerTracks {
 }
 
 interface peerState {
-	socket: Socket;
+	socket: Socket | null;
 	peers: peers;
 	peerTracks: peerTracks;
 	remoteStreams: MediaStream[];
@@ -58,7 +58,8 @@ export function resetUserState() {
 }
 
 export function resetPeerState() {
-	peerState.socket = createSocketWithListeners();
+	Object.values(peerState.peers).forEach((pc) => pc.close());
+
 	peerState.peers = {};
 	peerState.peerTracks = {};
 	peerState.remoteStreams = [];
