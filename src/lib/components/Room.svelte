@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { userState, peerState } from '$lib/state.svelte';
+	import { resolve } from '$app/paths';
 
 	import Video from './Video.svelte';
 	import Chat from './Chat.svelte';
 	import EmbeddedApps from './EmbeddedApps.svelte';
-	import { userState, peerState } from '$lib/state.svelte';
-	import { resolve } from '$app/paths';
 
+	// TODO: add if check to prevent user joining twice when navigating to the room page again
 	peerState.socket.emit('join-room', userState.roomId, userState.username);
 
 	function handleOnClickMuteMic() {
