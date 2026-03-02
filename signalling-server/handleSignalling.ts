@@ -33,12 +33,6 @@ export const handleSignalling = (io: Server, socket: Socket) => {
 			});
 		});
 
-		socket.on('send-url', (url) => {
-			socket.to(roomId).emit('url', {
-				url: url
-			});
-		});
-
 		socket.on('disconnect', () => {
 			console.log(`User ${socket.id} disconnected`);
 
