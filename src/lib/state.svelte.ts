@@ -1,4 +1,5 @@
-import { io, Socket } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
+import { createSocketWithListeners } from '$lib/utils/createSocketWithListeners';
 
 interface userState {
 	joinedRoom: boolean;
@@ -36,7 +37,7 @@ export const userState: userState = $state({
 });
 
 export const peerState: peerState = $state({
-	socket: io(),
+	socket: createSocketWithListeners(),
 	peers: {},
 	peerTracks: {}, // used to identify which tracks belong to which peer (for deletion)
 	remoteStreams: []
@@ -57,7 +58,7 @@ export function resetUserState() {
 }
 
 export function resetPeerState() {
-	peerState.socket = io();
+	peerState.socket = createSocketWithListeners();
 	peerState.peers = {};
 	peerState.peerTracks = {};
 	peerState.remoteStreams = [];
