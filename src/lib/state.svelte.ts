@@ -41,3 +41,20 @@ export const peerState: peerState = $state({
 	peerTracks: {}, // used to identify which tracks belong to which peer (for deletion)
 	remoteStreams: []
 });
+
+export function resetUserState() {
+	userState.joinedRoom = false;
+	userState.roomId = undefined;
+	userState.username = '';
+	userState.localMicEnabled = true;
+	userState.localVideoEnabled = true;
+	userState.localMicStream = null;
+	userState.localVideoStream = null;
+}
+
+export function resetPeerState() {
+	peerState.socket = io();
+	peerState.peers = {};
+	peerState.peerTracks = {};
+	peerState.remoteStreams = [];
+}

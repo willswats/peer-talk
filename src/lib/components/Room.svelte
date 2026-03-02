@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { userState, peerState } from '$lib/state.svelte';
+	import { userState, peerState, resetPeerState, resetUserState } from '$lib/state.svelte';
 	import { resolve } from '$app/paths';
 
 	import Video from './Video.svelte';
@@ -29,7 +29,8 @@
 	function handleOnClickDisconnect() {
 		peerState.socket.disconnect();
 		goto(resolve('/'));
-		userState.joinedRoom = false;
+		resetUserState();
+		resetPeerState();
 	}
 </script>
 
