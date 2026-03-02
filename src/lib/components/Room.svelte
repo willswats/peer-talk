@@ -6,9 +6,8 @@
 	import Video from './Video.svelte';
 	import Chat from './Chat.svelte';
 	import EmbeddedApps from './EmbeddedApps.svelte';
-	import { createSocketWithListeners } from '$lib/utils/createSocketWithListeners';
 
-	if (!userState.joinedRoom && peerState.socket) {
+	if (!userState.joinedRoom) {
 		peerState.socket.emit('join-room', userState.roomId, userState.username);
 		userState.joinedRoom = true;
 	}
@@ -28,15 +27,10 @@
 	}
 
 	function handleOnClickDisconnect() {
-		if (!peerState.socket) return;
-		peerState.socket.removeAllListeners();
 		peerState.socket.disconnect();
-		goto(resolve('/'));
 		resetUserState();
 		resetPeerState();
-		peerState.socket = createSocketWithListeners();
-		console.log(userState);
-		console.log(peerState);
+		goto(resolve('/'));
 	}
 </script>
 
