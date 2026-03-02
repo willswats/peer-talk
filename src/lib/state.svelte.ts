@@ -48,6 +48,10 @@ export function resetUserState() {
 	userState.username = '';
 	userState.localMicEnabled = true;
 	userState.localVideoEnabled = true;
+
+	userState.localMicStream?.getTracks().forEach((track) => track.stop());
+	userState.localVideoStream?.getTracks().forEach((track) => track.stop());
+
 	userState.localMicStream = null;
 	userState.localVideoStream = null;
 }
