@@ -8,6 +8,7 @@
 	import { userState } from '$lib/state.svelte';
 
 	let roomValid: boolean = $state(false);
+	let joinRoomButtonPressed: boolean = $state(false);
 
 	onMount(() => {
 		let checkRoomId = $page.params.roomId;
@@ -24,8 +25,8 @@
 	<main>
 		<p>Invalid room</p>
 	</main>
-{:else if userState.joinedRoom}
+{:else if joinRoomButtonPressed || userState.joinedRoom}
 	<Room />
 {:else}
-	<JoinSettings />
+	<JoinSettings bind:joinRoomButtonPressed />
 {/if}

@@ -2,6 +2,12 @@
 	import Video from './Video.svelte';
 	import { userState } from '$lib/state.svelte';
 
+	interface Props {
+		joinRoomButtonPressed: boolean;
+	}
+
+	let { joinRoomButtonPressed = $bindable() }: Props = $props();
+
 	async function handleOnClickVideo() {
 		try {
 			const videoConstraints = { video: true, audio: false };
@@ -23,7 +29,7 @@
 	function handleOnClickJoinRoom() {
 		// TODO: add error message
 		if (userState.localVideoStream !== null || userState.localMicStream !== null) {
-			userState.joinedRoom = true;
+			joinRoomButtonPressed = true;
 		}
 	}
 </script>

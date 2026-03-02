@@ -7,8 +7,10 @@
 	import Chat from './Chat.svelte';
 	import EmbeddedApps from './EmbeddedApps.svelte';
 
-	// TODO: add if check to prevent user joining twice when navigating to the room page again
-	peerState.socket.emit('join-room', userState.roomId, userState.username);
+	if (!userState.joinedRoom) {
+		peerState.socket.emit('join-room', userState.roomId, userState.username);
+		userState.joinedRoom = true;
+	}
 
 	function handleOnClickMuteMic() {
 		if (userState.localMicStream !== null) {
@@ -27,6 +29,7 @@
 	function handleOnClickDisconnect() {
 		peerState.socket.disconnect();
 		goto(resolve('/'));
+		userState.joinedRoom = false;
 	}
 </script>
 
