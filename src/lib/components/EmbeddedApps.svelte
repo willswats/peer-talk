@@ -1,11 +1,6 @@
 <script lang="ts">
 	import { apps } from '@/apps.json';
-
-	interface Props {
-		roomId: string | undefined;
-	}
-
-	const { roomId }: Props = $props();
+	import { userState } from '$lib/state.svelte';
 
 	interface embeddedApp {
 		id: string;
@@ -16,8 +11,9 @@
 
 	let embeddedApps: embeddedApp[] = $state([]);
 
+	// Init the embededApps state with the data from apps.json
 	for (let app of apps) {
-		app.url += roomId;
+		app.url += userState.roomId;
 		embeddedApps.push({ ...app, userConsent: false });
 	}
 </script>

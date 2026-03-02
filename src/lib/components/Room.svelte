@@ -5,6 +5,8 @@
 	import Video from './Video.svelte';
 	import Chat from './Chat.svelte';
 	import EmbeddedApps from './EmbeddedApps.svelte';
+	import { userState } from '$lib/state.svelte';
+	import { resolve } from '$app/paths';
 
 	// Global state
 	interface peers {
@@ -25,19 +27,18 @@
 	const socket = io();
 
 	interface Props {
-		roomId: string | undefined;
 		username: string;
 		localMicStream: MediaStream | null;
 		localVideoStream: MediaStream | null;
 	}
 
-	const { username, roomId, localMicStream, localVideoStream }: Props = $props();
+	const { username, localMicStream, localVideoStream }: Props = $props();
 
 	socket.on('eventFromServer', (message) => {
 		console.log(message);
 	});
 
-	socket.emit('join-room', roomId, username);
+	socket.emit('join-room', userState.roomId, username);
 
 	socket.on('user-connected', async (socketId) => {
 		try {
@@ -168,7 +169,7 @@
 
 	function handleOnClickDisconnect() {
 		socket.disconnect();
-		goto('/');
+		goto(resolve('/'));
 	}
 </script>
 
@@ -186,7 +187,7 @@
 			<button onclick={handleOnClickDisconnect}>Disconnect</button>
 		</div>
 		<Chat {socket} />
-		<EmbeddedApps {roomId} />
+		<EmbeddedApps />
 	</section>
 </main>
 

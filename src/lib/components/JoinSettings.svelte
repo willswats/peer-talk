@@ -1,15 +1,14 @@
 <script lang="ts">
 	import Video from './Video.svelte';
+	import { userState } from '$lib/state.svelte';
 
 	interface Props {
 		localVideoStream: MediaStream | null;
 		localMicStream: MediaStream | null;
-		joinRoomButtonPressed: boolean;
 		username: string;
 	}
 
 	let {
-		joinRoomButtonPressed = $bindable(),
 		localVideoStream = $bindable(),
 		localMicStream = $bindable(),
 		username = $bindable()
@@ -36,7 +35,7 @@
 	function handleOnClickJoinRoom() {
 		// TODO: add error message
 		if (localVideoStream !== null || localMicStream !== null) {
-			joinRoomButtonPressed = true;
+			userState.joinedRoom = true;
 		}
 	}
 </script>

@@ -1,4 +1,5 @@
 <script>
+	import { resolve } from '$app/paths';
 	import { v4 as uuidv4 } from 'uuid';
 </script>
 
@@ -10,7 +11,7 @@
 			embedded single page applications.
 		</p>
 		<div>
-			<a href={`/room/${uuidv4()}`}>Create Room</a>
+			<a href={resolve(`/room/${uuidv4()}`)}>Create Room</a>
 		</div>
 	</section>
 </main>

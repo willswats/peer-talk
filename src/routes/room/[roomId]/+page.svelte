@@ -5,19 +5,17 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { generateRandomUsername } from '$lib/utils/generateRandomUsername';
+	import { userState } from '$lib/state.svelte';
 
 	let localMicStream: MediaStream | null = $state(null);
 	let localVideoStream: MediaStream | null = $state(null);
 
 	let username: string = $state('');
-	let roomId: string | undefined = $state(undefined);
 	let roomValid: boolean = $state(false);
 
-	let joinRoomButtonPressed: boolean = $state(false);
-
 	onMount(() => {
-		roomId = $page.params.roomId;
-		roomValid = uuidvalidate(roomId);
+		userState.roomId = $page.params.roomId;
+		roomValid = uuidvalidate(userState.roomId);
 
 		if (roomValid) {
 			username = generateRandomUsername();
@@ -29,13 +27,8 @@
 	<main>
 		<p>Invalid room</p>
 	</main>
-{:else if joinRoomButtonPressed}
-	<Room {username} {roomId} {localMicStream} {localVideoStream} />
+{:else if userState.joinedRoom}
+	<Room {username} {localMicStream} {localVideoStream} />
 {:else}
-	<JoinSettings
-		bind:joinRoomButtonPressed
-		bind:localMicStream
-		bind:localVideoStream
-		bind:username
-	/>
+	<JoinSettings bind:localMicStream bind:localVideoStream bind:username />
 {/if}
