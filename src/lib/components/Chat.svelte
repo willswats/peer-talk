@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { Socket } from 'socket.io-client';
-
-	interface Props {
-		socket: Socket;
-	}
-
-	let { socket }: Props = $props();
+	import { peerState } from '$lib/state.svelte';
 
 	let messageContainer: HTMLOListElement | null = null;
 	let messageInput: HTMLInputElement | null = null;
@@ -21,6 +15,7 @@
 		const messageElement = document.createElement('li');
 		messageElement.classList.add(type); // 'sent' or 'received'
 		messageElement.innerText = text;
+		// TODO: dont manip dom directly
 		messageContainer.insertBefore(messageElement, messageContainer.firstChild);
 	}
 
@@ -34,14 +29,14 @@
 		appendMessage(`You (${getTime()}): ${message}`, 'sent');
 
 		// Send the message to the server
-		socket.emit('send-chat-message', message);
+		peerState.socket.emit('send-chat-message', message);
 
 		// Clear the input box
 		messageInput.value = '';
 	}
 
 	onMount(() => {
-		socket.on('chat-message', (data) => {
+		peerState.socket.on('chat-message', (data) => {
 			appendMessage(`${data.name} (${data.time}): ${data.message}`, 'received');
 		});
 	});

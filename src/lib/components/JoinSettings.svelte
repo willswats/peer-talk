@@ -2,22 +2,10 @@
 	import Video from './Video.svelte';
 	import { userState } from '$lib/state.svelte';
 
-	interface Props {
-		localVideoStream: MediaStream | null;
-		localMicStream: MediaStream | null;
-		username: string;
-	}
-
-	let {
-		localVideoStream = $bindable(),
-		localMicStream = $bindable(),
-		username = $bindable()
-	}: Props = $props();
-
 	async function handleOnClickVideo() {
 		try {
 			const videoConstraints = { video: true, audio: false };
-			localVideoStream = await navigator.mediaDevices.getUserMedia(videoConstraints);
+			userState.localVideoStream = await navigator.mediaDevices.getUserMedia(videoConstraints);
 		} catch (error) {
 			console.log('Error getting permissions', error);
 		}
@@ -26,7 +14,7 @@
 	async function handleOnClickMic() {
 		try {
 			const micConstraints = { video: false, audio: true };
-			localMicStream = await navigator.mediaDevices.getUserMedia(micConstraints);
+			userState.localMicStream = await navigator.mediaDevices.getUserMedia(micConstraints);
 		} catch (error) {
 			console.log('Error getting permissions', error);
 		}
@@ -34,7 +22,7 @@
 
 	function handleOnClickJoinRoom() {
 		// TODO: add error message
-		if (localVideoStream !== null || localMicStream !== null) {
+		if (userState.localVideoStream !== null || userState.localMicStream !== null) {
 			userState.joinedRoom = true;
 		}
 	}
@@ -42,8 +30,8 @@
 
 <main>
 	<section>
-		<Video videoStream={localVideoStream} />
-		<input type="text" bind:value={username} />
+		<Video videoStream={userState.localVideoStream} />
+		<input type="text" bind:value={userState.username} />
 		<div>
 			<button onclick={handleOnClickVideo}>Video</button>
 			<button onclick={handleOnClickMic}>Microphone</button>
