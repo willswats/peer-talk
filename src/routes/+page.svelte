@@ -1,6 +1,9 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { v4 as uuidv4 } from 'uuid';
+	import { v4 as uuidv4, validate as uuidvalidate } from 'uuid';
+
+	let roomIdInput = $state('');
 </script>
 
 <main>
@@ -12,6 +15,19 @@
 		</p>
 		<div>
 			<a href={resolve(`/room/${uuidv4()}`)}>Create Room</a>
+			<form
+				onsubmit={(event) => {
+					event.preventDefault();
+
+					const roomValid = uuidvalidate(roomIdInput);
+					if (roomValid) {
+						goto(resolve(`/room/${roomIdInput}`));
+					}
+				}}
+			>
+				<input type="text" bind:value={roomIdInput} />
+				<button>Enter Room</button>
+			</form>
 		</div>
 	</section>
 </main>
