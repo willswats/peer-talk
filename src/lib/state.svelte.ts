@@ -1,5 +1,6 @@
 import { Socket } from 'socket.io-client';
 import { createSocketWithListeners } from '$lib/utils/createSocketWithListeners';
+import { apps } from '@/apps.json';
 
 interface userState {
 	joinedRoom: boolean;
@@ -42,6 +43,20 @@ export const peerState: peerState = $state({
 	peerTracks: {}, // used to identify which tracks belong to which peer (for deletion)
 	remoteStreams: []
 });
+
+interface embeddedApp {
+	id: string;
+	title: string;
+	url: string;
+	userConsent: boolean;
+}
+
+export const embeddedApps: embeddedApp[] = $state([]);
+
+// Init the embededApps state with the data from apps.json
+for (const app of apps) {
+	embeddedApps.push({ ...app, userConsent: false });
+}
 
 export function resetUserState() {
 	userState.joinedRoom = false;
