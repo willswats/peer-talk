@@ -7,6 +7,8 @@
 	import Chat from './Chat.svelte';
 	import EmbeddedApps from './EmbeddedApps.svelte';
 
+	let roomToggle: boolean = $state(false);
+
 	function handleOnClickMuteMic() {
 		if (userState.localMicStream !== null) {
 			userState.localMicEnabled = !userState.localMicEnabled;
@@ -31,19 +33,30 @@
 
 <main id="room">
 	<section id="room__container">
-		<div id="room__videos">
-			<Video videoStream={userState.localVideoStream} />
-			{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-				<Video videoStream={remoteStream} />
-			{/each}
+		<div id="room__toggle-buttons">
+			<button onclick={() => (roomToggle = false)}>Talk</button>
+			<button onclick={() => (roomToggle = true)}>Apps</button>
 		</div>
-		<div id="room__buttons">
-			<button onclick={handleOnClickMuteMic}>Mute</button>
-			<button onclick={handleOnClickToggleVideo}>Toggle video</button>
-			<button onclick={handleOnClickDisconnect}>Disconnect</button>
-		</div>
-		<Chat />
-		<EmbeddedApps />
+		{#if !roomToggle}
+			<section id="room__talk">
+				<div id="room__videos">
+					<Video videoStream={userState.localVideoStream} />
+					{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
+						<Video videoStream={remoteStream} />
+					{/each}
+				</div>
+				<div id="room__buttons">
+					<button onclick={handleOnClickMuteMic}>Mute</button>
+					<button onclick={handleOnClickToggleVideo}>Toggle video</button>
+					<button onclick={handleOnClickDisconnect}>Disconnect</button>
+				</div>
+				<Chat />
+			</section>
+		{:else}
+			<section id="room__apps">
+				<EmbeddedApps />
+			</section>
+		{/if}
 	</section>
 </main>
 
