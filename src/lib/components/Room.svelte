@@ -7,11 +7,6 @@
 	import Chat from './Chat.svelte';
 	import EmbeddedApps from './EmbeddedApps.svelte';
 
-	if (!userState.joinedRoom) {
-		peerState.socket.emit('join-room', userState.roomId, userState.username);
-		userState.joinedRoom = true;
-	}
-
 	function handleOnClickMuteMic() {
 		if (userState.localMicStream !== null) {
 			userState.localMicEnabled = !userState.localMicEnabled;

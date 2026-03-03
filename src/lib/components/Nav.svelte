@@ -6,7 +6,7 @@
 
 <nav>
 	<a href={resolve('/')}>Home</a>
-	{#if userState.roomId}
+	{#if userState.joinedRoom && userState.roomId}
 		<a href={resolve(`/room/${userState.roomId}`)}>Room</a>
 	{:else}
 		<a href={resolve(`/room/${uuidv4()}`)}>Create Room</a>

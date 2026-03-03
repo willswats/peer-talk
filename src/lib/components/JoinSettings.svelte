@@ -1,12 +1,6 @@
 <script lang="ts">
 	import Video from './Video.svelte';
-	import { userState } from '$lib/state.svelte';
-
-	interface Props {
-		joinRoomButtonPressed: boolean;
-	}
-
-	let { joinRoomButtonPressed = $bindable() }: Props = $props();
+	import { peerState, userState } from '$lib/state.svelte';
 
 	async function handleOnClickVideo() {
 		try {
@@ -29,7 +23,8 @@
 	function handleOnClickJoinRoom() {
 		// TODO: add error message
 		if (userState.localVideoStream !== null || userState.localMicStream !== null) {
-			joinRoomButtonPressed = true;
+			peerState.socket.emit('join-room', userState.roomId, userState.username);
+			userState.joinedRoom = true;
 		}
 	}
 </script>
