@@ -16,15 +16,15 @@ interface peers {
 	[key: string]: RTCPeerConnection;
 }
 
-interface peerTracks {
-	[key: string]: string;
+interface remoteStreamIdentifier {
+	[key: string]: string; // socketId - stream.id
 }
 
 interface peerState {
 	socket: Socket;
 	peers: peers;
-	peerTracks: peerTracks;
 	remoteStreams: MediaStream[];
+	remoteStreamIdentifier: remoteStreamIdentifier;
 }
 
 export const userState: userState = $state({
@@ -40,8 +40,8 @@ export const userState: userState = $state({
 export const peerState: peerState = $state({
 	socket: createSocketWithListeners(),
 	peers: {},
-	peerTracks: {}, // used to identify which tracks belong to which peer (for deletion)
-	remoteStreams: []
+	remoteStreams: [],
+	remoteStreamIdentifier: {} // used to identify which tracks belong to which peer (for deletion)
 });
 
 interface embeddedApp {
@@ -78,6 +78,6 @@ export function resetPeerState() {
 	Object.values(peerState.peers).forEach((pc) => pc.close());
 
 	peerState.peers = {};
-	peerState.peerTracks = {};
 	peerState.remoteStreams = [];
+	peerState.remoteStreamIdentifier = {};
 }

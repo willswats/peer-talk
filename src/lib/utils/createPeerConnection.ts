@@ -27,7 +27,7 @@ export function createPeerConnection(socket: Socket, socketId: string) {
 	pc.ontrack = (event) => {
 		const stream = event.streams[0];
 		peerState.remoteStreams.push(stream);
-		peerState.peerTracks[socketId] = stream.id;
+		peerState.remoteStreamIdentifier[socketId] = stream.id;
 	};
 
 	pc.onicecandidate = (event) => {

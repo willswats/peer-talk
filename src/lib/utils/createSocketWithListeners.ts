@@ -75,12 +75,12 @@ export function createSocketWithListeners() {
 			delete peerState.peers[socketId];
 		}
 
-		// Remove the track from remoteStreams, then cleanup peerTracks (svelte then removes the element)
-		const trackId = peerState.peerTracks[socketId];
+		// Remove the track from remoteStreams, then cleanup remoteStreamIdentifier (svelte then removes the element)
+		const trackId = peerState.remoteStreamIdentifier[socketId];
 		peerState.remoteStreams = peerState.remoteStreams.filter(function (remoteStream) {
 			return remoteStream.id !== trackId;
 		});
-		delete peerState.peerTracks[socketId];
+		delete peerState.remoteStreamIdentifier[socketId];
 	});
 
 	return socket;
