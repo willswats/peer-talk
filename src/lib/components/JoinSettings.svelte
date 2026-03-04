@@ -2,27 +2,41 @@
 	import Video from './Video.svelte';
 	import { peerState, userState } from '$lib/state.svelte';
 
-	async function handleOnClickVideo() {
+	async function getMediaWithFallback() {
 		try {
-			const videoConstraints = { video: true, audio: false };
-			userState.localVideoStream = await navigator.mediaDevices.getUserMedia(videoConstraints);
-		} catch (error) {
-			console.log('Error getting permissions', error);
+			const stream = await navigator.mediaDevices.getUserMedia({
+				video: true,
+				audio: true
+			});
+			return stream;
+		} catch (error: any) {
+			if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
+				try {
+					const audioStream = await navigator.mediaDevices.getUserMedia({
+						audio: true
+					});
+					return audioStream;
+				} catch (audioError) {
+					throw new Error('Could not access any media devices');
+				}
+			} else {
+				throw error;
+			}
 		}
 	}
 
-	async function handleOnClickMic() {
+	async function handleOnClickPerms() {
 		try {
-			const micConstraints = { video: false, audio: true };
-			userState.localMicStream = await navigator.mediaDevices.getUserMedia(micConstraints);
+			userState.localStream = await getMediaWithFallback();
 		} catch (error) {
+			// TODO: add error message to UI
 			console.log('Error getting permissions', error);
 		}
 	}
 
 	function handleOnClickJoinRoom() {
-		// TODO: add error message
-		if (userState.localVideoStream !== null || userState.localMicStream !== null) {
+		// TODO: add error message to UI
+		if (userState.localStream !== null || userState.localStream !== null) {
 			peerState.socket.emit('join-room', userState.roomId, userState.username);
 			userState.joinedRoom = true;
 		}
@@ -31,11 +45,10 @@
 
 <main>
 	<section>
-		<Video videoStream={userState.localVideoStream} />
+		<Video videoStream={userState.localStream} muted={true} />
 		<input type="text" bind:value={userState.username} />
 		<div>
-			<button onclick={handleOnClickVideo}>Video</button>
-			<button onclick={handleOnClickMic}>Microphone</button>
+			<button onclick={handleOnClickPerms}>Grant Permissions</button>
 			<button onclick={handleOnClickJoinRoom}>Join Room</button>
 		</div>
 	</section>

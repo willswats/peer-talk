@@ -10,17 +10,10 @@ export function createPeerConnection(socket: Socket, socketId: string) {
 		]
 	});
 
-	if (userState.localMicStream !== null) {
-		userState.localMicStream.getTracks().forEach((track: MediaStreamTrack) => {
-			if (userState.localMicStream === null) return;
-			pc.addTrack(track, userState.localMicStream);
-		});
-	}
-
-	if (userState.localVideoStream !== null) {
-		userState.localVideoStream.getTracks().forEach((track: MediaStreamTrack) => {
-			if (userState.localVideoStream === null) return;
-			pc.addTrack(track, userState.localVideoStream);
+	if (userState.localStream !== null) {
+		userState.localStream.getTracks().forEach((track: MediaStreamTrack) => {
+			if (userState.localStream === null) return;
+			pc.addTrack(track, userState.localStream);
 		});
 	}
 

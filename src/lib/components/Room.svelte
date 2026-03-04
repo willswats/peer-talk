@@ -10,16 +10,16 @@
 	let roomToggle: boolean = $state(false);
 
 	function handleOnClickMuteMic() {
-		if (userState.localMicStream !== null) {
+		if (userState.localStream !== null) {
 			userState.localMicEnabled = !userState.localMicEnabled;
-			userState.localMicStream.getAudioTracks()[0].enabled = userState.localMicEnabled;
+			userState.localStream.getAudioTracks()[0].enabled = userState.localMicEnabled;
 		}
 	}
 
 	function handleOnClickToggleVideo() {
-		if (userState.localVideoStream !== null) {
+		if (userState.localStream !== null) {
 			userState.localVideoEnabled = !userState.localVideoEnabled;
-			userState.localVideoStream.getVideoTracks()[0].enabled = userState.localVideoEnabled;
+			userState.localStream.getVideoTracks()[0].enabled = userState.localVideoEnabled;
 		}
 	}
 
@@ -40,9 +40,9 @@
 		{#if !roomToggle}
 			<section id="room__talk">
 				<div id="room__videos">
-					<Video videoStream={userState.localVideoStream} />
-					{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-						<Video videoStream={remoteStream} />
+					<Video videoStream={userState.localStream} muted={true} />
+					{#each peerState.remoteStreams as stream (stream.id)}
+						<Video videoStream={stream} muted={false} />
 					{/each}
 				</div>
 				<div id="room__buttons">
