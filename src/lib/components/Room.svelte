@@ -8,6 +8,8 @@
 	import EmbeddedApps from './EmbeddedApps.svelte';
 
 	let roomToggle: boolean = $state(false);
+	let roomTalkElement: HTMLElement;
+	let roomAppsElement: HTMLElement;
 
 	function handleOnClickMuteMic() {
 		if (userState.localStream !== null) {
@@ -29,35 +31,39 @@
 		resetPeerState();
 		goto(resolve('/'));
 	}
+
+	$effect(() => {
+		if (!roomToggle) {
+			roomAppsElement.classList.add('hidden');
+			roomTalkElement.classList.remove('hidden');
+		} else {
+			roomAppsElement.classList.remove('hidden');
+			roomTalkElement.classList.add('hidden');
+		}
+	});
 </script>
 
 <main id="room">
-	<section id="room__container">
-		<div id="room__toggle-buttons">
-			<button onclick={() => (roomToggle = false)}>Talk</button>
-			<button onclick={() => (roomToggle = true)}>Apps</button>
+	<div id="room__toggle-buttons">
+		<button onclick={() => (roomToggle = false)}>Talk</button>
+		<button onclick={() => (roomToggle = true)}>Apps</button>
+	</div>
+	<section id="room__talk" bind:this={roomTalkElement}>
+		<div id="room__videos">
+			<Video videoStream={userState.localStream} muted={true} />
+			{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
+				<Video videoStream={remoteStream} muted={false} />
+			{/each}
 		</div>
-		{#if !roomToggle}
-			<section id="room__talk">
-				<div id="room__videos">
-					<Video videoStream={userState.localStream} muted={true} />
-					{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-						{console.log(remoteStream.getTracks())}
-						<Video videoStream={remoteStream} muted={false} />
-					{/each}
-				</div>
-				<div id="room__buttons">
-					<button onclick={handleOnClickMuteMic}>Mute</button>
-					<button onclick={handleOnClickToggleVideo}>Toggle video</button>
-					<button onclick={handleOnClickDisconnect}>Disconnect</button>
-				</div>
-				<Chat />
-			</section>
-		{:else}
-			<section id="room__apps">
-				<EmbeddedApps />
-			</section>
-		{/if}
+		<div id="room__buttons">
+			<button onclick={handleOnClickMuteMic}>Mute</button>
+			<button onclick={handleOnClickToggleVideo}>Toggle video</button>
+			<button onclick={handleOnClickDisconnect}>Disconnect</button>
+		</div>
+		<Chat />
+	</section>
+	<section id="room__apps" bind:this={roomAppsElement}>
+		<EmbeddedApps />
 	</section>
 </main>
 
@@ -69,14 +75,6 @@
 		align-items: center;
 		flex-grow: 1;
 		margin: 2rem;
-	}
-
-	#room__container {
-		display: flex;
-		flex-direction: column;
-		background-color: #2a2a2a;
-		border-radius: 25px;
-		padding: 2rem;
 	}
 
 	#room__videos {

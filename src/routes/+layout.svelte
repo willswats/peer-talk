@@ -50,6 +50,14 @@
 			fill: #fff;
 		}
 
+		.hidden {
+			opacity: 0;
+			pointer-events: none;
+			width: 0;
+			height: 0;
+			position: absolute;
+		}
+
 		input[type='number'] {
 			appearance: textfield;
 			/* Remove Firefox default browser style */

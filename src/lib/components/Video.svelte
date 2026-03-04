@@ -14,11 +14,7 @@
 
 			const hasVideo = videoStream.getVideoTracks().length > 0;
 			if (!hasVideo) {
-				videoElement.style.position = 'absolute';
-				videoElement.style.width = '0';
-				videoElement.style.height = '0';
-				videoElement.style.opacity = '0';
-				videoElement.style.pointerEvents = 'none';
+				videoElement.classList.add('hidden');
 			}
 		}
 	});
