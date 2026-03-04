@@ -41,8 +41,9 @@
 			<section id="room__talk">
 				<div id="room__videos">
 					<Video videoStream={userState.localStream} muted={true} />
-					{#each peerState.remoteStreams as stream (stream.id)}
-						<Video videoStream={stream} muted={false} />
+					{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
+						{console.log(remoteStream.getTracks())}
+						<Video videoStream={remoteStream} muted={false} />
 					{/each}
 				</div>
 				<div id="room__buttons">

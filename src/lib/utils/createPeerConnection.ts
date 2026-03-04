@@ -17,10 +17,20 @@ export function createPeerConnection(socket: Socket, socketId: string) {
 		});
 	}
 
+	// Create a MediaStream for each peer for all of the tracks
+	const remoteStream = new MediaStream();
+
 	pc.ontrack = (event) => {
-		const stream = event.streams[0];
-		peerState.remoteStreams.push(stream);
-		peerState.remoteStreamIdentifier[socketId] = stream.id;
+		event.streams[0].getTracks().forEach((track) => {
+			remoteStream.addTrack(track);
+		});
+
+		// Only add to peerState after we have at least one track.
+		// This ensures svelte has the correct reference when adding the remoteStreams.
+		if (!peerState.remoteStreams.includes(remoteStream)) {
+			peerState.remoteStreams.push(remoteStream);
+			peerState.remoteStreamIdentifier[socketId] = remoteStream.id;
+		}
 	};
 
 	pc.onicecandidate = (event) => {
@@ -31,5 +41,6 @@ export function createPeerConnection(socket: Socket, socketId: string) {
 	};
 
 	peerState.peers[socketId] = pc;
+
 	return pc;
 }
