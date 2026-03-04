@@ -51,11 +51,14 @@
 		}
 
 		.hidden {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 1px;
+			height: 1px;
 			opacity: 0;
 			pointer-events: none;
-			width: 0;
-			height: 0;
-			position: absolute;
+			z-index: -1;
 		}
 
 		input[type='number'] {
