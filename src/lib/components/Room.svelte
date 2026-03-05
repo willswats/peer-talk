@@ -44,11 +44,11 @@
 </script>
 
 <main id="room">
-	<div id="room__toggle-buttons">
-		<button onclick={() => (roomToggle = false)}>Talk</button>
-		<button onclick={() => (roomToggle = true)}>Apps</button>
-	</div>
 	<section id="room__talk" bind:this={roomTalkElement}>
+		<div id="room__toggle-buttons">
+			<button onclick={() => (roomToggle = false)}>Talk</button>
+			<button onclick={() => (roomToggle = true)}>Apps</button>
+		</div>
 		<div id="room__videos">
 			<Video videoStream={userState.localStream} muted={true} />
 			{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
@@ -63,6 +63,10 @@
 		<Chat />
 	</section>
 	<section id="room__apps" bind:this={roomAppsElement}>
+		<div id="room__toggle-buttons">
+			<button onclick={() => (roomToggle = false)}>Talk</button>
+			<button onclick={() => (roomToggle = true)}>Apps</button>
+		</div>
 		<EmbeddedApps />
 	</section>
 </main>
@@ -72,42 +76,34 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-		height: calc(100vh - 4rem);
 	}
 
 	#room__talk {
-		flex: 1;
 		display: flex;
 		flex-direction: column;
+		height: calc(100vh - 2rem);
+		flex-grow: 1;
 		min-height: 0;
 	}
 
 	#room__videos {
 		display: grid;
-		gap: 0.5rem;
 		grid-template-columns: 1fr;
+		gap: 0.5rem;
 		flex: 1;
 		min-height: 0;
 		min-width: 0;
-		max-height: calc(100vh - 200px);
-	}
-
-	#room__videos > :global(*) {
-		min-width: 0;
-		min-height: 0;
-		width: 100%;
-		height: 100%;
-	}
-
-	#room__apps {
-		display: grid;
-		gap: 1rem;
-		grid-template-columns: 1fr;
 	}
 
 	#room__buttons {
 		margin: 0.5rem 0;
 		flex-shrink: 0;
+	}
+
+	#room__apps {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
 	}
 
 	button {
@@ -123,11 +119,6 @@
 
 	@media screen and (min-width: 768px) {
 		#room__videos {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-		}
-
-		#room__apps {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 		}
