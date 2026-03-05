@@ -87,6 +87,10 @@
 		margin: 1rem;
 	}
 
+	#room__toggle-buttons {
+		margin-bottom: 0.5rem;
+	}
+
 	#room__videos {
 		display: grid;
 		grid-template-columns: 1fr;
