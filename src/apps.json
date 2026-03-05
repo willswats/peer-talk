@@ -3,12 +3,16 @@
     {
       "id": "wbo",
       "title": "WBO",
-      "url": "https://wbo.ophir.dev/boards/"
+      "description": "Online collaborative Whiteboard that is simple, free, easy to use and to deploy.",
+      "url": "https://wbo.ophir.dev/boards/",
+      "git": "https://github.com/lovasoa/whitebophir"
     },
     {
       "id": "etherpad",
       "title": "Etherpad",
-      "url": "https://etherpad.communitydata.science/p/"
+      "description": "Online collaborative Whiteboard that is simple, free, easy to use and to deploy.",
+      "url": "https://etherpad.communitydata.science/p/",
+      "git": "https://github.com/ether/etherpad-lite"
     }
   ]
 }

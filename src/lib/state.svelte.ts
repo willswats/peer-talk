@@ -42,11 +42,12 @@ export const peerState: peerState = $state({
 	remoteStreamIdentifier: {} // used to identify which tracks belong to which peer (for deletion)
 });
 
-interface embeddedApp {
+export interface embeddedApp {
 	id: string;
 	title: string;
-	url: string;
 	description: string;
+	url: string;
+	git: string;
 	userConsent: boolean;
 }
 
