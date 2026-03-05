@@ -76,13 +76,11 @@
 		background-color: var(--crust);
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
-		font-size: 1.2rem;
 	}
 
 	input {
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
-		font-size: 1.2rem;
 	}
 
 	@media screen and (max-width: 768px) {
@@ -92,14 +90,6 @@
 
 		p {
 			font-size: 1.2rem;
-		}
-
-		button {
-			font-size: 1rem;
-		}
-
-		input {
-			font-size: 1rem;
 		}
 
 		section {
