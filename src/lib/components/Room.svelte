@@ -2,6 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { userState, peerState, resetPeerState, resetUserState } from '$lib/state.svelte';
 	import { resolve } from '$app/paths';
+	import { toggleLocalAudio } from '$lib/utils/toggleLocalAudio';
+	import { toggleLocalVideo } from '$lib/utils/toggleLocalVideo';
 
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
@@ -10,20 +12,6 @@
 	let roomToggle: boolean = $state(false);
 	let roomTalkElement: HTMLElement;
 	let roomAppsElement: HTMLElement;
-
-	function handleOnClickMuteMic() {
-		if (userState.localStream !== null) {
-			userState.localMicEnabled = !userState.localMicEnabled;
-			userState.localStream.getAudioTracks()[0].enabled = userState.localMicEnabled;
-		}
-	}
-
-	function handleOnClickToggleVideo() {
-		if (userState.localStream !== null) {
-			userState.localVideoEnabled = !userState.localVideoEnabled;
-			userState.localStream.getVideoTracks()[0].enabled = userState.localVideoEnabled;
-		}
-	}
 
 	function handleOnClickDisconnect() {
 		peerState.socket.disconnect();
@@ -56,8 +44,8 @@
 			{/each}
 		</div>
 		<div id="room__buttons">
-			<button onclick={handleOnClickMuteMic}>Mute</button>
-			<button onclick={handleOnClickToggleVideo}>Toggle video</button>
+			<button onclick={toggleLocalAudio}>Mute Mic</button>
+			<button onclick={toggleLocalVideo}>Toggle Video</button>
 			<button onclick={handleOnClickDisconnect}>Disconnect</button>
 		</div>
 		<Chat />

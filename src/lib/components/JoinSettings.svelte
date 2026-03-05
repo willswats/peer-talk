@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Video from '$lib/components/Video.svelte';
 	import { peerState, userState } from '$lib/state.svelte';
+	import { toggleLocalAudio } from '$lib/utils/toggleLocalAudio';
+	import { toggleLocalVideo } from '$lib/utils/toggleLocalVideo';
 
 	async function getMediaWithFallback() {
 		try {
@@ -46,17 +48,22 @@
 <main>
 	<section>
 		<h1>Settings</h1>
+		<p>To join the room, you must grant permission for the app to use your camera/microphone.</p>
+		<div>
+			<button onclick={handleOnClickPerms}>Grant Permissions</button>
+		</div>
 		<div id="video-container">
 			{#if userState.localStream}
 				<Video videoStream={userState.localStream} muted={true} --background-color="var(--crust)" />
 			{:else}
-				No camera currently available (grant permissions)
+				No camera currently available
 			{/if}
 		</div>
 		<label for="input-username">Username:</label>
 		<input id="input-username" type="text" bind:value={userState.username} />
-		<div>
-			<button onclick={handleOnClickPerms}>Grant Permissions</button>
+		<div id="option-buttons">
+			<button onclick={toggleLocalAudio}>Mute Mic</button>
+			<button onclick={toggleLocalVideo}>Toggle Video</button>
 		</div>
 		<div>
 			<button onclick={handleOnClickJoinRoom}>Join Room</button>
@@ -74,16 +81,20 @@
 		margin: 2rem;
 	}
 
+	h1 {
+		color: var(--mauve);
+	}
+
 	#video-container {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		width: 30rem;
 		height: 20rem;
 		background-color: var(--crust);
 		border-radius: var(--border-radius-normal);
+		margin-top: 0.5rem;
 	}
 
 	section {
@@ -92,6 +103,7 @@
 		background-color: var(--mantle);
 		border-radius: var(--border-radius-normal);
 		padding: 2rem;
+		width: 30rem;
 	}
 
 	label {
@@ -107,6 +119,10 @@
 		display: flex;
 	}
 
+	#option-buttons {
+		gap: 0.5rem;
+	}
+
 	button {
 		background-color: var(--crust);
 		border-radius: var(--border-radius-normal);
@@ -115,9 +131,12 @@
 	}
 
 	@media screen and (max-width: 768px) {
-		#video-container {
+		section {
 			width: 20rem;
-			height: 10rem;
+		}
+
+		#video-container {
+			height: 15rem;
 		}
 	}
 </style>
