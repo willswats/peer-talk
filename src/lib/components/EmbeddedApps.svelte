@@ -12,7 +12,13 @@
 <style>
 	section {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr;
 		gap: 1rem;
+	}
+
+	@media screen and (min-width: 768px) {
+		section {
+			grid-template-columns: 1fr 1fr;
+		}
 	}
 </style>

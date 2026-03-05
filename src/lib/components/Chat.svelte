@@ -54,6 +54,7 @@
 		display: flex;
 		flex-direction: column;
 		background-color: #3a3a3a;
+		border: 1px solid #4a4a4a;
 		border-radius: 25px;
 		padding: 2rem;
 		height: 20rem;

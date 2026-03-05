@@ -73,8 +73,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		flex-grow: 1;
-		margin: 2rem;
+		height: 100%;
 	}
 
 	#room__videos {
@@ -89,6 +88,7 @@
 
 	button {
 		background-color: #3a3a3a;
+		border: 1px solid #4a4a4a;
 		border-radius: 25px;
 		padding: 0.5rem 1rem;
 	}

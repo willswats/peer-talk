@@ -58,7 +58,8 @@
 		display: flex;
 		flex-direction: column;
 		text-align: center;
-		height: 25rem;
+		width: 30rem;
+		height: 30em;
 		border: 1px solid #4a4a4a;
 		background-color: var(--background-color, '#000');
 		background-image: var(--background-image, '');

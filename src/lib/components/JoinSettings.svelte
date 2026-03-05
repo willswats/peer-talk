@@ -68,11 +68,13 @@
 		display: flex;
 		flex-direction: column;
 		background-color: #2a2a2a;
+		border: 1px solid #4a4a4a;
 		border-radius: 25px;
 		padding: 2rem;
 	}
 
 	input {
+		border: 1px solid #4a4a4a;
 		border-radius: 25px;
 		padding: 0.5rem;
 		margin: 0.5rem 0;
@@ -84,7 +86,8 @@
 
 	button {
 		background-color: #3a3a3a;
+		border: 1px solid #4a4a4a;
 		border-radius: 25px;
-		padding: 0.5rem 1rem;
+		padding: 0.5rem;
 	}
 </style>

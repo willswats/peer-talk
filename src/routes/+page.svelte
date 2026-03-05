@@ -50,8 +50,9 @@
 		display: flex;
 		flex-direction: column;
 		background-color: #2a2a2a;
-		border-radius: 25px;
 		padding: 2rem;
+		border: 1px solid #4a4a4a;
+		border-radius: 25px;
 		width: 20rem;
 	}
 
@@ -61,8 +62,9 @@
 
 	a {
 		background-color: #3a3a3a;
+		border: 1px solid #4a4a4a;
 		border-radius: 25px;
-		padding: 1rem;
+		padding: 0.5rem;
 	}
 
 	a:hover {
