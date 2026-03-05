@@ -28,7 +28,8 @@
 	video {
 		width: 100%;
 		height: 100%;
-		border-radius: 25px;
+		background-color: var(--mantle);
+		border-radius: var(--border-radius-normal);
 		min-width: 0;
 		min-height: 0;
 	}

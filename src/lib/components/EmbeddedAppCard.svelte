@@ -60,7 +60,7 @@
 		text-align: center;
 		width: 100%;
 		height: 30em;
-		border-radius: 25px;
+		border-radius: var(--border-radius-normal);
 		overflow: hidden;
 		background-color: var(--mantle);
 	}

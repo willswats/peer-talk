@@ -114,7 +114,7 @@
 
 	button {
 		background-color: var(--crust);
-		border-radius: 25px;
+		border-radius: var(--border-radius-normal);
 		padding: 0.5rem 1rem;
 	}
 

@@ -51,7 +51,7 @@
 		flex-direction: column;
 		background-color: var(--mantle);
 		padding: 2rem;
-		border-radius: 25px;
+		border-radius: var(--border-radius-normal);
 		width: 20rem;
 	}
 
@@ -61,7 +61,7 @@
 
 	a {
 		background-color: var(--crust);
-		border-radius: 25px;
+		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
 	}
 

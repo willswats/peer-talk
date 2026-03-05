@@ -40,6 +40,9 @@
 		--base: #1e1e2e;
 		--mantle: #181825;
 		--crust: #11111b;
+
+		--border-radius-normal: 6px;
+		--border-radius-large: 12px;
 	}
 
 	:global {

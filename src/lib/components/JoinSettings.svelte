@@ -68,12 +68,12 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--mantle);
-		border-radius: 25px;
+		border-radius: var(--border-radius-normal);
 		padding: 2rem;
 	}
 
 	input {
-		border-radius: 25px;
+		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
 		margin: 0.5rem 0;
 	}
@@ -84,7 +84,7 @@
 
 	button {
 		background-color: var(--crust);
-		border-radius: 25px;
+		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
 	}
 </style>
