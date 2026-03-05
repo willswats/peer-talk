@@ -1,7 +1,9 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { v4 as uuidv4, validate as uuidvalidate } from 'uuid';
+	import { userState } from '@/lib/state.svelte';
+	import { setUserRoomIdAndUserName } from '$lib/utils/setUserRoomIdAndUsername';
+	import { createRoom } from '$lib/utils/createRoom';
 
 	let roomIdInput = $state('');
 </script>
@@ -14,15 +16,15 @@
 			embedded single page applications.
 		</p>
 		<div>
-			<a href={resolve(`/room/${uuidv4()}`)}>Create Room</a>
+			<button onclick={createRoom}>Create Room</button>
 		</div>
 		<form
 			onsubmit={(event) => {
 				event.preventDefault();
+				const roomValid = setUserRoomIdAndUserName(roomIdInput);
 
-				const roomValid = uuidvalidate(roomIdInput);
 				if (roomValid) {
-					goto(resolve(`/room/${roomIdInput}`));
+					goto(resolve(`/room/${userState.roomId}`));
 				}
 			}}
 		>
@@ -40,6 +42,13 @@
 		align-items: center;
 		flex-grow: 1;
 		margin: 2rem;
+	}
+
+	h1 {
+		font-size: 3rem;
+		background-image: linear-gradient(120deg, var(--peach), var(--mauve));
+		background-clip: text;
+		color: transparent;
 	}
 
 	section > * {
