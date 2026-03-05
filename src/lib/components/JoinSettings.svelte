@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Video from './Video.svelte';
+	import Video from '$lib/components/Video.svelte';
 	import { peerState, userState } from '$lib/state.svelte';
 
 	async function getMediaWithFallback() {

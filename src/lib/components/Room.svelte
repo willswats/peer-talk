@@ -3,9 +3,9 @@
 	import { userState, peerState, resetPeerState, resetUserState } from '$lib/state.svelte';
 	import { resolve } from '$app/paths';
 
-	import Video from './Video.svelte';
-	import Chat from './Chat.svelte';
-	import EmbeddedApps from './EmbeddedApps.svelte';
+	import Video from '$lib/components/Video.svelte';
+	import Chat from '$lib/components/Chat.svelte';
+	import EmbeddedApps from '$lib/components/EmbeddedApps.svelte';
 
 	let roomToggle: boolean = $state(false);
 	let roomTalkElement: HTMLElement;
