@@ -29,7 +29,7 @@
 	nav {
 		display: flex;
 		width: 100%;
-		height: 2rem;
+		height: 3rem;
 		background-color: var(--mantle);
 		overflow: hidden;
 	}

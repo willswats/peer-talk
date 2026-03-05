@@ -15,20 +15,20 @@
 		</p>
 		<div>
 			<a href={resolve(`/room/${uuidv4()}`)}>Create Room</a>
-			<form
-				onsubmit={(event) => {
-					event.preventDefault();
-
-					const roomValid = uuidvalidate(roomIdInput);
-					if (roomValid) {
-						goto(resolve(`/room/${roomIdInput}`));
-					}
-				}}
-			>
-				<input type="text" bind:value={roomIdInput} />
-				<button>Enter Room</button>
-			</form>
 		</div>
+		<form
+			onsubmit={(event) => {
+				event.preventDefault();
+
+				const roomValid = uuidvalidate(roomIdInput);
+				if (roomValid) {
+					goto(resolve(`/room/${roomIdInput}`));
+				}
+			}}
+		>
+			<input type="text" placeholder="roomId..." bind:value={roomIdInput} />
+			<button>Enter Room</button>
+		</form>
 	</section>
 </main>
 
@@ -61,6 +61,17 @@
 
 	a {
 		background-color: var(--crust);
+		border-radius: var(--border-radius-normal);
+		padding: 0.5rem;
+	}
+
+	button {
+		background-color: var(--crust);
+		border-radius: var(--border-radius-normal);
+		padding: 0.5rem;
+	}
+
+	input {
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
 	}
