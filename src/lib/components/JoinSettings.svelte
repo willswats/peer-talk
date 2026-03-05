@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Video from '$lib/components/Video.svelte';
-	import { peerState, userState } from '$lib/state.svelte';
+	import { peerState, resetUserState, userState } from '$lib/state.svelte';
+	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { toggleLocalAudio } from '$lib/utils/toggleLocalAudio';
 	import { toggleLocalVideo } from '$lib/utils/toggleLocalVideo';
 
@@ -43,6 +45,11 @@
 			userState.joinedRoom = true;
 		}
 	}
+
+	function handleOnClickLeaveRoom() {
+		resetUserState();
+		goto(resolve('/'));
+	}
 </script>
 
 <main>
@@ -61,12 +68,13 @@
 		</div>
 		<label for="input-username">Username:</label>
 		<input id="input-username" type="text" bind:value={userState.username} />
-		<div id="option-buttons">
+		<div>
 			<button onclick={toggleLocalAudio}>Mute Mic</button>
 			<button onclick={toggleLocalVideo}>Toggle Video</button>
 		</div>
 		<div>
 			<button onclick={handleOnClickJoinRoom}>Join Room</button>
+			<button onclick={handleOnClickLeaveRoom}>Leave Room</button>
 		</div>
 	</section>
 </main>
@@ -119,8 +127,8 @@
 		display: flex;
 	}
 
-	#option-buttons {
-		gap: 0.5rem;
+	div button {
+		margin-right: 0.5rem;
 	}
 
 	button {
