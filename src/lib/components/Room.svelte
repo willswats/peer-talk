@@ -113,14 +113,9 @@
 	}
 
 	button {
-		background-color: #3a3a3a;
-		border: 1px solid #4a4a4a;
+		background-color: var(--crust);
 		border-radius: 25px;
 		padding: 0.5rem 1rem;
-	}
-
-	button:hover {
-		background-color: #4a4a4a;
 	}
 
 	@media screen and (min-width: 768px) {

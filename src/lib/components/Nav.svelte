@@ -30,8 +30,7 @@
 		display: flex;
 		width: 100%;
 		height: 2rem;
-		background-color: #2a2a2a;
-		border-bottom: 1px solid #4a4a4a;
+		background-color: var(--mantle);
 		overflow: hidden;
 	}
 
@@ -46,15 +45,10 @@
 		align-items: center;
 		padding: 1rem;
 		font-size: 1.2rem;
-		border-right: 1px solid #4a4a4a;
 		transition: background-color 0.1s;
 	}
 
-	.nav-menu a:hover {
-		background-color: #3a3a3a;
-	}
-
 	.nav-menu-a-enabled {
-		background-color: #3a3a3a;
+		background-color: var(--crust);
 	}
 </style>

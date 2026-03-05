@@ -60,9 +60,9 @@
 		text-align: center;
 		width: 100%;
 		height: 30em;
-		border: 1px solid #4a4a4a;
-		background-color: var(--background-color, '#000');
-		background-image: var(--background-image, '');
+		border-radius: 25px;
+		overflow: hidden;
+		background-color: var(--mantle);
 	}
 
 	figure figcaption {
@@ -93,19 +93,14 @@
 		text-align: center;
 		width: 100%;
 		color: #fff;
-		background-color: #2a2a2a;
-		border-top: 1px solid #4a4a4a;
+		background-color: var(--crust);
 		padding: 0.5rem;
 		transition: background-color 0.1s;
 		font-size: 1rem;
 	}
 
-	figure section button:hover {
-		background-color: #3a3a3a;
-	}
-
-	figure section button:nth-of-type(1) {
-		border-right: 1px solid #4a4a4a;
+	figure section button:nth-of-type(2) {
+		border-left: 1px solid var(--base);
 	}
 
 	iframe {

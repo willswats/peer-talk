@@ -49,9 +49,8 @@
 	section {
 		display: flex;
 		flex-direction: column;
-		background-color: #2a2a2a;
+		background-color: var(--mantle);
 		padding: 2rem;
-		border: 1px solid #4a4a4a;
 		border-radius: 25px;
 		width: 20rem;
 	}
@@ -61,14 +60,9 @@
 	}
 
 	a {
-		background-color: #3a3a3a;
-		border: 1px solid #4a4a4a;
+		background-color: var(--crust);
 		border-radius: 25px;
 		padding: 0.5rem;
-	}
-
-	a:hover {
-		background-color: #4a4a4a;
 	}
 
 	@media screen and (min-width: 768px) {

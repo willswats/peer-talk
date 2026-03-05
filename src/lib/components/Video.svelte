@@ -28,7 +28,6 @@
 	video {
 		width: 100%;
 		height: 100%;
-		border: 1px solid #4a4a4a;
 		border-radius: 25px;
 		min-width: 0;
 		min-height: 0;
