@@ -71,6 +71,7 @@
 			border: none;
 			background-color: transparent;
 			cursor: pointer;
+			font-size: 1.2rem;
 		}
 
 		input {
@@ -124,6 +125,12 @@
 			border: none;
 			/* Remove Firefox default browser style */
 			background-color: var(--text);
+		}
+
+		@media screen and (max-width: 768px) {
+			button {
+				font-size: 1rem;
+			}
 		}
 	}
 </style>

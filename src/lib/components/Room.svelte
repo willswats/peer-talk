@@ -93,7 +93,7 @@
 
 	#room__videos {
 		display: grid;
-		grid-template-columns: 1fr;
+		grid-template-columns: 1fr 1fr;
 		gap: 0.5rem;
 		flex: 1;
 		min-height: 0;
@@ -118,10 +118,10 @@
 		padding: 0.5rem 1rem;
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (max-width: 768px) {
 		#room__videos {
 			display: grid;
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: 1fr;
 		}
 	}
 </style>

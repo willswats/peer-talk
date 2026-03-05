@@ -75,6 +75,7 @@
 
 	figure figcaption h2 {
 		font-size: 2rem;
+		color: var(--blue);
 	}
 
 	figure figcaption a:hover {

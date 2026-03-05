@@ -51,6 +51,10 @@
 		color: transparent;
 	}
 
+	p {
+		font-size: 1.5rem;
+	}
+
 	section > * {
 		margin-bottom: 0.5rem;
 	}
@@ -61,33 +65,45 @@
 		background-color: var(--mantle);
 		padding: 2rem;
 		border-radius: var(--border-radius-normal);
-		width: 20rem;
+		width: 45rem;
 	}
 
 	div {
 		display: flex;
 	}
 
-	a {
-		background-color: var(--crust);
-		border-radius: var(--border-radius-normal);
-		padding: 0.5rem;
-	}
-
 	button {
 		background-color: var(--crust);
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
+		font-size: 1.2rem;
 	}
 
 	input {
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
+		font-size: 1.2rem;
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (max-width: 768px) {
+		h1 {
+			font-size: 2rem;
+		}
+
+		p {
+			font-size: 1.2rem;
+		}
+
+		button {
+			font-size: 1rem;
+		}
+
+		input {
+			font-size: 1rem;
+		}
+
 		section {
-			width: 45rem;
+			width: 20rem;
 		}
 	}
 </style>

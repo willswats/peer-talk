@@ -13,13 +13,13 @@
 	#embedded-apps {
 		display: grid;
 		gap: 1rem;
-		grid-template-columns: 1fr;
+		grid-template-columns: 1fr 1fr;
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (max-width: 768px) {
 		#embedded-apps {
 			display: grid;
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: 1fr;
 		}
 	}
 </style>
