@@ -58,7 +58,7 @@
 		display: flex;
 		flex-direction: column;
 		text-align: center;
-		width: 30rem;
+		width: 100%;
 		height: 30em;
 		border: 1px solid #4a4a4a;
 		background-color: var(--background-color, '#000');

@@ -82,6 +82,12 @@
 		grid-template-columns: 1fr;
 	}
 
+	#room__apps {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: 1fr;
+	}
+
 	#room__buttons {
 		margin: 0.5rem 0;
 	}
@@ -99,6 +105,11 @@
 
 	@media screen and (min-width: 768px) {
 		#room__videos {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+
+		#room__apps {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 		}
