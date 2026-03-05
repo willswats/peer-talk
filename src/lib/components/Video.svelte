@@ -28,7 +28,7 @@
 	video {
 		width: 100%;
 		height: 100%;
-		background-color: var(--mantle);
+		background-color: var(--background-color, var(--mantle));
 		border-radius: var(--border-radius-normal);
 		min-width: 0;
 		min-height: 0;

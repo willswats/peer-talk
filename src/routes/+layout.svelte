@@ -77,6 +77,7 @@
 		input {
 			color: #000;
 			border: none;
+			font-size: 1.2rem;
 		}
 
 		svg path {
@@ -129,6 +130,10 @@
 
 		@media screen and (max-width: 768px) {
 			button {
+				font-size: 1rem;
+			}
+
+			input {
 				font-size: 1rem;
 			}
 		}

@@ -45,10 +45,20 @@
 
 <main>
 	<section>
-		<Video videoStream={userState.localStream} muted={true} />
-		<input type="text" bind:value={userState.username} />
+		<h1>Settings</h1>
+		<div id="video-container">
+			{#if userState.localStream}
+				<Video videoStream={userState.localStream} muted={true} --background-color="var(--crust)" />
+			{:else}
+				No camera currently available (grant permissions)
+			{/if}
+		</div>
+		<label for="input-username">Username:</label>
+		<input id="input-username" type="text" bind:value={userState.username} />
 		<div>
 			<button onclick={handleOnClickPerms}>Grant Permissions</button>
+		</div>
+		<div>
 			<button onclick={handleOnClickJoinRoom}>Join Room</button>
 		</div>
 	</section>
@@ -64,6 +74,18 @@
 		margin: 2rem;
 	}
 
+	#video-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		width: 30rem;
+		height: 20rem;
+		background-color: var(--crust);
+		border-radius: var(--border-radius-normal);
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
@@ -72,10 +94,13 @@
 		padding: 2rem;
 	}
 
+	label {
+		margin-top: 0.5rem;
+	}
+
 	input {
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
-		margin: 0.5rem 0;
 	}
 
 	div {
@@ -86,5 +111,13 @@
 		background-color: var(--crust);
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
+		margin-top: 0.5rem;
+	}
+
+	@media screen and (max-width: 768px) {
+		#video-container {
+			width: 20rem;
+			height: 10rem;
+		}
 	}
 </style>
