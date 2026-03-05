@@ -71,9 +71,6 @@
 	#room {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
 	}
 
 	#room__videos {
