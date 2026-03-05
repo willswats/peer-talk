@@ -71,12 +71,32 @@
 	#room {
 		display: flex;
 		flex-direction: column;
+		flex-grow: 1;
+		height: calc(100vh - 4rem);
+	}
+
+	#room__talk {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		min-height: 0;
 	}
 
 	#room__videos {
 		display: grid;
 		gap: 0.5rem;
 		grid-template-columns: 1fr;
+		flex: 1;
+		min-height: 0;
+		min-width: 0;
+		max-height: calc(100vh - 200px);
+	}
+
+	#room__videos > :global(*) {
+		min-width: 0;
+		min-height: 0;
+		width: 100%;
+		height: 100%;
 	}
 
 	#room__apps {
@@ -87,6 +107,7 @@
 
 	#room__buttons {
 		margin: 0.5rem 0;
+		flex-shrink: 0;
 	}
 
 	button {
