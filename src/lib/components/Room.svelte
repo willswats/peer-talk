@@ -81,9 +81,10 @@
 	#room__talk {
 		display: flex;
 		flex-direction: column;
-		height: calc(100vh - 2rem);
+		height: calc(100vh - 4rem); /* Account for nav and margin */
 		flex-grow: 1;
 		min-height: 0;
+		margin: 1rem;
 	}
 
 	#room__videos {
@@ -104,6 +105,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
+		margin: 1rem;
 	}
 
 	button {
