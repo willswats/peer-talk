@@ -92,7 +92,7 @@
 	figure section button {
 		text-align: center;
 		width: 100%;
-		color: #fff;
+		color: var(--text);
 		background-color: var(--crust);
 		padding: 0.5rem;
 		transition: background-color 0.1s;

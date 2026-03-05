@@ -67,7 +67,7 @@
 		}
 
 		button {
-			color: #fff;
+			color: var(--text);
 			border: none;
 			background-color: transparent;
 			cursor: pointer;
@@ -79,7 +79,7 @@
 		}
 
 		svg path {
-			fill: #fff;
+			fill: var(--text);
 		}
 
 		.hidden {
@@ -116,14 +116,14 @@
 			cursor: pointer;
 			appearance: none;
 			/* Remove WebKit default browser style */
-			background-color: #fff;
+			background-color: var(--text);
 		}
 
 		input[type='range']::-moz-range-thumb {
 			cursor: pointer;
 			border: none;
 			/* Remove Firefox default browser style */
-			background-color: #fff;
+			background-color: var(--text);
 		}
 	}
 </style>

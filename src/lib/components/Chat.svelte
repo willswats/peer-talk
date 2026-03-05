@@ -69,7 +69,7 @@
 	}
 
 	#chat__message-input {
-		color: #fff;
+		color: var(--text);
 		background-color: var(--crust);
 		font-size: 1.2rem;
 		padding: 0.5rem;
