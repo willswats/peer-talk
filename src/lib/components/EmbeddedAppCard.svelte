@@ -11,10 +11,10 @@
 
 	let embeddedAppElement: HTMLIFrameElement | null = $state(null);
 
-	function handleOnClickConsent() {
+	function handleOnClickRender() {
 		const app = embeddedApps.find((app) => app.id === embeddedApp.id);
 		if (app) {
-			app.userConsent = !app.userConsent;
+			app.render = !app.render;
 		}
 	}
 
@@ -27,7 +27,7 @@
 
 <figure>
 	<figcaption>
-		{#if !embeddedApp.userConsent}
+		{#if !embeddedApp.render}
 			<h2>
 				<a href={embeddedApp.git} target="_blank" rel="external noreferrer">{embeddedApp.title}</a>
 			</h2>
@@ -44,10 +44,10 @@
 		{/if}
 	</figcaption>
 	<section>
-		{#if !embeddedApp.userConsent}
-			<button onclick={handleOnClickConsent}>Consent</button>
+		{#if !embeddedApp.render}
+			<button onclick={handleOnClickRender}>Run app</button>
 		{:else}
-			<button onclick={handleOnClickConsent}>Un-consent</button>
+			<button onclick={handleOnClickRender}>Close app</button>
 			<button onclick={handleOnClickFullScreen}>Fullscreen</button>
 		{/if}
 	</section>

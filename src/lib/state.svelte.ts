@@ -48,14 +48,14 @@ export interface embeddedApp {
 	description: string;
 	url: string;
 	git: string;
-	userConsent: boolean;
+	render: boolean;
 }
 
 export const embeddedApps: embeddedApp[] = $state([]);
 
 // Init the embededApps state with the data from apps.json
 for (const app of apps) {
-	embeddedApps.push({ ...app, userConsent: false });
+	embeddedApps.push({ ...app, render: false });
 }
 
 export function resetUserState() {
