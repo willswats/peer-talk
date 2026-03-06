@@ -33,4 +33,5 @@ npm start
 
 ## Acknowledgements
 
-The SVGs are from [Remix Icon](https://remixicon.com) and [Feather](https://feathericons.com/).
+- The SVGs are from [Remix Icon](https://remixicon.com) and [Feather](https://feathericons.com/).
+- [Catppuccin](https://catppuccin.com/) for the colorscheme.
