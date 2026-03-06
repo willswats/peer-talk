@@ -24,6 +24,7 @@ interface peerState {
 	peers: peers;
 	remoteStreams: MediaStream[];
 	remoteStreamIdentifier: remoteStreamIdentifier;
+	messages: string[];
 }
 
 export const userState: userState = $state({
@@ -39,7 +40,8 @@ export const peerState: peerState = $state({
 	socket: createSocketWithListeners(),
 	peers: {},
 	remoteStreams: [],
-	remoteStreamIdentifier: {} // used to identify which tracks belong to which peer (for deletion)
+	remoteStreamIdentifier: {}, // used to identify which tracks belong to which peer (for deletion)
+	messages: []
 });
 
 export interface embeddedApp {
@@ -78,4 +80,5 @@ export function resetPeerState() {
 	peerState.peers = {};
 	peerState.remoteStreams = [];
 	peerState.remoteStreamIdentifier = {};
+	peerState.messages = [];
 }

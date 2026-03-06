@@ -1,16 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { peerState } from '$lib/state.svelte';
 
 	let messageInput: HTMLInputElement | null = null;
-	let messages: { text: string; type: string }[] = [];
 
 	function getTime() {
 		return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-	}
-
-	function appendMessage(text: string, type: string) {
-		messages = [{ text, type }, ...messages];
 	}
 
 	function handleMessageSubmit(event: SubmitEvent) {
@@ -21,7 +15,7 @@
 
 		if (message.length > 0) {
 			// Show the message in your chat window
-			appendMessage(`You (${getTime()}): ${message}`, 'sent');
+			peerState.messages.unshift(`You (${getTime()}): ${message}`);
 
 			// Send the message to the server
 			peerState.socket.emit('send-chat-message', message);
@@ -30,18 +24,12 @@
 			messageInput.value = '';
 		}
 	}
-
-	onMount(() => {
-		peerState.socket.on('chat-message', (data) => {
-			appendMessage(`${data.name} (${data.time}): ${data.message}`, 'received');
-		});
-	});
 </script>
 
 <section id="chat">
 	<ol id="chat__message-container">
-		{#each messages as message, index (index + message.text + message.type)}
-			<li class={message.type}>{message.text}</li>
+		{#each peerState.messages as message, index (index + message)}
+			<li>{message}</li>
 		{/each}
 	</ol>
 	<form onsubmit={handleMessageSubmit}>

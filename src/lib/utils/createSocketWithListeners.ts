@@ -68,6 +68,10 @@ export function createSocketWithListeners() {
 		}
 	});
 
+	socket.on('chat-message', (data) => {
+		peerState.messages.unshift(`${data.name} (${data.time}): ${data.message}`);
+	});
+
 	socket.on('user-disconnected', (socketId) => {
 		console.log('User disconnected:', socketId);
 		if (peerState.peers[socketId]) {
