@@ -1,6 +1,6 @@
 # Peer Talk
 
-A web application for peer-to-peer text and voice communication with an open marketplace of embedded single page applications.
+A web app for peer-to-peer text and voice communication, featuring collaborative apps that can be used whilst in a call.
 
 ## Contributing an App to the App Marketplace
 
