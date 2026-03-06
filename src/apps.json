@@ -10,7 +10,7 @@
     {
       "id": "etherpad",
       "title": "Etherpad",
-      "description": "Online collaborative Whiteboard that is simple, free, easy to use and to deploy.",
+      "description": "Etherpad: A modern really-real-time collaborative document editor.",
       "url": "https://etherpad.communitydata.science/p/",
       "git": "https://github.com/ether/etherpad-lite"
     }
