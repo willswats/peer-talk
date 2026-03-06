@@ -134,15 +134,15 @@
 		display: flex;
 	}
 
-	div button {
-		margin-right: 0.5rem;
+	div {
+		gap: 0.5rem;
+		margin-top: 0.5rem;
 	}
 
 	button {
 		background-color: var(--crust);
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
-		margin-top: 0.5rem;
 	}
 
 	@media screen and (max-width: 768px) {
