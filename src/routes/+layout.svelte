@@ -91,7 +91,43 @@
 			z-index: -1;
 		}
 
-		input[type='number'] {
+		.btn-peach {
+			background-color: var(--peach);
+			background-image: linear-gradient(120deg, var(--peach), var(--red));
+			background-size: 150% 100%;
+			background-position: top left;
+			font-weight: 600;
+			color: #11111b;
+		}
+
+		.btn-mauve {
+			background-color: var(--mauve);
+			background-image: linear-gradient(120deg, var(--pink), var(--mauve));
+			background-size: 150% 100%;
+			background-position: top left;
+			font-weight: 600;
+			color: #11111b;
+		}
+
+		.btn-green {
+			background-color: var(--green);
+			background-image: linear-gradient(120deg, var(--teal), var(--green));
+			background-size: 150% 100%;
+			background-position: top left;
+			font-weight: 600;
+			color: #11111b;
+		}
+
+		.btn-blue {
+			background-color: var(--blue);
+			background-image: linear-gradient(120deg, var(--blue), var(--sky));
+			background-size: 150% 100%;
+			background-position: top left;
+			font-weight: 600;
+			color: #11111b;
+		}
+
+		.btn- input[type='number'] {
 			appearance: textfield;
 			/* Remove Firefox default browser style */
 			outline: none;

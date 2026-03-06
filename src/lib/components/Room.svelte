@@ -26,8 +26,8 @@
 <main id="room">
 	<section id="room__talk" bind:this={roomTalkElement}>
 		<div id="room__toggle-buttons">
-			<button onclick={() => (roomToggle = false)}>Talk</button>
-			<button onclick={() => (roomToggle = true)}>Apps</button>
+			<button class="btn-blue" onclick={() => (roomToggle = false)}>Talk</button>
+			<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
 		</div>
 		<div id="room__videos">
 			<Video videoStream={userState.localStream} muted={true} />
@@ -44,8 +44,8 @@
 	</section>
 	<section id="room__apps" bind:this={roomAppsElement}>
 		<div id="room__toggle-buttons">
-			<button onclick={() => (roomToggle = false)}>Talk</button>
-			<button onclick={() => (roomToggle = true)}>Apps</button>
+			<button class="btn-blue" onclick={() => (roomToggle = false)}>Talk</button>
+			<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
 		</div>
 		<EmbeddedApps />
 	</section>

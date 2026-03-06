@@ -64,7 +64,7 @@
 		<h1>Settings</h1>
 		<p>To join the room, you must grant permission for the app to use your camera/microphone.</p>
 		<div>
-			<button onclick={handleOnClickPerms}>Grant Permissions</button>
+			<button class="btn-peach" onclick={handleOnClickPerms}>Grant Permissions</button>
 		</div>
 		<div id="video-container">
 			{#if userState.localStream}
