@@ -30,8 +30,8 @@ export const userState: userState = $state({
 	joinedRoom: false,
 	roomId: undefined,
 	username: '',
-	localMicEnabled: true,
-	localVideoEnabled: true,
+	localMicEnabled: false,
+	localVideoEnabled: false,
 	localStream: null
 });
 
@@ -62,8 +62,8 @@ export function resetUserState() {
 	userState.joinedRoom = false;
 	userState.roomId = undefined;
 	userState.username = '';
-	userState.localMicEnabled = true;
-	userState.localVideoEnabled = true;
+	userState.localMicEnabled = false;
+	userState.localVideoEnabled = false;
 
 	userState.localStream?.getTracks().forEach((track) => track.stop());
 

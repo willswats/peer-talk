@@ -1,24 +1,16 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { userState, peerState, resetPeerState, resetUserState } from '$lib/state.svelte';
-	import { resolve } from '$app/paths';
-	import { toggleLocalAudio } from '$lib/utils/toggleLocalAudio';
-	import { toggleLocalVideo } from '$lib/utils/toggleLocalVideo';
+	import { userState, peerState } from '$lib/state.svelte';
 
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
 	import EmbeddedApps from '$lib/components/EmbeddedApps.svelte';
+	import ButtonDisconnect from '$lib/components/ButtonDisconnect.svelte';
+	import ButtonMuteMic from '$lib/components/ButtonMuteMic.svelte';
+	import ButtonToggleVideo from '$lib/components/ButtonToggleVideo.svelte';
 
 	let roomToggle: boolean = $state(false);
 	let roomTalkElement: HTMLElement;
 	let roomAppsElement: HTMLElement;
-
-	function handleOnClickDisconnect() {
-		peerState.socket.disconnect();
-		resetUserState();
-		resetPeerState();
-		goto(resolve('/'));
-	}
 
 	$effect(() => {
 		if (!roomToggle) {
@@ -44,9 +36,9 @@
 			{/each}
 		</div>
 		<div id="room__buttons">
-			<button onclick={toggleLocalAudio}>Mute Mic</button>
-			<button onclick={toggleLocalVideo}>Toggle Video</button>
-			<button onclick={handleOnClickDisconnect}>Disconnect</button>
+			<ButtonMuteMic />
+			<ButtonToggleVideo />
+			<ButtonDisconnect />
 		</div>
 		<Chat />
 	</section>

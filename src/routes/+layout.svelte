@@ -80,10 +80,6 @@
 			font-size: 1.2rem;
 		}
 
-		svg path {
-			fill: var(--text);
-		}
-
 		.hidden {
 			position: fixed;
 			top: 0;

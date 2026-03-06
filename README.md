@@ -30,3 +30,7 @@ A web app for peer-to-peer text and voice communication, featuring collaborative
 npm build
 npm start
 ```
+
+## Acknowledgements
+
+The SVGs are from [Remix Icon](https://remixicon.com).

@@ -3,8 +3,8 @@
 	import { peerState, resetUserState, userState } from '$lib/state.svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { toggleLocalAudio } from '$lib/utils/toggleLocalAudio';
-	import { toggleLocalVideo } from '$lib/utils/toggleLocalVideo';
+	import ButtonMuteMic from '$lib/components/ButtonMuteMic.svelte';
+	import ButtonToggleVideo from '$lib/components/ButtonToggleVideo.svelte';
 
 	async function getMediaWithFallback() {
 		try {
@@ -12,6 +12,10 @@
 				video: true,
 				audio: true
 			});
+
+			userState.localVideoEnabled = true;
+			userState.localMicEnabled = true;
+
 			return stream;
 		} catch (error: any) {
 			if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
@@ -19,6 +23,9 @@
 					const audioStream = await navigator.mediaDevices.getUserMedia({
 						audio: true
 					});
+
+					userState.localMicEnabled = true;
+
 					return audioStream;
 				} catch (audioError) {
 					throw new Error('Could not access any media devices');
@@ -69,8 +76,8 @@
 		<label for="input-username">Username:</label>
 		<input id="input-username" type="text" bind:value={userState.username} />
 		<div>
-			<button onclick={toggleLocalAudio}>Mute Mic</button>
-			<button onclick={toggleLocalVideo}>Toggle Video</button>
+			<ButtonMuteMic />
+			<ButtonToggleVideo />
 		</div>
 		<div>
 			<button onclick={handleOnClickJoinRoom}>Join Room</button>
