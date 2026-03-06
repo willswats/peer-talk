@@ -2,21 +2,15 @@
 	import { onMount } from 'svelte';
 	import { peerState } from '$lib/state.svelte';
 
-	let messageContainer: HTMLOListElement | null = null;
 	let messageInput: HTMLInputElement | null = null;
+	let messages: { text: string; type: string }[] = [];
 
 	function getTime() {
 		return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 	}
 
 	function appendMessage(text: string, type: string) {
-		if (messageContainer === null) return;
-
-		const messageElement = document.createElement('li');
-		messageElement.classList.add(type); // 'sent' or 'received'
-		messageElement.innerText = text;
-		// TODO: dont manip dom directly
-		messageContainer.insertBefore(messageElement, messageContainer.firstChild);
+		messages = [{ text, type }, ...messages];
 	}
 
 	function handleMessageSubmit(event: SubmitEvent) {
@@ -25,14 +19,16 @@
 
 		const message = messageInput!.value;
 
-		// Show the message in your chat window
-		appendMessage(`You (${getTime()}): ${message}`, 'sent');
+		if (message.length > 0) {
+			// Show the message in your chat window
+			appendMessage(`You (${getTime()}): ${message}`, 'sent');
 
-		// Send the message to the server
-		peerState.socket.emit('send-chat-message', message);
+			// Send the message to the server
+			peerState.socket.emit('send-chat-message', message);
 
-		// Clear the input box
-		messageInput.value = '';
+			// Clear the input box
+			messageInput.value = '';
+		}
 	}
 
 	onMount(() => {
@@ -43,7 +39,11 @@
 </script>
 
 <section id="chat">
-	<ol bind:this={messageContainer} id="chat__message-container"></ol>
+	<ol id="chat__message-container">
+		{#each messages as message, index (index + message.text + message.type)}
+			<li class={message.type}>{message.text}</li>
+		{/each}
+	</ol>
 	<form onsubmit={handleMessageSubmit}>
 		<input bind:this={messageInput} id="chat__message-input" />
 	</form>
