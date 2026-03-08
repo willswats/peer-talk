@@ -53,7 +53,7 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--mantle);
-		border-radius: var(--border-radius-normal);
+		border-radius: 0 0 var(--border-radius-normal) var(--border-radius-normal);
 		padding: 2rem;
 		height: 20rem;
 	}
@@ -77,7 +77,7 @@
 
 	button {
 		background-color: var(--crust);
-		border-radius: var(--border-radius-normal);
+		border-radius: var(--border-radius-normal) var(--border-radius-normal) 0 0;
 		padding: 0.5rem;
 	}
 </style>
