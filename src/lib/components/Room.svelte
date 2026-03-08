@@ -24,7 +24,12 @@
 		}
 	});
 
-	beforeNavigate(({ cancel }) => {
+	beforeNavigate(({ type, cancel }) => {
+		// Allow user to refresh or leave page without default browser prompt
+		if (type === 'leave') {
+			return;
+		}
+
 		if (!confirm('Are you sure you want to disconnect from this room?')) {
 			cancel();
 		} else {
