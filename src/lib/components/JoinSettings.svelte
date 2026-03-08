@@ -40,16 +40,18 @@
 		try {
 			userState.localStream = await getMediaWithFallback();
 		} catch (error) {
-			// TODO: add error message to UI
 			console.log('Error getting permissions', error);
 		}
 	}
 
 	function handleOnClickJoinRoom() {
-		// TODO: add error message to UI
-		if (userState.localStream !== null || userState.localStream !== null) {
+		if (userState.localStream !== null) {
 			peerState.socket.emit('join-room', userState.roomId, userState.username);
 			userState.joinedRoom = true;
+		} else {
+			confirm(
+				'You must grant permissions and have an available microphone/camera to join the room.'
+			);
 		}
 	}
 
