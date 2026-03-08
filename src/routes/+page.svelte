@@ -16,7 +16,7 @@
 			be used whilst in a call.
 		</p>
 		<div>
-			<button onclick={createRoom}>Create Room</button>
+			<button class="btn-blue" onclick={createRoom}>Create Room</button>
 		</div>
 		<form
 			onsubmit={(event) => {
