@@ -127,7 +127,7 @@
 			color: #11111b;
 		}
 
-		.btn- input[type='number'] {
+		input[type='number'] {
 			appearance: textfield;
 			/* Remove Firefox default browser style */
 			outline: none;
