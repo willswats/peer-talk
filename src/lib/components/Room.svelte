@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { userState, peerState } from '$lib/state.svelte';
+	import { disconnectUser } from '$lib/utils/disconnectUser';
 
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
@@ -7,6 +8,7 @@
 	import ButtonDisconnect from '$lib/components/ButtonDisconnect.svelte';
 	import ButtonMuteMic from '$lib/components/ButtonMuteMic.svelte';
 	import ButtonToggleVideo from '$lib/components/ButtonToggleVideo.svelte';
+	import { beforeNavigate } from '$app/navigation';
 
 	let roomToggle: boolean = $state(false);
 	let roomTalkElement: HTMLElement;
@@ -19,6 +21,14 @@
 		} else {
 			roomAppsElement.classList.remove('hidden');
 			roomTalkElement.classList.add('hidden');
+		}
+	});
+
+	beforeNavigate(({ cancel }) => {
+		if (!confirm('Are you sure you want to disconnect from this room?')) {
+			cancel();
+		} else {
+			disconnectUser();
 		}
 	});
 </script>
