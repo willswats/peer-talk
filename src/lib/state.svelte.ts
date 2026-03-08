@@ -6,9 +6,10 @@ interface userState {
 	joinedRoom: boolean;
 	roomId: string | undefined;
 	username: string;
-	localStream: MediaStream | null;
 	localMicEnabled: boolean;
 	localVideoEnabled: boolean;
+	chatToggled: boolean;
+	localStream: MediaStream | null;
 }
 
 interface peers {
@@ -33,6 +34,7 @@ export const userState: userState = $state({
 	username: '',
 	localMicEnabled: false,
 	localVideoEnabled: false,
+	chatToggled: false,
 	localStream: null
 });
 
@@ -66,6 +68,7 @@ export function resetUserState() {
 	userState.username = '';
 	userState.localMicEnabled = false;
 	userState.localVideoEnabled = false;
+	userState.chatToggled = false;
 
 	userState.localStream?.getTracks().forEach((track) => track.stop());
 

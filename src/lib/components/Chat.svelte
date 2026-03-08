@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { peerState } from '$lib/state.svelte';
+	import ChatLine from '$lib/components/svg/ChatLine.svelte';
+	import ChatOffLine from '$lib/components/svg/ChatOffLine.svelte';
+	import { userState, peerState } from '$lib/state.svelte';
 
 	let messageInput: HTMLInputElement | null = null;
 
@@ -26,16 +28,25 @@
 	}
 </script>
 
-<section id="chat">
-	<ol id="chat__message-container">
-		{#each peerState.messages as message, index (index + message)}
-			<li>{message}</li>
-		{/each}
-	</ol>
-	<form onsubmit={handleMessageSubmit}>
-		<input bind:this={messageInput} id="chat__message-input" />
-	</form>
-</section>
+<button onclick={() => (userState.chatToggled = !userState.chatToggled)}>
+	{#if userState.chatToggled}
+		<ChatOffLine width={24} height={24} />
+	{:else}
+		<ChatLine width={24} height={24} />
+	{/if}
+</button>
+{#if userState.chatToggled}
+	<section id="chat">
+		<ol id="chat__message-container">
+			{#each peerState.messages as message, index (index + message)}
+				<li>{message}</li>
+			{/each}
+		</ol>
+		<form onsubmit={handleMessageSubmit}>
+			<input bind:this={messageInput} id="chat__message-input" />
+		</form>
+	</section>
+{/if}
 
 <style>
 	#chat {
@@ -62,5 +73,11 @@
 		font-size: 1.2rem;
 		padding: 0.5rem;
 		width: 100%;
+	}
+
+	button {
+		background-color: var(--crust);
+		border-radius: var(--border-radius-normal);
+		padding: 0.5rem;
 	}
 </style>
