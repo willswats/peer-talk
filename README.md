@@ -7,6 +7,7 @@ A web app for peer-to-peer text and voice communication, featuring collaborative
 ### Requirements
 
 - Must be open-source.
+- Must be actively maintained.
 - Must be able to collaborate on it in real time.
 - Must be able to create a room within the app by providing the URL with a UUID.
 
