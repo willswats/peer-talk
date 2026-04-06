@@ -4,7 +4,7 @@
 	import { userState } from '$lib/state.svelte';
 
 	function toggleLocalVideo() {
-		if (userState.localStream !== null) {
+		if (userState.localStream !== null && userState.localStream?.getVideoTracks().length > 0) {
 			userState.localVideoEnabled = !userState.localVideoEnabled;
 			userState.localStream.getVideoTracks()[0].enabled = userState.localVideoEnabled;
 		}
