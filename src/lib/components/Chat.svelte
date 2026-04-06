@@ -58,7 +58,7 @@
 
 <svelte:document onclick={handleClickOutside} />
 
-<button onclick={() => (userState.chatToggled = !userState.chatToggled)}>
+<button id="btn-chat-toggle" onclick={() => (userState.chatToggled = !userState.chatToggled)}>
 	{#if userState.chatToggled}
 		<ChatOffLine width={24} height={24} />
 	{:else}
@@ -77,7 +77,11 @@
 			<form onsubmit={handleMessageSubmit}>
 				<input bind:this={messageInput} id="chat__message-input" />
 			</form>
-			<button bind:this={emojiButton} onclick={() => (showEmojiPicker = !showEmojiPicker)}>
+			<button
+				id="chat__btn-show-emoji"
+				bind:this={emojiButton}
+				onclick={() => (showEmojiPicker = !showEmojiPicker)}
+			>
 				<EmoticonLine width={24} height={24} />
 			</button>
 		</div>
@@ -132,9 +136,16 @@
 		position: relative;
 	}
 
+	#chat__btn-show-emoji {
+		border-radius: var(--border-radius-normal);
+	}
+
 	button {
 		background-color: var(--crust);
-		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
+	}
+
+	#btn-chat-toggle {
+		border-radius: var(--border-radius-normal) var(--border-radius-normal) 0 0;
 	}
 </style>
