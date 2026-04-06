@@ -2,6 +2,8 @@
 	import EmojiPicker from '$lib/components/EmojiPicker.svelte';
 	import ChatLine from '$lib/components/svg/ChatLine.svelte';
 	import ChatOffLine from '$lib/components/svg/ChatOffLine.svelte';
+	import EmoticonLine from '$lib/components/svg/EmoticonLine.svelte';
+
 	import { userState, peerState } from '$lib/state.svelte';
 
 	let messageInput: HTMLInputElement | null = $state(null);
@@ -75,9 +77,9 @@
 			<form onsubmit={handleMessageSubmit}>
 				<input bind:this={messageInput} id="chat__message-input" />
 			</form>
-			<button bind:this={emojiButton} onclick={() => (showEmojiPicker = !showEmojiPicker)}
-				>Emoji</button
-			>
+			<button bind:this={emojiButton} onclick={() => (showEmojiPicker = !showEmojiPicker)}>
+				<EmoticonLine width={24} height={24} />
+			</button>
 		</div>
 	</section>
 
@@ -112,12 +114,18 @@
 		gap: 0.5rem;
 	}
 
+	#chat__message-input-container form {
+		display: flex;
+		flex: 1;
+	}
+
 	#chat__message-input {
+		width: 100%;
 		color: var(--text);
 		background-color: var(--crust);
+		border-radius: var(--border-radius-normal);
 		font-size: 1.2rem;
 		padding: 0.5rem;
-		width: 100%;
 	}
 
 	.chat__emoji-picker-wrapper {
@@ -126,6 +134,7 @@
 
 	button {
 		background-color: var(--crust);
+		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
 	}
 </style>
