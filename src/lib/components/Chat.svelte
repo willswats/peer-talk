@@ -1,9 +1,11 @@
 <script lang="ts">
+	import EmojiPicker from '$lib/components/EmojiPicker.svelte';
 	import ChatLine from '$lib/components/svg/ChatLine.svelte';
 	import ChatOffLine from '$lib/components/svg/ChatOffLine.svelte';
 	import { userState, peerState } from '$lib/state.svelte';
 
-	let messageInput: HTMLInputElement | null = null;
+	let messageInput: HTMLInputElement | null = $state(null);
+	let showEmojiPicker = $state(false);
 
 	function getTime() {
 		return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -26,6 +28,14 @@
 			messageInput.value = '';
 		}
 	}
+
+	function addEmojiToInput(emojiChar: string) {
+		if (messageInput === null) return;
+
+		messageInput.value += emojiChar;
+		showEmojiPicker = false;
+		messageInput.focus();
+	}
 </script>
 
 <button onclick={() => (userState.chatToggled = !userState.chatToggled)}>
@@ -35,6 +45,7 @@
 		<ChatLine width={24} height={24} />
 	{/if}
 </button>
+
 {#if userState.chatToggled}
 	<section id="chat">
 		<ol id="chat__message-container">
@@ -42,10 +53,19 @@
 				<li>{message}</li>
 			{/each}
 		</ol>
-		<form onsubmit={handleMessageSubmit}>
-			<input bind:this={messageInput} id="chat__message-input" />
-		</form>
+		<div id="chat__message-input-container">
+			<form onsubmit={handleMessageSubmit}>
+				<input bind:this={messageInput} id="chat__message-input" />
+			</form>
+			<button onclick={() => (showEmojiPicker = !showEmojiPicker)}>Emoji</button>
+		</div>
 	</section>
+
+	{#if showEmojiPicker}
+		<div class="chat__emoji-picker-wrapper">
+			<EmojiPicker onEmojiSelect={addEmojiToInput} />
+		</div>
+	{/if}
 {/if}
 
 <style>
@@ -67,6 +87,11 @@
 		overflow-y: auto;
 	}
 
+	#chat__message-input-container {
+		display: flex;
+		gap: 0.5rem;
+	}
+
 	#chat__message-input {
 		color: var(--text);
 		background-color: var(--crust);
@@ -75,9 +100,12 @@
 		width: 100%;
 	}
 
+	.chat__emoji-picker-wrapper {
+		position: relative;
+	}
+
 	button {
 		background-color: var(--crust);
-		border-radius: var(--border-radius-normal) var(--border-radius-normal) 0 0;
 		padding: 0.5rem;
 	}
 </style>
