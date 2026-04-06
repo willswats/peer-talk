@@ -11,7 +11,7 @@ export const handleSignalling = (io: Server, socket: Socket) => {
 		socket.join(roomId);
 		users[socket.id] = username;
 
-		socket.to(roomId).emit('user-connected', socket.id);
+		socket.to(roomId).emit('user-connected', socket.id, username);
 		console.log(`User ${socket.id} joined room ${roomId}`);
 
 		// ICE candidates, offers, answers
@@ -19,7 +19,8 @@ export const handleSignalling = (io: Server, socket: Socket) => {
 			console.log(`Signal from ${socket.id} to ${data.target}`);
 			io.to(data.target).emit('signal', {
 				signal: data.signal,
-				from: socket.id
+				from: socket.id,
+				username: users[socket.id]
 			});
 		});
 

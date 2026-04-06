@@ -57,6 +57,12 @@
 		font-size: 2rem;
 		background-color: var(--crust);
 		border-radius: var(--border-radius-large);
-		padding: 4rem;
+		padding: 2rem;
+	}
+
+	@media screen and (max-width: 768px) {
+		span {
+			font-size: 1rem;
+		}
 	}
 </style>

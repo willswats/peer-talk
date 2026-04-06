@@ -36,6 +36,14 @@
 			disconnectUser();
 		}
 	});
+
+	function getUsernameFromStream(streamId: string): string {
+		const socketId = Object.keys(peerState.remoteStreamIdentifier).find(
+			(key) => peerState.remoteStreamIdentifier[key] === streamId
+		);
+
+		return socketId ? peerState.usernames[socketId] || 'Unknown User' : 'Unknown User';
+	}
 </script>
 
 <main id="room">
@@ -47,7 +55,11 @@
 		<div id="room__videos">
 			<Video username={userState.username} videoStream={userState.localStream} muted={true} />
 			{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-				<Video username={'Remote User'} videoStream={remoteStream} muted={false} />
+				<Video
+					username={getUsernameFromStream(remoteStream.id)}
+					videoStream={remoteStream}
+					muted={false}
+				/>
 			{/each}
 		</div>
 		<div id="room__buttons">

@@ -20,11 +20,16 @@ interface remoteStreamIdentifier {
 	[key: string]: string; // socketId - stream.id
 }
 
+interface peerUsernames {
+	[key: string]: string; // socketId - username
+}
+
 interface peerState {
 	socket: Socket;
 	peers: peers;
 	remoteStreams: MediaStream[];
 	remoteStreamIdentifier: remoteStreamIdentifier;
+	usernames: peerUsernames;
 	messages: string[];
 }
 
@@ -43,6 +48,7 @@ export const peerState: peerState = $state({
 	peers: {},
 	remoteStreams: [],
 	remoteStreamIdentifier: {}, // used to identify which tracks belong to which peer (for deletion)
+	usernames: {},
 	messages: []
 });
 
@@ -83,5 +89,6 @@ export function resetPeerState() {
 	peerState.peers = {};
 	peerState.remoteStreams = [];
 	peerState.remoteStreamIdentifier = {};
+	peerState.usernames = {};
 	peerState.messages = [];
 }

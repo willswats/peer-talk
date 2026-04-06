@@ -5,11 +5,12 @@ import { peerState } from '$lib/state.svelte';
 export function createSocketWithListeners() {
 	const socket = io();
 
-	socket.on('user-connected', async (socketId) => {
+	socket.on('user-connected', async (socketId, username) => {
 		try {
-			console.log('User connected:', socketId);
+			console.log('User connected:', socketId, 'Username:', username);
 
 			const pc = createPeerConnection(socket, socketId);
+			peerState.usernames[socketId] = username;
 
 			const offerDescription = await pc.createOffer();
 			await pc.setLocalDescription(offerDescription);
@@ -21,11 +22,12 @@ export function createSocketWithListeners() {
 	});
 
 	socket.on('signal', async (data) => {
-		const { signal, from } = data;
+		const { signal, from, username } = data;
 
 		if (!peerState.peers[from]) {
 			console.log('Creating peer connection for user:', from);
 			createPeerConnection(socket, from);
+			peerState.usernames[from] = username;
 		}
 
 		if (signal.candidate) {
