@@ -6,6 +6,8 @@
 
 	let messageInput: HTMLInputElement | null = $state(null);
 	let showEmojiPicker = $state(false);
+	let emojiButton: HTMLButtonElement | null = $state(null);
+	let emojiPickerWrapper: HTMLDivElement | null = $state(null);
 
 	function getTime() {
 		return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -36,7 +38,23 @@
 		showEmojiPicker = false;
 		messageInput.focus();
 	}
+
+	function handleClickOutside(event: MouseEvent) {
+		if (emojiButton && emojiButton.contains(event.target as Node)) {
+			return;
+		}
+
+		if (
+			showEmojiPicker &&
+			emojiPickerWrapper &&
+			!emojiPickerWrapper.contains(event.target as Node)
+		) {
+			showEmojiPicker = false;
+		}
+	}
 </script>
+
+<svelte:document onclick={handleClickOutside} />
 
 <button onclick={() => (userState.chatToggled = !userState.chatToggled)}>
 	{#if userState.chatToggled}
@@ -57,12 +75,14 @@
 			<form onsubmit={handleMessageSubmit}>
 				<input bind:this={messageInput} id="chat__message-input" />
 			</form>
-			<button onclick={() => (showEmojiPicker = !showEmojiPicker)}>Emoji</button>
+			<button bind:this={emojiButton} onclick={() => (showEmojiPicker = !showEmojiPicker)}
+				>Emoji</button
+			>
 		</div>
 	</section>
 
 	{#if showEmojiPicker}
-		<div class="chat__emoji-picker-wrapper">
+		<div bind:this={emojiPickerWrapper} class="chat__emoji-picker-wrapper">
 			<EmojiPicker onEmojiSelect={addEmojiToInput} />
 		</div>
 	{/if}

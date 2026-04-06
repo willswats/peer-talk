@@ -8,19 +8,31 @@
 	let { onEmojiSelect }: EmojiPicker = $props();
 
 	let emojiPickerContainer: HTMLDivElement;
+	let picker: any = $state(null);
 
 	onMount(async () => {
 		const { Picker } = await import('emoji-picker-element');
 
-		let picker = new Picker({
+		picker = new Picker({
 			locale: 'en'
 		});
 
-		emojiPickerContainer.appendChild(picker);
+		if (emojiPickerContainer) {
+			emojiPickerContainer.appendChild(picker);
+		}
 
 		picker.addEventListener('emoji-click', (event: any) => {
 			onEmojiSelect(event.detail.unicode);
 		});
+	});
+
+	$effect(() => {
+		return () => {
+			if (picker) {
+				picker.remove();
+				picker = null;
+			}
+		};
 	});
 </script>
 
