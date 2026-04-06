@@ -6,6 +6,8 @@
 	import ButtonMuteMic from '$lib/components/ButtonMuteMic.svelte';
 	import ButtonToggleVideo from '$lib/components/ButtonToggleVideo.svelte';
 
+	let hasLocalVideo = $state(false);
+
 	async function getMediaWithFallback() {
 		try {
 			const stream = await navigator.mediaDevices.getUserMedia({
@@ -59,6 +61,12 @@
 		resetUserState();
 		goto(resolve('/'));
 	}
+
+	$effect(() => {
+		if (userState.localStream) {
+			hasLocalVideo = userState.localStream.getVideoTracks().length > 0;
+		}
+	});
 </script>
 
 <main>
@@ -69,8 +77,13 @@
 			<button class="btn-peach" onclick={handleOnClickPerms}>Grant Permissions</button>
 		</div>
 		<div id="video-container">
-			{#if userState.localStream}
-				<Video videoStream={userState.localStream} muted={true} --background-color="var(--crust)" />
+			{#if hasLocalVideo}
+				<Video
+					username={userState.username}
+					videoStream={userState.localStream}
+					muted={true}
+					--background-color="var(--crust)"
+				/>
 			{:else}
 				No camera currently available
 			{/if}

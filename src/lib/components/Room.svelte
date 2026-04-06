@@ -45,9 +45,9 @@
 			<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
 		</div>
 		<div id="room__videos">
-			<Video videoStream={userState.localStream} muted={true} />
+			<Video username={userState.username} videoStream={userState.localStream} muted={true} />
 			{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-				<Video videoStream={remoteStream} muted={false} />
+				<Video username={'Remote User'} videoStream={remoteStream} muted={false} />
 			{/each}
 		</div>
 		<div id="room__buttons">
