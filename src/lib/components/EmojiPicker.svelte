@@ -58,4 +58,11 @@
 		--input-font-color: var(--text);
 		--input-border-color: var(--surface0);
 	}
+
+	@media screen and (max-width: 768px) {
+		.emoji-picker-container {
+			width: 100%;
+			height: 400px;
+		}
+	}
 </style>
