@@ -17,6 +17,9 @@ export function createPeerConnection(socket: Socket, socketId: string) {
 		});
 	}
 
+	// This allows users without video to receive video from users with video (camera)
+	pc.addTransceiver('video', { direction: 'recvonly' });
+
 	// Create a MediaStream for each peer for all of the tracks
 	const remoteStream = new MediaStream();
 
