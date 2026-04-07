@@ -91,7 +91,7 @@
 	#room__talk {
 		display: flex;
 		flex-direction: column;
-		height: calc(100dvh - 5rem); /* Account for nav and margin */
+		height: calc(100vh - 5rem); /* Account for nav and margin */
 		flex-grow: 1;
 		min-height: 0;
 		margin: 1rem;
