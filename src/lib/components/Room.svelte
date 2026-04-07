@@ -135,6 +135,9 @@
 		}
 
 		#room__talk {
+			/* TODO: fix min-height and min-width not working on IOS
+		- currently causes elements to be hidden, rather than shrinking the video elements
+		 */
 			height: 100%;
 		}
 	}
