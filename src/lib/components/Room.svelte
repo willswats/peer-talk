@@ -7,7 +7,9 @@
 	import EmbeddedApps from '$lib/components/EmbeddedApps.svelte';
 	import ButtonDisconnect from '$lib/components/ButtonDisconnect.svelte';
 	import ButtonMuteMic from '$lib/components/ButtonMuteMic.svelte';
+	import ButtonDeafen from '$lib/components/ButtonDeafen.svelte';
 	import ButtonToggleVideo from '$lib/components/ButtonToggleVideo.svelte';
+
 	import { beforeNavigate } from '$app/navigation';
 
 	let roomToggle: boolean = $state(false);
@@ -64,6 +66,7 @@
 		</div>
 		<div id="room__buttons">
 			<ButtonMuteMic />
+			<ButtonDeafen />
 			<ButtonToggleVideo />
 			<ButtonDisconnect />
 		</div>

@@ -8,6 +8,7 @@ interface userState {
 	username: string;
 	localMicEnabled: boolean;
 	localVideoEnabled: boolean;
+	deafened: boolean;
 	chatToggled: boolean;
 	localStream: MediaStream | null;
 }
@@ -39,6 +40,7 @@ export const userState: userState = $state({
 	username: '',
 	localMicEnabled: false,
 	localVideoEnabled: false,
+	deafened: false,
 	chatToggled: false,
 	localStream: null
 });
@@ -74,6 +76,7 @@ export function resetUserState() {
 	userState.username = '';
 	userState.localMicEnabled = false;
 	userState.localVideoEnabled = false;
+	userState.deafened = false;
 	userState.chatToggled = false;
 
 	userState.localStream?.getTracks().forEach((track) => track.stop());
