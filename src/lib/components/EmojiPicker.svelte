@@ -45,9 +45,13 @@
 		right: 0;
 		margin-bottom: 0.5rem;
 		z-index: 1000;
+		width: 350px;
+		height: 400px;
 	}
 
 	:global(emoji-picker) {
+		width: 100%;
+		height: 100%;
 		--background: var(--mantle);
 		--border-color: var(--surface0);
 		--category-font-color: var(--text);
