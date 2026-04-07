@@ -12,7 +12,11 @@
 		try {
 			const stream = await navigator.mediaDevices.getUserMedia({
 				video: true,
-				audio: true
+				audio: {
+					autoGainControl: true,
+					echoCancellation: true,
+					noiseSuppression: true
+				}
 			});
 
 			userState.localVideoEnabled = true;
@@ -23,7 +27,11 @@
 			if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
 				try {
 					const audioStream = await navigator.mediaDevices.getUserMedia({
-						audio: true
+						audio: {
+							autoGainControl: true,
+							echoCancellation: true,
+							noiseSuppression: true
+						}
 					});
 
 					userState.localMicEnabled = true;
