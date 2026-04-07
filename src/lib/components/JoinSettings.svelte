@@ -47,13 +47,17 @@
 	}
 
 	function handleOnClickJoinRoom() {
-		if (userState.localStream !== null) {
-			peerState.socket.emit('join-room', userState.roomId, userState.username);
-			userState.joinedRoom = true;
-		} else {
+		if (userState.localStream === null) {
 			confirm(
 				'You must grant permissions and have an available microphone/camera to join the room.'
 			);
+		} else if (userState.username.length <= 0) {
+			confirm('Username cannot be empty.');
+		} else if (userState.username.length >= 30) {
+			confirm('Username must be shorter than 30 characters.');
+		} else {
+			peerState.socket.emit('join-room', userState.roomId, userState.username);
+			userState.joinedRoom = true;
 		}
 	}
 

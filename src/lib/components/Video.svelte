@@ -58,6 +58,7 @@
 		background-color: var(--crust);
 		border-radius: var(--border-radius-large);
 		padding: 2rem;
+		overflow: hidden;
 	}
 
 	@media screen and (max-width: 768px) {

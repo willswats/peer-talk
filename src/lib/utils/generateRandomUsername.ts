@@ -55,10 +55,14 @@ export function generateRandomUsername() {
 	const namePartsInd2 = Math.floor(Math.random() * nameParts.length);
 	const capitalize = (val: string) => String(val).charAt(0).toUpperCase() + String(val).slice(1);
 
-	const name =
+	let name =
 		capitalize(nameParts[namePartsInd1]) +
 		capitalize(nameParts[namePartsInd2]) +
 		Math.floor(Math.random() * 50).toString();
+
+	if (name.length >= 30) {
+		name = generateRandomUsername();
+	}
 
 	return name;
 }
