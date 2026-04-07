@@ -133,5 +133,9 @@
 			display: grid;
 			grid-template-columns: 1fr;
 		}
+
+		#room__talk {
+			height: 100%;
+		}
 	}
 </style>
