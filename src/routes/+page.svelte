@@ -29,7 +29,9 @@
 			}}
 		>
 			<input type="text" placeholder="roomId..." bind:value={roomIdInput} />
-			<button>Enter Room</button>
+			<div>
+				<button>Enter Room</button>
+			</div>
 		</form>
 	</section>
 </main>
@@ -78,7 +80,14 @@
 		padding: 0.5rem;
 	}
 
+	form {
+		display: flex;
+		gap: 0.5rem;
+	}
+
 	input {
+		display: flex;
+		flex: 1;
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
 	}
@@ -89,11 +98,16 @@
 		}
 
 		p {
-			font-size: 1.2rem;
+			font-size: 1rem;
+		}
+
+		form {
+			flex-direction: column;
 		}
 
 		section {
-			width: 20rem;
+			width: 16rem;
+			padding: 1rem;
 		}
 	}
 </style>

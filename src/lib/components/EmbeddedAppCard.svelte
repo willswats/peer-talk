@@ -71,6 +71,7 @@
 		justify-content: center;
 		align-items: center;
 		height: 100%;
+		padding: 1rem;
 	}
 
 	figure figcaption h2 {
@@ -107,5 +108,15 @@
 	iframe {
 		width: 100%;
 		height: 100%;
+	}
+
+	@media screen and (max-width: 768px) {
+		figure figcaption h2 {
+			font-size: 1.4rem;
+		}
+
+		figure figcaption p {
+			font-size: 1rem;
+		}
 	}
 </style>

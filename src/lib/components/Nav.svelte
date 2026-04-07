@@ -48,4 +48,11 @@
 	.nav-menu-a-enabled {
 		background-color: var(--crust);
 	}
+
+	@media screen and (max-width: 768px) {
+		.nav-menu a,
+		button {
+			font-size: 1rem;
+		}
+	}
 </style>

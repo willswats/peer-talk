@@ -98,7 +98,7 @@
 			<ButtonMuteMic />
 			<ButtonToggleVideo />
 		</div>
-		<div>
+		<div id="join-leave-buttons">
 			<button onclick={handleOnClickJoinRoom}>Join Room</button>
 			<button onclick={handleOnClickLeaveRoom}>Leave Room</button>
 		</div>
@@ -158,6 +158,10 @@
 		margin-top: 0.5rem;
 	}
 
+	#join-leave-buttons {
+		display: flex;
+	}
+
 	button {
 		background-color: var(--crust);
 		border-radius: var(--border-radius-normal);
@@ -166,11 +170,16 @@
 
 	@media screen and (max-width: 768px) {
 		section {
-			width: 20rem;
+			width: 16rem;
+			padding: 1rem;
 		}
 
 		#video-container {
 			height: 15rem;
+		}
+
+		#join-leave-buttons {
+			flex-direction: column;
 		}
 	}
 </style>

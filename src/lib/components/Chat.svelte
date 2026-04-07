@@ -100,7 +100,7 @@
 		flex-direction: column;
 		background-color: var(--mantle);
 		border-radius: 0 0 var(--border-radius-normal) var(--border-radius-normal);
-		padding: 2rem;
+		padding: 1rem;
 		height: 20rem;
 	}
 
@@ -147,5 +147,12 @@
 
 	#btn-chat-toggle {
 		border-radius: var(--border-radius-normal) var(--border-radius-normal) 0 0;
+	}
+
+	@media screen and (max-width: 768px) {
+		button {
+			background-color: var(--crust);
+			padding: 0.2rem;
+		}
 	}
 </style>
