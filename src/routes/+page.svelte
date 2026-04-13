@@ -11,10 +11,7 @@
 <main>
 	<section>
 		<h1>PeerTalk</h1>
-		<p>
-			A web app for peer-to-peer text and voice communication, featuring collaborative apps that can
-			be used whilst in a call.
-		</p>
+		<p>A web app for peer-to-peer group calls with collaborative applications.</p>
 		<div>
 			<button class="btn-blue" onclick={createRoom}>Create Room</button>
 		</div>
