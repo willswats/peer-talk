@@ -9,6 +9,7 @@
 	import ButtonMuteMic from '$lib/components/ButtonMuteMic.svelte';
 	import ButtonDeafen from '$lib/components/ButtonDeafen.svelte';
 	import ButtonToggleVideo from '$lib/components/ButtonToggleVideo.svelte';
+	import ButtonRoomCopy from '$lib/components/ButtonRoomCopy.svelte';
 
 	import { beforeNavigate } from '$app/navigation';
 
@@ -50,9 +51,23 @@
 
 <main id="room">
 	<section id="room__talk" bind:this={roomTalkElement}>
-		<div id="room__toggle-buttons">
-			<button class="btn-blue" onclick={() => (roomToggle = false)}>Talk</button>
-			<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
+		<div id="room__top-buttons">
+			<div id="room__top-buttons-left">
+				<button class="btn-blue" onclick={() => (roomToggle = false)}>Talk</button>
+				<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
+			</div>
+			<div id="room__top-buttons-right">
+				<ButtonRoomCopy
+					copy={userState.roomId}
+					textBefore={'Copy Room ID'}
+					textAfter={'Copied Room ID'}
+				/>
+				<ButtonRoomCopy
+					copy={window.location.href}
+					textBefore={'Copy Room Link'}
+					textAfter={'Copied Room Link'}
+				/>
+			</div>
 		</div>
 		<div id="room__videos">
 			<Video username={userState.username} videoStream={userState.localStream} muted={true} />
@@ -73,9 +88,23 @@
 		<Chat />
 	</section>
 	<section id="room__apps" bind:this={roomAppsElement}>
-		<div id="room__toggle-buttons">
-			<button class="btn-blue" onclick={() => (roomToggle = false)}>Talk</button>
-			<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
+		<div id="room__top-buttons">
+			<div id="room__top-buttons-left">
+				<button class="btn-blue" onclick={() => (roomToggle = false)}>Talk</button>
+				<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
+			</div>
+			<div id="room__top-buttons-right">
+				<ButtonRoomCopy
+					copy={userState.roomId || ''}
+					textBefore={'Copy Room ID'}
+					textAfter={'Copied Room ID'}
+				/>
+				<ButtonRoomCopy
+					copy={window.location.href}
+					textBefore={'Copy Room Link'}
+					textAfter={'Copied Room Link'}
+				/>
+			</div>
 		</div>
 		<EmbeddedApps />
 	</section>
@@ -97,8 +126,23 @@
 		margin: 1rem;
 	}
 
-	#room__toggle-buttons {
+	#room__top-buttons {
+		display: flex;
 		margin-bottom: 0.5rem;
+	}
+
+	#room__top-buttons-left {
+		display: flex;
+		flex-grow: 1;
+		justify-content: flex-start;
+		gap: 0.25rem;
+	}
+
+	#room__top-buttons-right {
+		display: flex;
+		flex-grow: 1;
+		justify-content: flex-end;
+		gap: 0.25rem;
 	}
 
 	#room__videos {
