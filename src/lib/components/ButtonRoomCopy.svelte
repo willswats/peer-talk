@@ -26,4 +26,10 @@
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem 1rem;
 	}
+
+	@media screen and (max-width: 768px) {
+		button {
+			padding: 0.25rem 0.5rem;
+		}
+	}
 </style>

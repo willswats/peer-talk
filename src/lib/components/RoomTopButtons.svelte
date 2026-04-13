@@ -14,11 +14,11 @@
 		<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
 	</div>
 	<div id="room__top-buttons-right">
-		<ButtonRoomCopy copy={roomId || ''} textBefore={'Copy Room ID'} textAfter={'Copied Room ID'} />
+		<ButtonRoomCopy copy={roomId || ''} textBefore={'Copy ID'} textAfter={'Copied ID'} />
 		<ButtonRoomCopy
 			copy={window.location.href}
-			textBefore={'Copy Room Link'}
-			textAfter={'Copied Room Link'}
+			textBefore={'Copy Link'}
+			textAfter={'Copied Link'}
 		/>
 	</div>
 </div>
@@ -33,6 +33,7 @@
 	#room__top-buttons {
 		display: flex;
 		margin-bottom: 0.5rem;
+		gap: 0.25rem;
 	}
 
 	#room__top-buttons-left {
@@ -47,5 +48,11 @@
 		flex-grow: 1;
 		justify-content: flex-end;
 		gap: 0.25rem;
+	}
+
+	@media screen and (max-width: 768px) {
+		button {
+			padding: 0.25rem 0.5rem;
+		}
 	}
 </style>
