@@ -29,9 +29,10 @@
 	<figcaption>
 		{#if !embeddedApp.render}
 			<h2>
-				<a href={embeddedApp.git} target="_blank" rel="external noreferrer">{embeddedApp.title}</a>
+				{embeddedApp.title}
 			</h2>
 			<p>{embeddedApp.description}</p>
+			<a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a>
 		{:else}
 			<iframe
 				id={embeddedApp.id}
@@ -110,12 +111,21 @@
 		height: 100%;
 	}
 
+	a {
+		font-size: 1.2rem;
+		color: var(--mauve);
+	}
+
 	@media screen and (max-width: 768px) {
 		figure figcaption h2 {
 			font-size: 1.4rem;
 		}
 
 		figure figcaption p {
+			font-size: 1rem;
+		}
+
+		a {
 			font-size: 1rem;
 		}
 	}
