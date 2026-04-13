@@ -23,7 +23,7 @@
 
 		if (message.length > 0) {
 			// Show the message in your chat window
-			peerState.messages.unshift(`You (${getTime()}): ${message}`);
+			peerState.messages.unshift(`${userState.username} (${getTime()}): ${message}`);
 
 			// Send the message to the server
 			peerState.socket.emit('send-chat-message', message);
