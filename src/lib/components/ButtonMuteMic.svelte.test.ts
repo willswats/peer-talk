@@ -1,4 +1,4 @@
-import { toggleLocalAudio } from '$lib/utils/userAudio';
+import { toggleLocalAudio } from '$lib/utils/userActions';
 import { test, expect } from 'vitest';
 
 // Helper to create a mock MediaStream with audio tracks

@@ -3,24 +3,14 @@
 	import VolumeMuteLine from '$lib/components/svg/VolumeMuteLine.svelte';
 	import { userState } from '$lib/state.svelte';
 	import { peerState } from '$lib/state.svelte';
-
-	function toggleDeafen() {
-		userState.deafened = !userState.deafened;
-		if (userState.deafened) {
-			// Disable remote audio streams
-			for (let remoteStream of peerState.remoteStreams) {
-				remoteStream.getAudioTracks()[0].enabled = false;
-			}
-		} else {
-			// Enable remote audio streams
-			for (let remoteStream of peerState.remoteStreams) {
-				remoteStream.getAudioTracks()[0].enabled = true;
-			}
-		}
-	}
+	import { toggleDeafen } from '$lib/utils/userActions';
 </script>
 
-<button onclick={toggleDeafen}>
+<button
+	onclick={() => {
+		userState.deafened = toggleDeafen(userState.deafened, peerState.remoteStreams);
+	}}
+>
 	{#if userState.deafened}
 		<VolumeMuteLine width={24} height={24} />
 	{:else}
