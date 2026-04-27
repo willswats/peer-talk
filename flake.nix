@@ -38,13 +38,17 @@
               nodejs
               pnpm
               svelte-language-server
+              playwright-driver.browsers # NOTE: playwright must be the same version as the one installed in the package.json - https://www.nixhub.io/packages/playwright 
             ];
 
             # Set any environment variables for your dev shell
             env = { };
 
             # Add any shell logic you want executed any time the environment is activated
-            shellHook = '''';
+            shellHook = ''
+              export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
+              export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true;
+            '';
           };
         }
       );

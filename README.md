@@ -25,11 +25,16 @@ A web app for peer-to-peer text and voice communication, featuring collaborative
 2. Run `pnpm i` to install dependencies.
 3. Run `pnpm run dev --host`.
 
+## Testing
+
+1. Run `pnpm exec playwright install chromium`.
+2. Run `pnpm run test`
+
 ## Production
 
 ```bash
-npm build
-npm start
+pnpm build
+pnpm start
 ```
 
 ## Acknowledgements
