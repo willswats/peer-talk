@@ -5,20 +5,17 @@
 		textAfter: string;
 	}
 
+	import { handleButtonRoomCopy } from '$lib/utils/userActions';
+
 	let { copy, textBefore, textAfter }: Props = $props();
 
 	let buttonEl: HTMLButtonElement;
-
-	function handleButtonRoomCopy() {
-		navigator.clipboard.writeText(copy);
-		buttonEl.innerText = textAfter;
-		setTimeout(() => {
-			buttonEl.innerText = textBefore;
-		}, 5000);
-	}
 </script>
 
-<button bind:this={buttonEl} onclick={() => handleButtonRoomCopy()}>{textBefore}</button>
+<button
+	bind:this={buttonEl}
+	onclick={() => handleButtonRoomCopy(buttonEl, copy, textAfter, textBefore)}>{textBefore}</button
+>
 
 <style>
 	button {
