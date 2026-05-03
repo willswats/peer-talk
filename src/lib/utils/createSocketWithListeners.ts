@@ -24,6 +24,9 @@ export function createSocketWithListeners() {
 	socket.on('signal', async (data) => {
 		const { signal, from, username } = data;
 
+		// This is needed when a room already exists with users inside,
+		// the user joining the room needs to create peer connections for all the
+		// other users in the room
 		if (!peerState.peers[from]) {
 			console.log('Creating peer connection for user:', from);
 			createPeerConnection(socket, from);
