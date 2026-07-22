@@ -26,7 +26,6 @@
 		display: flex;
 		width: 100%;
 		height: 3rem;
-		background-color: var(--mantle);
 		overflow: hidden;
 	}
 
@@ -35,7 +34,7 @@
 		text-wrap: nowrap;
 	}
 
-	.nav-menu a,
+	a,
 	button {
 		display: flex;
 		justify-content: center;
@@ -43,6 +42,10 @@
 		padding: 1rem;
 		font-size: 1.2rem;
 		transition: background-color 0.1s;
+		border-radius: var(--border-radius-normal);
+		margin-left: 0.25rem;
+		background-color: var(--mantle);
+		margin-top: 0.1rem;
 	}
 
 	.nav-menu-a-enabled {
