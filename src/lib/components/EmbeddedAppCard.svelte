@@ -63,7 +63,7 @@
 		height: 30em;
 		border-radius: var(--border-radius-normal);
 		overflow: hidden;
-		background-color: var(--mantle);
+		background-color: var(--bg-secondary);
 	}
 
 	figure figcaption {
@@ -96,14 +96,14 @@
 		text-align: center;
 		width: 100%;
 		color: var(--text);
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 		padding: 0.5rem;
 		transition: background-color 0.1s;
 		font-size: 1rem;
 	}
 
 	figure section button:nth-of-type(2) {
-		border-left: 1px solid var(--base);
+		border-left: 1px solid var(--bg-primary);
 	}
 
 	iframe {

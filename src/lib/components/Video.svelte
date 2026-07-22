@@ -35,7 +35,7 @@
 	video {
 		width: 100%;
 		height: 100%;
-		background-color: var(--background-color, var(--mantle));
+		background-color: var(--background-color, var(--bg-secondary));
 		border-radius: var(--border-radius-normal);
 		min-width: 0;
 		min-height: 0;
@@ -44,7 +44,7 @@
 	div {
 		width: 100%;
 		height: 100%;
-		background-color: var(--background-color, var(--mantle));
+		background-color: var(--background-color, var(--bg-secondary));
 		border-radius: var(--border-radius-normal);
 		min-width: 0;
 		min-height: 0;
@@ -55,7 +55,7 @@
 
 	span {
 		font-size: 2rem;
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-large);
 		padding: 2rem;
 		overflow: hidden;

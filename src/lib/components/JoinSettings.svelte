@@ -94,7 +94,7 @@
 					username={userState.username}
 					videoStream={userState.localStream}
 					muted={true}
-					--background-color="var(--crust)"
+					--background-color="var(--bg-tertiary)"
 				/>
 			{:else}
 				No camera currently available
@@ -134,7 +134,7 @@
 		align-items: center;
 		text-align: center;
 		height: 20rem;
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-normal);
 		margin-top: 0.5rem;
 	}
@@ -142,7 +142,7 @@
 	section {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--mantle);
+		background-color: var(--bg-secondary);
 		border-radius: var(--border-radius-normal);
 		padding: 2rem;
 		width: 30rem;
@@ -171,7 +171,7 @@
 	}
 
 	button {
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
 	}

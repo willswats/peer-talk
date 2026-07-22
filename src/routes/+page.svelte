@@ -61,7 +61,7 @@
 	section {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--mantle);
+		background-color: var(--bg-secondary);
 		padding: 2rem;
 		border-radius: var(--border-radius-normal);
 		width: 45rem;
@@ -72,7 +72,7 @@
 	}
 
 	button {
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem;
 	}

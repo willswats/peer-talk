@@ -96,7 +96,7 @@
 	#chat {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--mantle);
+		background-color: var(--bg-secondary);
 		border-radius: 0 0 var(--border-radius-normal) var(--border-radius-normal);
 		padding: 1rem;
 		height: 20rem;
@@ -124,7 +124,7 @@
 	#chat__message-input {
 		width: 100%;
 		color: var(--text);
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-normal);
 		font-size: 1.2rem;
 		padding: 0.5rem;
@@ -139,7 +139,7 @@
 	}
 
 	button {
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 		padding: 0.5rem;
 	}
 
@@ -149,7 +149,7 @@
 
 	@media screen and (max-width: 768px) {
 		button {
-			background-color: var(--crust);
+			background-color: var(--bg-tertiary);
 			padding: 0.2rem;
 		}
 	}

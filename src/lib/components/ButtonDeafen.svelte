@@ -20,7 +20,7 @@
 
 <style>
 	button {
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem 1rem;
 	}

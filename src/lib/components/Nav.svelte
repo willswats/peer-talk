@@ -44,12 +44,12 @@
 		transition: background-color 0.1s;
 		border-radius: var(--border-radius-normal);
 		margin-left: 0.25rem;
-		background-color: var(--mantle);
+		background-color: var(--bg-secondary);
 		margin-top: 0.1rem;
 	}
 
 	.nav-menu-a-enabled {
-		background-color: var(--crust);
+		background-color: var(--bg-tertiary);
 	}
 
 	@media screen and (max-width: 768px) {

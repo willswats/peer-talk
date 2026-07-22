@@ -52,11 +52,11 @@
 	:global(emoji-picker) {
 		width: 100%;
 		height: 100%;
-		--background: var(--mantle);
-		--border-color: var(--surface0);
+		--background: var(--bg-secondary);
+		--border-color: var(--border);
 		--category-font-color: var(--text);
 		--input-font-color: var(--text);
-		--input-border-color: var(--surface0);
+		--input-border-color: var(--border);
 	}
 
 	@media screen and (max-width: 768px) {
