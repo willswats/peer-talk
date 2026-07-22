@@ -13,6 +13,11 @@
 {@render children()}
 
 <style>
+	@font-face {
+		font-family: 'Roboto';
+		src: url('/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf');
+	}
+
 	:root {
 		--rosewater: #f5e0dc;
 		--flamingo: #f2cdcd;
@@ -50,7 +55,7 @@
 			margin: 0;
 			padding: 0;
 			box-sizing: border-box;
-			font-family: sans-serif;
+			font-family: Roboto, sans-serif;
 		}
 
 		a {
