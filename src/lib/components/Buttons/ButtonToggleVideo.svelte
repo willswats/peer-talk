@@ -2,6 +2,7 @@
 	import VideoOnLine from '$lib/components/svg/VideoOnLine.svelte';
 	import VideoOffLine from '$lib/components/svg/VideoOffLine.svelte';
 	import { userState } from '$lib/state.svelte';
+	import './buttons.css';
 
 	function toggleLocalVideo() {
 		if (userState.localStream !== null && userState.localStream?.getVideoTracks().length > 0) {
@@ -18,17 +19,3 @@
 		<VideoOffLine width={24} height={24} />
 	{/if}
 </button>
-
-<style>
-	button {
-		background-color: var(--bg-tertiary);
-		border-radius: var(--border-radius-normal);
-		padding: 0.5rem 1rem;
-	}
-
-	@media screen and (max-width: 768px) {
-		button {
-			padding: 0.5rem;
-		}
-	}
-</style>

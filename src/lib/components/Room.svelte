@@ -5,10 +5,12 @@
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
 	import EmbeddedApps from '$lib/components/EmbeddedApps.svelte';
-	import ButtonDisconnect from '$lib/components/ButtonDisconnect.svelte';
-	import ButtonMuteMic from '$lib/components/ButtonMuteMic.svelte';
-	import ButtonDeafen from '$lib/components/ButtonDeafen.svelte';
-	import ButtonToggleVideo from '$lib/components/ButtonToggleVideo.svelte';
+	import {
+		ButtonDisconnect,
+		ButtonMuteMic,
+		ButtonDeafen,
+		ButtonToggleVideo
+	} from '$lib/components/Buttons';
 	import RoomTopButtons from '$lib/components/RoomTopButtons.svelte';
 
 	import { beforeNavigate } from '$app/navigation';

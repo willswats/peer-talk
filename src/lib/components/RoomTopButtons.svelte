@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ButtonRoomCopy from '$lib/components/ButtonRoomCopy.svelte';
+	import { ButtonRoomCopy } from '$lib/components/Buttons';
 
 	interface Props {
 		roomToggle: boolean;

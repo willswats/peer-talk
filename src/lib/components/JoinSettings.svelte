@@ -3,8 +3,7 @@
 	import { peerState, resetUserState, userState } from '$lib/state.svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import ButtonMuteMic from '$lib/components/ButtonMuteMic.svelte';
-	import ButtonToggleVideo from '$lib/components/ButtonToggleVideo.svelte';
+	import { ButtonToggleVideo, ButtonMuteMic } from '$lib/components/Buttons';
 
 	let hasLocalVideo = $state(false);
 
