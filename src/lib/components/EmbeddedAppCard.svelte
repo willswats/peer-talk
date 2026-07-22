@@ -64,6 +64,7 @@
 		border-radius: var(--border-radius-normal);
 		overflow: hidden;
 		background-color: var(--bg-secondary);
+		border: 1px solid var(--border);
 	}
 
 	figure figcaption {
@@ -100,10 +101,13 @@
 		padding: 0.5rem;
 		transition: background-color 0.1s;
 		font-size: 1rem;
+		border-radius: 0;
+		border: 0;
+		border-top: 1px solid var(--border);
 	}
 
 	figure section button:nth-of-type(2) {
-		border-left: 1px solid var(--bg-primary);
+		border-left: 1px solid var(--border);
 	}
 
 	iframe {

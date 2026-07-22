@@ -136,6 +136,7 @@
 		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-normal);
 		margin-top: 0.5rem;
+		border: 1px solid var(--border);
 	}
 
 	section {
@@ -145,6 +146,7 @@
 		border-radius: var(--border-radius-normal);
 		padding: 2rem;
 		width: 30rem;
+		border: 1px solid var(--border);
 	}
 
 	label {

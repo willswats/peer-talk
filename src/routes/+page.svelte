@@ -65,6 +65,7 @@
 		padding: 2rem;
 		border-radius: var(--border-radius-normal);
 		width: 45rem;
+		border: 1px solid var(--border);
 	}
 
 	div {

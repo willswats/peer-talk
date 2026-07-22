@@ -2,6 +2,7 @@ button {
 	background-color: var(--bg-tertiary);
 	border-radius: var(--border-radius-normal);
 	padding: 0.5rem 1rem;
+	border: 1px solid var(--border);
 }
 
 @media screen and (max-width: 768px) {

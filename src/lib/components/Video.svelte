@@ -39,6 +39,7 @@
 		border-radius: var(--border-radius-normal);
 		min-width: 0;
 		min-height: 0;
+		border: 1px solid var(--border);
 	}
 
 	div {
@@ -51,6 +52,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		border: 1px solid var(--border);
 	}
 
 	span {
@@ -59,6 +61,7 @@
 		border-radius: var(--border-radius-large);
 		padding: 2rem;
 		overflow: hidden;
+		border: 1px solid var(--border);
 	}
 
 	@media screen and (max-width: 768px) {

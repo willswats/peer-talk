@@ -46,6 +46,7 @@
 		margin-left: 0.25rem;
 		background-color: var(--bg-secondary);
 		margin-top: 0.1rem;
+		border: 1px solid var(--border);
 	}
 
 	.nav-menu-a-enabled {
