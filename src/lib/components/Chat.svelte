@@ -63,15 +63,15 @@
 		</div>
 		<div id="chat__message-input-container">
 			<form onsubmit={handleMessageSubmit}>
-				<input bind:this={messageInput} id="chat__message-input" />
+				<input placeholder="Send message..." bind:this={messageInput} id="chat__message-input" />
+				<button
+					id="chat__btn-show-emoji"
+					bind:this={emojiButton}
+					onclick={() => (showEmojiPicker = !showEmojiPicker)}
+				>
+					<EmoticonLine width={24} height={24} />
+				</button>
 			</form>
-			<button
-				id="chat__btn-show-emoji"
-				bind:this={emojiButton}
-				onclick={() => (showEmojiPicker = !showEmojiPicker)}
-			>
-				<EmoticonLine width={24} height={24} />
-			</button>
 		</div>
 		{#if showEmojiPicker}
 			<div bind:this={emojiPickerWrapper} class="chat__emoji-picker-wrapper">
@@ -86,7 +86,7 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--bg-secondary);
-		border-radius: 0 0 var(--border-radius-normal) var(--border-radius-normal);
+		border-radius: var(--border-radius-normal);
 		padding: 1rem;
 		height: 100%;
 		max-width: 25rem;
@@ -111,6 +111,7 @@
 	#chat__message-input-container form {
 		display: flex;
 		flex: 1;
+		position: relative;
 	}
 
 	#chat__message-input {
@@ -120,6 +121,7 @@
 		border-radius: var(--border-radius-normal);
 		font-size: 1.2rem;
 		padding: 0.5rem;
+		padding-right: 50px;
 	}
 
 	.chat__emoji-picker-wrapper {
@@ -127,6 +129,10 @@
 	}
 
 	#chat__btn-show-emoji {
+		background-color: transparent;
 		border-radius: var(--border-radius-normal);
+		position: absolute;
+		bottom: 0;
+		right: 0;
 	}
 </style>
