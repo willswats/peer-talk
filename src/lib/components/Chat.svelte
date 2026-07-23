@@ -65,6 +65,7 @@
 			<form onsubmit={handleMessageSubmit}>
 				<input placeholder="Send message..." bind:this={messageInput} id="chat__message-input" />
 				<button
+					type="button"
 					id="chat__btn-show-emoji"
 					bind:this={emojiButton}
 					onclick={() => (showEmojiPicker = !showEmojiPicker)}
