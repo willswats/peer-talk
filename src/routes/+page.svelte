@@ -18,14 +18,17 @@
 		<form
 			onsubmit={(event) => {
 				event.preventDefault();
-				const roomValid = setUserRoomIdAndUserName(roomIdInput);
+				const uuid = roomIdInput.split('/').pop();
+				if (uuid) {
+					const roomValid = setUserRoomIdAndUserName(uuid);
 
-				if (roomValid) {
-					goto(resolve(`/room/${userState.roomId}`));
+					if (roomValid) {
+						goto(resolve(`/room/${userState.roomId}`));
+					}
 				}
 			}}
 		>
-			<input type="text" placeholder="roomId..." bind:value={roomIdInput} />
+			<input type="text" placeholder="Room link..." bind:value={roomIdInput} />
 			<div>
 				<button>Enter Room</button>
 			</div>
