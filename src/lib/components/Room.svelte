@@ -72,16 +72,7 @@
 		<div id="room__buttons">
 			<div id="room__buttons-left">
 				<div class="room__buttons-pill">
-					<ButtonRoomCopy
-						copy={userState.roomId || ''}
-						textBefore={'Copy ID'}
-						textAfter={'Copied ID'}
-					/>
-					<ButtonRoomCopy
-						copy={window.location.href}
-						textBefore={'Copy Link'}
-						textAfter={'Copied Link'}
-					/>
+					<ButtonRoomCopy />
 				</div>
 			</div>
 			<div class="room__buttons-pill">
@@ -162,17 +153,10 @@
 		margin: 1rem;
 	}
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 1200px) {
 		#room__videos {
 			display: grid;
 			grid-template-columns: 1fr;
-		}
-
-		#room__talk {
-			/* TODO: fix min-height and min-width not working on IOS
-		- currently causes elements to be hidden, rather than shrinking the video elements
-		 */
-			height: 100%;
 		}
 	}
 </style>

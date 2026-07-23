@@ -1,19 +1,9 @@
 <script lang="ts">
-	interface Props {
-		copy: string;
-		textBefore: string;
-		textAfter: string;
-	}
-
-	import { handleButtonRoomCopy } from '$lib/utils/userActions';
+	import UserAddLine from '$lib/components/svg/UserAddLine.svelte';
 	import './buttons.css';
-
-	let { copy, textBefore, textAfter }: Props = $props();
-
-	let buttonEl: HTMLButtonElement;
 </script>
 
-<button
-	bind:this={buttonEl}
-	onclick={() => handleButtonRoomCopy(buttonEl, copy, textAfter, textBefore)}>{textBefore}</button
+<!-- TODO: Change this to use an overlay where users can copy the link -->
+<button onclick={() => navigator.clipboard.writeText(window.location.href)}
+	><UserAddLine width={24} height={24} /></button
 >
