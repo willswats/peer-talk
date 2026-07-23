@@ -10,7 +10,7 @@ A web app for peer-to-peer text and voice communication, featuring collaborative
 
 ### Nix Flake
 
-Nix uses can run `nix develop` to use the provided development flake, or if `nix-direnv` is installed, run `direnv allow`.
+Nix users can run `nix develop` to use the provided development flake, or if `nix-direnv` is installed, run `direnv allow`.
 
 ## Testing
 
