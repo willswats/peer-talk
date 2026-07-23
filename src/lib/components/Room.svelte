@@ -9,7 +9,9 @@
 		ButtonDisconnect,
 		ButtonMuteMic,
 		ButtonDeafen,
-		ButtonToggleVideo
+		ButtonToggleVideo,
+		ButtonRoomCopy,
+		ButtonChatToggle
 	} from '$lib/components/Buttons';
 	import RoomTopButtons from '$lib/components/RoomTopButtons.svelte';
 
@@ -53,29 +55,48 @@
 
 <main id="room">
 	<section id="room__talk" bind:this={roomTalkElement}>
-		<RoomTopButtons roomId={userState.roomId} bind:roomToggle />
-		<div id="room__videos">
-			<Video username={userState.username} videoStream={userState.localStream} muted={true} />
-			{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-				<Video
-					username={getUsernameFromStream(remoteStream.id)}
-					videoStream={remoteStream}
-					muted={false}
-				/>
-			{/each}
+		<RoomTopButtons bind:roomToggle />
+		<div id="room__videos-chat">
+			<div id="room__videos">
+				<Video username={userState.username} videoStream={userState.localStream} muted={true} />
+				{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
+					<Video
+						username={getUsernameFromStream(remoteStream.id)}
+						videoStream={remoteStream}
+						muted={false}
+					/>
+				{/each}
+			</div>
+			<Chat />
 		</div>
 		<div id="room__buttons">
-			<div id="room__buttons-pill">
+			<div id="room__buttons-left">
+				<div class="room__buttons-pill">
+					<ButtonRoomCopy
+						copy={userState.roomId || ''}
+						textBefore={'Copy ID'}
+						textAfter={'Copied ID'}
+					/>
+					<ButtonRoomCopy
+						copy={window.location.href}
+						textBefore={'Copy Link'}
+						textAfter={'Copied Link'}
+					/>
+				</div>
+			</div>
+			<div class="room__buttons-pill">
 				<ButtonMuteMic />
 				<ButtonDeafen />
 				<ButtonToggleVideo />
 				<ButtonDisconnect />
 			</div>
+			<div id="room__buttons-right">
+				<ButtonChatToggle />
+			</div>
 		</div>
-		<Chat />
 	</section>
 	<section id="room__apps" bind:this={roomAppsElement}>
-		<RoomTopButtons roomId={userState.roomId} bind:roomToggle />
+		<RoomTopButtons bind:roomToggle />
 		<EmbeddedApps />
 	</section>
 </main>
@@ -96,6 +117,11 @@
 		margin: 1rem;
 	}
 
+	#room__videos-chat {
+		display: flex;
+		flex: 2;
+		min-height: 0; /* Add this */
+	}
 	#room__videos {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -103,19 +129,30 @@
 		flex: 1;
 		min-height: 0;
 		min-width: 0;
+		margin-right: 0.5rem;
 	}
 
 	#room__buttons {
 		display: flex;
-		justify-content: center;
 		margin: 0.5rem 0;
 		flex-shrink: 0;
 	}
 
-	#room__buttons-pill {
+	.room__buttons-pill {
 		background-color: var(--bg-secondary);
 		border: 1px solid var(--border);
 		border-radius: var(--border-radius-normal);
+	}
+
+	#room__buttons-left {
+		display: flex;
+		flex: 1;
+	}
+
+	#room__buttons-right {
+		display: flex;
+		justify-content: flex-end;
+		flex: 1;
 	}
 
 	#room__apps {

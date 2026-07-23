@@ -1,26 +1,13 @@
 <script lang="ts">
-	import { ButtonRoomCopy } from '$lib/components/Buttons';
-
 	interface Props {
 		roomToggle: boolean;
-		roomId: string | undefined;
 	}
-	let { roomToggle = $bindable(), roomId }: Props = $props();
+	let { roomToggle = $bindable() }: Props = $props();
 </script>
 
 <div id="room__top-buttons">
-	<div id="room__top-buttons-left">
-		<button class="btn-blue" onclick={() => (roomToggle = false)}>Talk</button>
-		<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
-	</div>
-	<div id="room__top-buttons-right">
-		<ButtonRoomCopy copy={roomId || ''} textBefore={'Copy ID'} textAfter={'Copied ID'} />
-		<ButtonRoomCopy
-			copy={window.location.href}
-			textBefore={'Copy Link'}
-			textAfter={'Copied Link'}
-		/>
-	</div>
+	<button class="btn-blue" onclick={() => (roomToggle = false)}>Talk</button>
+	<button class="btn-mauve" onclick={() => (roomToggle = true)}>Apps</button>
 </div>
 
 <style>
@@ -33,20 +20,6 @@
 	#room__top-buttons {
 		display: flex;
 		margin-bottom: 0.5rem;
-		gap: 0.25rem;
-	}
-
-	#room__top-buttons-left {
-		display: flex;
-		flex-grow: 1;
-		justify-content: flex-start;
-		gap: 0.25rem;
-	}
-
-	#room__top-buttons-right {
-		display: flex;
-		flex-grow: 1;
-		justify-content: flex-end;
 		gap: 0.25rem;
 	}
 
