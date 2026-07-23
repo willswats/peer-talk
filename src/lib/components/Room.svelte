@@ -65,10 +65,12 @@
 			{/each}
 		</div>
 		<div id="room__buttons">
-			<ButtonMuteMic />
-			<ButtonDeafen />
-			<ButtonToggleVideo />
-			<ButtonDisconnect />
+			<div id="room__buttons-pill">
+				<ButtonMuteMic />
+				<ButtonDeafen />
+				<ButtonToggleVideo />
+				<ButtonDisconnect />
+			</div>
 		</div>
 		<Chat />
 	</section>
@@ -104,8 +106,16 @@
 	}
 
 	#room__buttons {
+		display: flex;
+		justify-content: center;
 		margin: 0.5rem 0;
 		flex-shrink: 0;
+	}
+
+	#room__buttons-pill {
+		background-color: var(--bg-secondary);
+		border: 1px solid var(--border);
+		border-radius: var(--border-radius-normal);
 	}
 
 	#room__apps {
