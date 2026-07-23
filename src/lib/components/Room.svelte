@@ -113,9 +113,10 @@
 		flex: 2;
 		min-height: 0; /* Add this */
 	}
+
 	#room__videos {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 		gap: 0.5rem;
 		flex: 1;
 		min-height: 0;
@@ -151,12 +152,5 @@
 		flex-direction: column;
 		flex-grow: 1;
 		margin: 1rem;
-	}
-
-	@media screen and (max-width: 1200px) {
-		#room__videos {
-			display: grid;
-			grid-template-columns: 1fr;
-		}
 	}
 </style>
