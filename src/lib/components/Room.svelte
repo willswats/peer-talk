@@ -112,6 +112,7 @@
 		display: flex;
 		flex: 2;
 		min-height: 0; /* Add this */
+		position: relative;
 	}
 
 	#room__videos {
@@ -152,5 +153,12 @@
 		flex-direction: column;
 		flex-grow: 1;
 		margin: 1rem;
+	}
+
+	@media screen and (max-width: 768px) {
+		#room__videos {
+			display: grid;
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

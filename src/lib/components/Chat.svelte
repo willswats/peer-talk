@@ -123,6 +123,7 @@
 		font-size: 1.2rem;
 		padding: 0.5rem;
 		padding-right: 50px;
+		border: 1px solid var(--border);
 	}
 
 	.chat__emoji-picker-wrapper {
@@ -135,5 +136,12 @@
 		position: absolute;
 		bottom: 0;
 		right: 0;
+	}
+	@media screen and (max-width: 768px) {
+		#chat {
+			position: absolute;
+			right: 0;
+			background-color: var(--bg-tertiary-opaque);
+		}
 	}
 </style>
