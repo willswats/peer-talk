@@ -97,22 +97,22 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
+		height: calc(100vh - 5rem);
 	}
 
 	#room__talk {
 		display: flex;
 		flex-direction: column;
-		height: calc(100vh - 5rem); /* Account for nav and margin */
+		height: calc(100vh - 5rem);
 		flex-grow: 1;
-		min-height: 0;
 		margin: 1rem;
 	}
 
 	#room__videos-chat {
 		display: flex;
 		flex: 2;
-		min-height: 0; /* Add this */
 		position: relative;
+		min-height: 0;
 	}
 
 	#room__videos {
@@ -120,9 +120,10 @@
 		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 		gap: 0.5rem;
 		flex: 1;
-		min-height: 0;
-		min-width: 0;
 		margin-right: 0.5rem;
+		min-height: 0;
+		height: 100%;
+		width: 100%;
 	}
 
 	#room__buttons {
