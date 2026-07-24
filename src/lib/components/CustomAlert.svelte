@@ -69,10 +69,8 @@
 		position: fixed;
 		z-index: 2;
 		top: 50%;
-		left: 0;
-		right: 0;
-		margin-left: auto;
-		margin-right: auto;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		width: 20rem;
 	}
 
