@@ -26,7 +26,7 @@
 </script>
 
 {#if alertShown}
-	<div id="alert-overlay"></div>
+	<div id="overlay"></div>
 	<form id="alert">
 		<div id="alert-content">
 			<p>
@@ -53,7 +53,7 @@
 {/if}
 
 <style>
-	#alert-overlay {
+	#overlay {
 		position: fixed;
 		width: 100%;
 		height: 100%;
