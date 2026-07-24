@@ -3,7 +3,7 @@
 
 	interface Button {
 		children: Snippet;
-		onclick: () => void;
+		onclick?: () => void;
 	}
 
 	let { children, onclick }: Button = $props();

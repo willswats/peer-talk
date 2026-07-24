@@ -6,13 +6,10 @@
 	import { createRoom } from '$lib/utils/createRoom';
 	import Button from '@/lib/components/Buttons/Button.svelte';
 
-	import CustomAlert from '$lib/components/CustomAlert.svelte';
-
 	let roomIdInput = $state('');
 </script>
 
 <main>
-	<CustomAlert />
 	<section>
 		<h1>PeerTalk</h1>
 		<p>A web app for peer-to-peer group calls with collaborative applications.</p>
