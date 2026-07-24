@@ -1,3 +1,4 @@
+export { default as Button } from './Button.svelte';
 export { default as ButtonDeafen } from './ButtonDeafen.svelte';
 export { default as ButtonDisconnect } from './ButtonDisconnect.svelte';
 export { default as ButtonMuteMic } from './ButtonMuteMic.svelte';

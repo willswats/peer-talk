@@ -3,7 +3,7 @@
 	import { peerState, resetUserState, userState } from '$lib/state.svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { ButtonToggleVideo, ButtonMuteMic } from '$lib/components/Buttons';
+	import { Button, ButtonToggleVideo, ButtonMuteMic } from '$lib/components/Buttons';
 
 	let hasLocalVideo = $state(false);
 
@@ -102,12 +102,20 @@
 		<label for="input-username">Username:</label>
 		<input id="input-username" type="text" bind:value={userState.username} />
 		<div>
-			<ButtonMuteMic />
-			<ButtonToggleVideo />
+			<ButtonMuteMic --btn-bg-colour="var(--bg-tertiary)" --btn-bg-hover="var(--bg-tertiary)" />
+			<ButtonToggleVideo --btn-bg-colour="var(--bg-tertiary)" --btn-bg-hover="var(--bg-tertiary)" />
 		</div>
 		<div id="join-leave-buttons">
-			<button onclick={handleOnClickJoinRoom}>Join Room</button>
-			<button onclick={handleOnClickLeaveRoom}>Leave Room</button>
+			<Button
+				--btn-bg-colour="var(--bg-tertiary)"
+				--btn-bg-hover="var(--bg-tertiary)"
+				onclick={handleOnClickJoinRoom}>Join Room</Button
+			>
+			<Button
+				--btn-bg-colour="var(--bg-tertiary)"
+				--btn-bg-hover="var(--bg-tertiary)"
+				onclick={handleOnClickLeaveRoom}>Leave Room</Button
+			>
 		</div>
 	</section>
 </main>

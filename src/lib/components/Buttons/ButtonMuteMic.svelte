@@ -3,10 +3,10 @@
 	import MicOffLine from '$lib/components/svg/MicOffLine.svelte';
 	import { userState } from '$lib/state.svelte';
 	import { toggleLocalAudio } from '$lib/utils/userActions';
-	import './buttons.css';
+	import { Button } from '$lib/components/Buttons';
 </script>
 
-<button
+<Button
 	onclick={() => {
 		userState.localMicEnabled = toggleLocalAudio(userState.localStream, userState.localMicEnabled);
 	}}
@@ -16,4 +16,4 @@
 	{:else}
 		<MicOffLine width={24} height={24} />
 	{/if}
-</button>
+</Button>
