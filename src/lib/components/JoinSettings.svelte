@@ -211,7 +211,7 @@
 
 	@media screen and (max-width: 768px) {
 		section {
-			width: 16rem;
+			width: 18rem;
 			padding: 1rem;
 		}
 

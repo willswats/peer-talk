@@ -71,7 +71,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 20rem;
+		width: 25rem;
 	}
 
 	#alert-content {
@@ -100,11 +100,11 @@
 
 	@media screen and (max-width: 768px) {
 		#alert {
-			width: 18rem;
+			width: 16rem;
 		}
 
 		#alert-content p {
-			font-size: 1.2rem;
+			font-size: 1rem;
 		}
 	}
 </style>

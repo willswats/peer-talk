@@ -115,7 +115,7 @@
 		}
 
 		section {
-			width: 16rem;
+			width: 18rem;
 			padding: 1rem;
 		}
 	}
