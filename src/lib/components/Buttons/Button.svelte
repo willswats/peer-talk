@@ -15,7 +15,7 @@
 
 <style>
 	button {
-		background-color: var(--btn-bg-colour, --bg-secondary);
+		background-color: var(--btn-bg-colour, var(--bg-secondary));
 		border-radius: var(--border-radius-normal);
 		padding: 0.5rem 1rem;
 		height: 100%;
@@ -23,7 +23,7 @@
 	}
 
 	button:hover {
-		background-color: var(--btn-bg-hover, --bg-tertiary);
+		background-color: var(--btn-bg-hover, var(--bg-tertiary));
 	}
 
 	@media screen and (max-width: 768px) {
