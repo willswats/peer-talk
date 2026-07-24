@@ -4,8 +4,13 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { Button, ButtonToggleVideo, ButtonMuteMic } from '$lib/components/Buttons';
+	import CustomAlert from '$lib/components/CustomAlert.svelte';
 
 	let hasLocalVideo = $state(false);
+
+	// CustomAlert variables
+	let customAlertText = $state('');
+	let alertShown = $state(false);
 
 	async function getMediaWithFallback() {
 		try {
@@ -55,13 +60,15 @@
 
 	function handleOnClickJoinRoom() {
 		if (userState.localStream === null) {
-			confirm(
-				'You must grant permissions and have an available microphone/camera to join the room.'
-			);
+			alertShown = true;
+			customAlertText =
+				'You must grant permissions and have an available microphone/camera to join the room.';
 		} else if (userState.username.length <= 0) {
-			confirm('Username cannot be empty.');
+			alertShown = true;
+			customAlertText = 'Username cannot be empty.';
 		} else if (userState.username.length >= 30) {
-			confirm('Username must be shorter than 30 characters.');
+			alertShown = true;
+			customAlertText = 'Username must be shorter than 30 characters.';
 		} else {
 			peerState.socket.emit('join-room', userState.roomId, userState.username);
 			userState.joinedRoom = true;
@@ -81,6 +88,13 @@
 </script>
 
 <main>
+	<CustomAlert
+		confirmFunction={() => {
+			alertShown = false;
+		}}
+		bind:alertShown
+		showCancelButton={false}>{customAlertText}</CustomAlert
+	>
 	<section>
 		<h1>Settings</h1>
 		<p>To join the room, you must grant permission for the app to use your camera/microphone.</p>
@@ -102,18 +116,28 @@
 		<label for="input-username">Username:</label>
 		<input id="input-username" type="text" bind:value={userState.username} />
 		<div>
-			<ButtonMuteMic --btn-bg-colour="var(--bg-tertiary)" --btn-bg-hover="var(--bg-tertiary)" />
-			<ButtonToggleVideo --btn-bg-colour="var(--bg-tertiary)" --btn-bg-hover="var(--bg-tertiary)" />
+			<ButtonMuteMic
+				--btn-bg-colour="var(--bg-tertiary)"
+				--btn-bg-hover="var(--bg-tertiary)"
+				--btn-border="var(--border)"
+			/>
+			<ButtonToggleVideo
+				--btn-bg-colour="var(--bg-tertiary)"
+				--btn-bg-hover="var(--bg-tertiary)"
+				--btn-border="var(--border)"
+			/>
 		</div>
 		<div id="join-leave-buttons">
 			<Button
 				--btn-bg-colour="var(--bg-tertiary)"
 				--btn-bg-hover="var(--bg-tertiary)"
+				--btn-border="var(--border)"
 				onclick={handleOnClickJoinRoom}>Join Room</Button
 			>
 			<Button
 				--btn-bg-colour="var(--bg-tertiary)"
 				--btn-bg-hover="var(--bg-tertiary)"
+				--btn-border="var(--border)"
 				onclick={handleOnClickLeaveRoom}>Leave Room</Button
 			>
 		</div>

@@ -4,11 +4,15 @@
 	import { userState } from '@/lib/state.svelte';
 	import { setUserRoomIdAndUserName } from '$lib/utils/setUserRoomIdAndUsername';
 	import { createRoom } from '$lib/utils/createRoom';
+	import Button from '@/lib/components/Buttons/Button.svelte';
+
+	import CustomAlert from '$lib/components/CustomAlert.svelte';
 
 	let roomIdInput = $state('');
 </script>
 
 <main>
+	<CustomAlert />
 	<section>
 		<h1>PeerTalk</h1>
 		<p>A web app for peer-to-peer group calls with collaborative applications.</p>
@@ -30,7 +34,11 @@
 		>
 			<input type="text" placeholder="Room link..." bind:value={roomIdInput} />
 			<div>
-				<button>Enter Room</button>
+				<Button
+					--btn-bg-colour="var(--bg-tertiary)"
+					--btn-bg-hover="var(--bg-tertiary)"
+					--btn-border="var(--border)">Enter Room</Button
+				>
 			</div>
 		</form>
 	</section>

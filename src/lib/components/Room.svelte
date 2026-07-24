@@ -14,12 +14,16 @@
 		ButtonChatToggle
 	} from '$lib/components/Buttons';
 	import RoomTopButtons from '$lib/components/RoomTopButtons.svelte';
+	import CustomAlert from '$lib/components/CustomAlert.svelte';
 
 	import { beforeNavigate } from '$app/navigation';
 
 	let roomToggle: boolean = $state(false);
 	let roomTalkElement: HTMLElement;
 	let roomAppsElement: HTMLElement;
+
+	// CustomAlert variables
+	let alertShown = $state(false);
 
 	$effect(() => {
 		if (!roomToggle) {
@@ -37,13 +41,17 @@
 			return;
 		}
 
-		if (!confirm('Are you sure you want to disconnect from this room?')) {
-			cancel();
-		} else {
-			disconnectUser();
-		}
-	});
+		alertShown = true;
 
+		return new Promise((resolve) => {
+			if (alertShown === false) {
+				resolve(true);
+			} else {
+				cancel();
+				resolve(false);
+			}
+		});
+	});
 	function getUsernameFromStream(streamId: string): string {
 		const socketId = Object.keys(peerState.remoteStreamIdentifier).find(
 			(key) => peerState.remoteStreamIdentifier[key] === streamId
@@ -54,6 +62,9 @@
 </script>
 
 <main id="room">
+	<CustomAlert confirmFunction={disconnectUser} bind:alertShown
+		>Are you sure you want to disconnect from this room?</CustomAlert
+	>
 	<section id="room__talk" bind:this={roomTalkElement}>
 		<RoomTopButtons bind:roomToggle />
 		<div id="room__videos-chat">
