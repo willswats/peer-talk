@@ -10,16 +10,16 @@
 
 {#if shareShown}
 	<div id="overlay"></div>
-	<form id="share">
+	<section id="share">
 		<div id="share-content">
 			<Button onclick={() => (shareShown = false)}>Close</Button>
 			<p>Invite Others</p>
 			<div id="share-content-bottom">
 				<input value={window.location.href} />
-				<!-- <Button onclick={() => navigator.clipboard.writeText(window.location.href)}>Copy</Button> -->
+				<Button onclick={() => navigator.clipboard.writeText(window.location.href)}>Copy</Button>
 			</div>
 		</div>
-	</form>
+	</section>
 {/if}
 
 <style>

@@ -6,7 +6,5 @@
 	let shareShown = $state(false);
 </script>
 
-<!-- TODO: Change this to use an overlay where users can copy the link -->
-
 <OverlayShare bind:shareShown />
 <Button onclick={() => (shareShown = true)}><UserAddLine width={24} height={24} /></Button>

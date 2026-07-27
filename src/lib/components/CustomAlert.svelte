@@ -27,7 +27,7 @@
 
 {#if alertShown}
 	<div id="overlay"></div>
-	<form id="alert">
+	<section id="alert">
 		<div id="alert-content">
 			<p>
 				{@render children()}
@@ -49,7 +49,7 @@
 				{/if}
 			</div>
 		</div>
-	</form>
+	</section>
 {/if}
 
 <style>
