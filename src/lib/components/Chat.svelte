@@ -128,14 +128,24 @@
 		background-color: transparent;
 		border-radius: var(--border-radius-normal);
 		position: absolute;
-		bottom: 0;
-		right: 0;
+		right: 0.5rem;
+		top: 50%;
+		transform: translateY(-50%);
+		padding: 0.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
+
 	@media screen and (max-width: 768px) {
 		#chat {
 			position: absolute;
 			right: 0;
 			background-color: var(--bg-tertiary-opaque);
+		}
+
+		#chat__message-input-container input {
+			padding-right: 40px;
 		}
 	}
 </style>
