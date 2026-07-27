@@ -26,7 +26,7 @@
 </script>
 
 {#if alertShown}
-	<div id="overlay"></div>
+	<button aria-label="overlay" id="overlay" onclick={() => (alertShown = false)}></button>
 	<section id="alert">
 		<div id="alert-content">
 			<p>

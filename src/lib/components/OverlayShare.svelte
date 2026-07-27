@@ -10,7 +10,7 @@
 </script>
 
 {#if shareShown}
-	<div id="overlay"></div>
+	<button aria-label="overlay" id="overlay" onclick={() => (shareShown = false)}></button>
 	<section id="share">
 		<div id="share__content">
 			<button id="share__content-close-btn" onclick={() => (shareShown = false)}
