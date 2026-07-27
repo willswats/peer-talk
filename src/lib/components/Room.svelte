@@ -129,12 +129,11 @@
 	#room__videos {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-		gap: 0.5rem;
 		flex: 1;
-		margin-right: 0.5rem;
 		min-height: 0;
 		height: 100%;
 		width: 100%;
+		gap: 0.5rem;
 	}
 
 	#room__buttons {

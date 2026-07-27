@@ -92,6 +92,7 @@
 		height: 100%;
 		max-width: 25rem;
 		border: 1px solid var(--border);
+		margin-left: 0.5rem;
 	}
 
 	#chat__message-container {
