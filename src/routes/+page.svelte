@@ -91,13 +91,6 @@
 		gap: 0.5rem;
 	}
 
-	input {
-		display: flex;
-		flex: 1;
-		border-radius: var(--border-radius-normal);
-		padding: 0.5rem;
-	}
-
 	@media screen and (max-width: 768px) {
 		h1 {
 			font-size: 2rem;

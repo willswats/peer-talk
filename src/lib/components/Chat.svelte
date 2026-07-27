@@ -63,7 +63,7 @@
 		</div>
 		<div id="chat__message-input-container">
 			<form onsubmit={handleMessageSubmit}>
-				<input placeholder="Send message..." bind:this={messageInput} id="chat__message-input" />
+				<input placeholder="Send message..." bind:this={messageInput} />
 				<button
 					type="button"
 					id="chat__btn-show-emoji"
@@ -113,17 +113,6 @@
 		display: flex;
 		flex: 1;
 		position: relative;
-	}
-
-	#chat__message-input {
-		width: 100%;
-		color: var(--text);
-		background-color: var(--bg-tertiary);
-		border-radius: var(--border-radius-normal);
-		font-size: 1.2rem;
-		padding: 0.5rem;
-		padding-right: 50px;
-		border: 1px solid var(--border);
 	}
 
 	.chat__emoji-picker-wrapper {

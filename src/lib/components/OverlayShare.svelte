@@ -4,6 +4,7 @@
 	}
 
 	import { Button } from '$lib/components/Buttons';
+	import CloseX from '$lib/components/svg/CloseX.svelte';
 
 	let { shareShown = $bindable() }: Props = $props();
 </script>
@@ -11,11 +12,16 @@
 {#if shareShown}
 	<div id="overlay"></div>
 	<section id="share">
-		<div id="share-content">
-			<Button onclick={() => (shareShown = false)}>Close</Button>
-			<p>Invite Others</p>
-			<div id="share-content-bottom">
-				<input value={window.location.href} />
+		<div id="share__content">
+			<button id="share__content-close-btn" onclick={() => (shareShown = false)}
+				><CloseX width={24} height={24} /></button
+			>
+			<div id="share__content-top">
+				<h1>Invite Others</h1>
+				<p>Send them the room link to invite them to the room</p>
+			</div>
+			<div id="share__content-bottom">
+				<input readonly value={window.location.href} />
 				<Button onclick={() => navigator.clipboard.writeText(window.location.href)}>Copy</Button>
 			</div>
 		</div>
@@ -44,7 +50,8 @@
 		width: 25rem;
 	}
 
-	#share-content {
+	#share__content {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		background-color: var(--bg-tertiary);
@@ -54,12 +61,27 @@
 		border: 1px solid var(--border);
 	}
 
-	#share-content p {
-		font-size: 1.4rem;
-		padding: 1rem;
+	#share__content-top {
+		padding: 0.5rem;
 	}
 
-	#share-content-bottom {
+	#share__content-top h1 {
+		font-size: 1.4rem;
+		text-decoration: underline;
+	}
+
+	#share__content-top p {
+		font-size: 1rem;
+	}
+
+	#share__content-close-btn {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 0.25rem;
+	}
+
+	#share__content-bottom {
 		display: flex;
 		background-color: var(--bg-secondary);
 		padding: 0.5rem;
@@ -67,12 +89,16 @@
 		gap: 0.5rem;
 	}
 
+	#share__content-bottom input {
+		font-size: 1rem;
+	}
+
 	@media screen and (max-width: 768px) {
 		#share {
 			width: 16rem;
 		}
 
-		#share-content p {
+		#share__content p {
 			font-size: 1rem;
 		}
 	}
