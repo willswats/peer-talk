@@ -1,7 +1,5 @@
 <script lang="ts">
 	import EmojiPicker from '$lib/components/EmojiPicker.svelte';
-	import ChatLine from '$lib/components/svg/ChatLine.svelte';
-	import ChatOffLine from '$lib/components/svg/ChatOffLine.svelte';
 	import EmoticonLine from '$lib/components/svg/EmoticonLine.svelte';
 
 	import { userState, peerState } from '$lib/state.svelte';
@@ -56,40 +54,32 @@
 
 <svelte:document onclick={handleClickOutside} />
 
-<button id="btn-chat-toggle" onclick={() => (userState.chatToggled = !userState.chatToggled)}>
-	{#if userState.chatToggled}
-		<ChatOffLine width={24} height={24} />
-	{:else}
-		<ChatLine width={24} height={24} />
-	{/if}
-</button>
-
 {#if userState.chatToggled}
 	<section id="chat">
-		<ol id="chat__message-container">
+		<div id="chat__message-container">
 			{#each peerState.messages as message, index (index + message)}
-				<li>{message}</li>
+				<p>{message}</p>
 			{/each}
-		</ol>
+		</div>
 		<div id="chat__message-input-container">
 			<form onsubmit={handleMessageSubmit}>
-				<input bind:this={messageInput} id="chat__message-input" />
+				<input placeholder="Send message..." bind:this={messageInput} />
+				<button
+					type="button"
+					id="chat__btn-show-emoji"
+					bind:this={emojiButton}
+					onclick={() => (showEmojiPicker = !showEmojiPicker)}
+				>
+					<EmoticonLine width={24} height={24} />
+				</button>
 			</form>
-			<button
-				id="chat__btn-show-emoji"
-				bind:this={emojiButton}
-				onclick={() => (showEmojiPicker = !showEmojiPicker)}
-			>
-				<EmoticonLine width={24} height={24} />
-			</button>
 		</div>
+		{#if showEmojiPicker}
+			<div bind:this={emojiPickerWrapper} class="chat__emoji-picker-wrapper">
+				<EmojiPicker onEmojiSelect={addEmojiToInput} />
+			</div>
+		{/if}
 	</section>
-
-	{#if showEmojiPicker}
-		<div bind:this={emojiPickerWrapper} class="chat__emoji-picker-wrapper">
-			<EmojiPicker onEmojiSelect={addEmojiToInput} />
-		</div>
-	{/if}
 {/if}
 
 <style>
@@ -97,9 +87,12 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--bg-secondary);
-		border-radius: 0 0 var(--border-radius-normal) var(--border-radius-normal);
+		border-radius: var(--border-radius-normal);
 		padding: 1rem;
-		height: 20rem;
+		height: 100%;
+		max-width: 25rem;
+		border: 1px solid var(--border);
+		margin-left: 0.5rem;
 	}
 
 	#chat__message-container {
@@ -108,7 +101,8 @@
 		font-size: 1.2rem;
 		width: 100%;
 		height: 100%;
-		overflow-y: auto;
+		overflow-y: scroll;
+		overflow-wrap: break-word;
 	}
 
 	#chat__message-input-container {
@@ -116,18 +110,14 @@
 		gap: 0.5rem;
 	}
 
+	#chat__message-input-container input {
+		padding-right: 50px;
+	}
+
 	#chat__message-input-container form {
 		display: flex;
 		flex: 1;
-	}
-
-	#chat__message-input {
-		width: 100%;
-		color: var(--text);
-		background-color: var(--bg-tertiary);
-		border-radius: var(--border-radius-normal);
-		font-size: 1.2rem;
-		padding: 0.5rem;
+		position: relative;
 	}
 
 	.chat__emoji-picker-wrapper {
@@ -135,22 +125,27 @@
 	}
 
 	#chat__btn-show-emoji {
+		background-color: transparent;
 		border-radius: var(--border-radius-normal);
-	}
-
-	button {
-		background-color: var(--bg-tertiary);
-		padding: 0.5rem;
-	}
-
-	#btn-chat-toggle {
-		border-radius: var(--border-radius-normal) var(--border-radius-normal) 0 0;
+		position: absolute;
+		right: 0.5rem;
+		top: 50%;
+		transform: translateY(-50%);
+		padding: 0.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	@media screen and (max-width: 768px) {
-		button {
-			background-color: var(--bg-tertiary);
-			padding: 0.2rem;
+		#chat {
+			position: absolute;
+			right: 0;
+			background-color: var(--bg-tertiary-opaque);
+		}
+
+		#chat__message-input-container input {
+			padding-right: 40px;
 		}
 	}
 </style>

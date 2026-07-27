@@ -4,10 +4,10 @@
 	import { userState } from '$lib/state.svelte';
 	import { peerState } from '$lib/state.svelte';
 	import { toggleDeafen } from '$lib/utils/userActions';
-	import './buttons.css';
+	import { Button } from '$lib/components/Buttons';
 </script>
 
-<button
+<Button
 	onclick={() => {
 		userState.deafened = toggleDeafen(userState.deafened, peerState.remoteStreams);
 	}}
@@ -17,4 +17,4 @@
 	{:else}
 		<VolumeUpLine width={24} height={24} />
 	{/if}
-</button>
+</Button>

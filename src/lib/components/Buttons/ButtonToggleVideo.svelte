@@ -2,7 +2,7 @@
 	import VideoOnLine from '$lib/components/svg/VideoOnLine.svelte';
 	import VideoOffLine from '$lib/components/svg/VideoOffLine.svelte';
 	import { userState } from '$lib/state.svelte';
-	import './buttons.css';
+	import { Button } from '$lib/components/Buttons';
 
 	function toggleLocalVideo() {
 		if (userState.localStream !== null && userState.localStream?.getVideoTracks().length > 0) {
@@ -12,10 +12,10 @@
 	}
 </script>
 
-<button onclick={toggleLocalVideo}>
+<Button onclick={toggleLocalVideo}>
 	{#if userState.localVideoEnabled}
 		<VideoOnLine width={24} height={24} />
 	{:else}
 		<VideoOffLine width={24} height={24} />
 	{/if}
-</button>
+</Button>

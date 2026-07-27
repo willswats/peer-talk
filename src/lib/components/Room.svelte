@@ -9,15 +9,21 @@
 		ButtonDisconnect,
 		ButtonMuteMic,
 		ButtonDeafen,
-		ButtonToggleVideo
+		ButtonToggleVideo,
+		ButtonRoomCopy,
+		ButtonChatToggle
 	} from '$lib/components/Buttons';
 	import RoomTopButtons from '$lib/components/RoomTopButtons.svelte';
+	import CustomAlert from '$lib/components/CustomAlert.svelte';
 
 	import { beforeNavigate } from '$app/navigation';
 
 	let roomToggle: boolean = $state(false);
 	let roomTalkElement: HTMLElement;
 	let roomAppsElement: HTMLElement;
+
+	// CustomAlert variables
+	let alertShown = $state(false);
 
 	$effect(() => {
 		if (!roomToggle) {
@@ -35,13 +41,17 @@
 			return;
 		}
 
-		if (!confirm('Are you sure you want to disconnect from this room?')) {
-			cancel();
-		} else {
-			disconnectUser();
-		}
-	});
+		alertShown = true;
 
+		return new Promise((resolve) => {
+			if (alertShown === false) {
+				resolve(true);
+			} else {
+				cancel();
+				resolve(false);
+			}
+		});
+	});
 	function getUsernameFromStream(streamId: string): string {
 		const socketId = Object.keys(peerState.remoteStreamIdentifier).find(
 			(key) => peerState.remoteStreamIdentifier[key] === streamId
@@ -52,28 +62,43 @@
 </script>
 
 <main id="room">
+	<CustomAlert confirmFunction={disconnectUser} bind:alertShown
+		>Are you sure you want to disconnect from this room?</CustomAlert
+	>
 	<section id="room__talk" bind:this={roomTalkElement}>
-		<RoomTopButtons roomId={userState.roomId} bind:roomToggle />
-		<div id="room__videos">
-			<Video username={userState.username} videoStream={userState.localStream} muted={true} />
-			{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-				<Video
-					username={getUsernameFromStream(remoteStream.id)}
-					videoStream={remoteStream}
-					muted={false}
-				/>
-			{/each}
+		<RoomTopButtons bind:roomToggle />
+		<div id="room__videos-chat">
+			<div id="room__videos">
+				<Video username={userState.username} videoStream={userState.localStream} muted={true} />
+				{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
+					<Video
+						username={getUsernameFromStream(remoteStream.id)}
+						videoStream={remoteStream}
+						muted={false}
+					/>
+				{/each}
+			</div>
+			<Chat />
 		</div>
 		<div id="room__buttons">
-			<ButtonMuteMic />
-			<ButtonDeafen />
-			<ButtonToggleVideo />
-			<ButtonDisconnect />
+			<div id="room__buttons-left">
+				<div class="room__buttons-pill">
+					<ButtonRoomCopy />
+				</div>
+			</div>
+			<div class="room__buttons-pill">
+				<ButtonMuteMic />
+				<ButtonDeafen />
+				<ButtonToggleVideo />
+				<ButtonDisconnect />
+			</div>
+			<div id="room__buttons-right">
+				<ButtonChatToggle />
+			</div>
 		</div>
-		<Chat />
 	</section>
 	<section id="room__apps" bind:this={roomAppsElement}>
-		<RoomTopButtons roomId={userState.roomId} bind:roomToggle />
+		<RoomTopButtons bind:roomToggle />
 		<EmbeddedApps />
 	</section>
 </main>
@@ -83,29 +108,55 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
+		height: calc(100vh - 5rem);
 	}
 
 	#room__talk {
 		display: flex;
 		flex-direction: column;
-		height: calc(100vh - 5rem); /* Account for nav and margin */
+		height: calc(100vh - 5rem);
 		flex-grow: 1;
-		min-height: 0;
 		margin: 1rem;
+	}
+
+	#room__videos-chat {
+		display: flex;
+		flex: 2;
+		position: relative;
+		min-height: 0;
 	}
 
 	#room__videos {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 0.5rem;
+		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 		flex: 1;
 		min-height: 0;
-		min-width: 0;
+		height: 100%;
+		width: 100%;
+		gap: 0.5rem;
 	}
 
 	#room__buttons {
+		display: flex;
 		margin: 0.5rem 0;
 		flex-shrink: 0;
+	}
+
+	.room__buttons-pill {
+		background-color: var(--bg-secondary);
+		border: 1px solid var(--border);
+		border-radius: var(--border-radius-normal);
+	}
+
+	#room__buttons-left {
+		display: flex;
+		flex: 1;
+	}
+
+	#room__buttons-right {
+		display: flex;
+		justify-content: flex-end;
+		flex: 1;
 	}
 
 	#room__apps {
@@ -119,13 +170,6 @@
 		#room__videos {
 			display: grid;
 			grid-template-columns: 1fr;
-		}
-
-		#room__talk {
-			/* TODO: fix min-height and min-width not working on IOS
-		- currently causes elements to be hidden, rather than shrinking the video elements
-		 */
-			height: 100%;
 		}
 	}
 </style>

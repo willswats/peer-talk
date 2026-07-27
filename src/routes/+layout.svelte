@@ -36,8 +36,11 @@
 			--lavender: #b4befe;
 
 			--bg-primary: #1e1e2e;
+			--bg-primary-opaque: rgb(30, 30, 46, 0.9);
 			--bg-secondary: #181825;
+			--bg-secondary-opaque: rgb(24, 24, 37, 0.9);
 			--bg-tertiary: #11111b;
+			--bg-tertiary-opaque: rgb(17, 17, 27, 0.9);
 			--text: #cdd6f4;
 			--border: #313244;
 
@@ -74,9 +77,13 @@
 		}
 
 		input {
-			color: #000;
-			border: none;
+			width: 100%;
+			color: var(--text);
+			background-color: var(--bg-tertiary);
+			border-radius: var(--border-radius-normal);
 			font-size: 1.2rem;
+			padding: 0.5rem;
+			border: 1px solid var(--border);
 		}
 
 		.hidden {

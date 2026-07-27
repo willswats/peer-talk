@@ -23,16 +23,3 @@ export function toggleDeafen(deafened: boolean, remoteStreams: MediaStream[]) {
 	}
 	return deafened;
 }
-
-export function handleButtonRoomCopy(
-	buttonEl: HTMLButtonElement,
-	copy: string,
-	textAfter: string,
-	textBefore: string
-) {
-	navigator.clipboard.writeText(copy);
-	buttonEl.innerText = textAfter;
-	setTimeout(() => {
-		buttonEl.innerText = textBefore;
-	}, 5000);
-}

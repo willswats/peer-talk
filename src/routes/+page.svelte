@@ -4,6 +4,7 @@
 	import { userState } from '@/lib/state.svelte';
 	import { setUserRoomIdAndUserName } from '$lib/utils/setUserRoomIdAndUsername';
 	import { createRoom } from '$lib/utils/createRoom';
+	import Button from '@/lib/components/Buttons/Button.svelte';
 
 	let roomIdInput = $state('');
 </script>
@@ -18,16 +19,23 @@
 		<form
 			onsubmit={(event) => {
 				event.preventDefault();
-				const roomValid = setUserRoomIdAndUserName(roomIdInput);
+				const uuid = roomIdInput.split('/').pop();
+				if (uuid) {
+					const roomValid = setUserRoomIdAndUserName(uuid);
 
-				if (roomValid) {
-					goto(resolve(`/room/${userState.roomId}`));
+					if (roomValid) {
+						goto(resolve(`/room/${userState.roomId}`));
+					}
 				}
 			}}
 		>
-			<input type="text" placeholder="roomId..." bind:value={roomIdInput} />
+			<input type="text" placeholder="Room link..." bind:value={roomIdInput} />
 			<div>
-				<button>Enter Room</button>
+				<Button
+					--btn-bg-colour="var(--bg-tertiary)"
+					--btn-bg-hover="var(--bg-tertiary)"
+					--btn-border="var(--border)">Enter</Button
+				>
 			</div>
 		</form>
 	</section>
@@ -83,13 +91,6 @@
 		gap: 0.5rem;
 	}
 
-	input {
-		display: flex;
-		flex: 1;
-		border-radius: var(--border-radius-normal);
-		padding: 0.5rem;
-	}
-
 	@media screen and (max-width: 768px) {
 		h1 {
 			font-size: 2rem;
@@ -104,7 +105,7 @@
 		}
 
 		section {
-			width: 16rem;
+			width: 18rem;
 			padding: 1rem;
 		}
 	}

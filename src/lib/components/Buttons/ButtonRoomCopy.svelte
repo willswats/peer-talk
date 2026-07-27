@@ -1,19 +1,10 @@
 <script lang="ts">
-	interface Props {
-		copy: string;
-		textBefore: string;
-		textAfter: string;
-	}
+	import UserAddLine from '$lib/components/svg/UserAddLine.svelte';
+	import { Button } from '$lib/components/Buttons';
+	import OverlayShare from '$lib/components/OverlayShare.svelte';
 
-	import { handleButtonRoomCopy } from '$lib/utils/userActions';
-	import './buttons.css';
-
-	let { copy, textBefore, textAfter }: Props = $props();
-
-	let buttonEl: HTMLButtonElement;
+	let shareShown = $state(false);
 </script>
 
-<button
-	bind:this={buttonEl}
-	onclick={() => handleButtonRoomCopy(buttonEl, copy, textAfter, textBefore)}>{textBefore}</button
->
+<OverlayShare bind:shareShown />
+<Button onclick={() => (shareShown = true)}><UserAddLine width={24} height={24} /></Button>
