@@ -18,7 +18,7 @@
 			>
 			<div id="share__content-top">
 				<h1>Invite Others</h1>
-				<p>Send them the room link to invite them to the room</p>
+				<p>Send the link to others to invite them</p>
 			</div>
 			<div id="share__content-bottom">
 				<input readonly value={window.location.href} />
