@@ -34,7 +34,7 @@
 				<Button
 					--btn-bg-colour="var(--bg-tertiary)"
 					--btn-bg-hover="var(--bg-tertiary)"
-					--btn-border="var(--border)">Enter Room</Button
+					--btn-border="var(--border)">Enter</Button
 				>
 			</div>
 		</form>

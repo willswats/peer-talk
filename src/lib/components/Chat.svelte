@@ -110,6 +110,10 @@
 		gap: 0.5rem;
 	}
 
+	#chat__message-input-container input {
+		padding-right: 50px;
+	}
+
 	#chat__message-input-container form {
 		display: flex;
 		flex: 1;

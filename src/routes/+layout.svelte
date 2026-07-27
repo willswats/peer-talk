@@ -77,14 +77,12 @@
 		}
 
 		input {
-			display: flex;
-			flex: 1;
+			width: 100%;
 			color: var(--text);
 			background-color: var(--bg-tertiary);
 			border-radius: var(--border-radius-normal);
 			font-size: 1.2rem;
 			padding: 0.5rem;
-			padding-right: 50px;
 			border: 1px solid var(--border);
 		}
 

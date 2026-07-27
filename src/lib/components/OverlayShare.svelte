@@ -22,7 +22,12 @@
 			</div>
 			<div id="share__content-bottom">
 				<input readonly value={window.location.href} />
-				<Button onclick={() => navigator.clipboard.writeText(window.location.href)}>Copy</Button>
+				<Button
+					--btn-bg-colour="var(--bg-tertiary)"
+					--btn-bg-hover="var(--bg-tertiary)"
+					--btn-border="var(--border)"
+					onclick={() => navigator.clipboard.writeText(window.location.href)}>Copy</Button
+				>
 			</div>
 		</div>
 	</section>
@@ -96,10 +101,6 @@
 	@media screen and (max-width: 768px) {
 		#share {
 			width: 16rem;
-		}
-
-		#share__content p {
-			font-size: 1rem;
 		}
 	}
 </style>
