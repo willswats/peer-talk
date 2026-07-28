@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { userState, peerState } from '$lib/state.svelte';
+	import { userState, peerState, embeddedApps } from '$lib/state.svelte';
 	import { disconnectUser } from '$lib/utils/disconnectUser';
 
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
-	import EmbeddedApps from '$lib/components/EmbeddedApps.svelte';
+	import AppsPicker from '$lib/components/AppsPicker.svelte';
+	import AppCard from '$lib/components/AppCard.svelte';
 	import {
+		Button,
 		ButtonDisconnect,
 		ButtonMuteMic,
 		ButtonDeafen,
@@ -13,27 +15,12 @@
 		ButtonRoomCopy,
 		ButtonChatToggle
 	} from '$lib/components/Buttons';
-	import RoomTopButtons from '$lib/components/RoomTopButtons.svelte';
 	import CustomAlert from '$lib/components/CustomAlert.svelte';
 
 	import { beforeNavigate } from '$app/navigation';
 
-	let roomToggle: boolean = $state(false);
-	let roomTalkElement: HTMLElement;
-	let roomAppsElement: HTMLElement;
-
 	// CustomAlert variables
 	let alertShown = $state(false);
-
-	$effect(() => {
-		if (!roomToggle) {
-			roomAppsElement.classList.add('hidden');
-			roomTalkElement.classList.remove('hidden');
-		} else {
-			roomAppsElement.classList.remove('hidden');
-			roomTalkElement.classList.add('hidden');
-		}
-	});
 
 	beforeNavigate(({ type, cancel }) => {
 		// Allow user to refresh or leave page without default browser prompt
@@ -59,14 +46,19 @@
 
 		return socketId ? peerState.usernames[socketId] || 'Unknown User' : 'Unknown User';
 	}
+
+	let appsShown: boolean = $state(false);
 </script>
 
 <main id="room">
 	<CustomAlert confirmFunction={disconnectUser} bind:alertShown
 		>Are you sure you want to disconnect from this room?</CustomAlert
 	>
-	<section id="room__talk" bind:this={roomTalkElement}>
-		<RoomTopButtons bind:roomToggle />
+	<AppsPicker bind:appsShown />
+	<section id="room__talk">
+		<div id="room__top-buttons">
+			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>Apps</Button>
+		</div>
 		<div id="room__videos-chat">
 			<div id="room__videos">
 				<Video username={userState.username} videoStream={userState.localStream} muted={true} />
@@ -76,6 +68,10 @@
 						videoStream={remoteStream}
 						muted={false}
 					/>
+				{/each}
+
+				{#each embeddedApps as embeddedApp (embeddedApp.id)}
+					<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
 				{/each}
 			</div>
 			<Chat />
@@ -96,10 +92,6 @@
 				<ButtonChatToggle />
 			</div>
 		</div>
-	</section>
-	<section id="room__apps" bind:this={roomAppsElement}>
-		<RoomTopButtons bind:roomToggle />
-		<EmbeddedApps />
 	</section>
 </main>
 
@@ -159,11 +151,10 @@
 		flex: 1;
 	}
 
-	#room__apps {
+	#room__top-buttons {
 		display: flex;
-		flex-direction: column;
-		flex-grow: 1;
-		margin: 1rem;
+		margin-bottom: 0.5rem;
+		gap: 0.25rem;
 	}
 
 	@media screen and (max-width: 768px) {
