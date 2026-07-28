@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { embeddedApps } from '$lib/state.svelte';
+	import { embeddedApps, userState } from '$lib/state.svelte';
+
+	import AppCard from '$lib/components/AppCard.svelte';
 	import AppLaunchCard from '$lib/components/AppLaunchCard.svelte';
 	import CloseX from '$lib/components/svg/CloseX.svelte';
 
@@ -22,7 +24,11 @@
 			</div>
 			<div id="apps-picker__content-bottom">
 				{#each embeddedApps as embeddedApp (embeddedApp.id)}
-					<AppLaunchCard bind:appsShown {embeddedApp} {embeddedApps} />
+					{#if !embeddedApp.render}
+						<AppLaunchCard {embeddedApp} {embeddedApps} />
+					{:else}
+						<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
+					{/if}
 				{/each}
 			</div>
 		</div>

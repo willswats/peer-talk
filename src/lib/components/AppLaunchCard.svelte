@@ -4,10 +4,9 @@
 	interface Props {
 		embeddedApp: embeddedAppType;
 		embeddedApps: embeddedAppType[];
-		appsShown: boolean;
 	}
 
-	let { embeddedApp, embeddedApps, appsShown = $bindable() }: Props = $props();
+	let { embeddedApp, embeddedApps }: Props = $props();
 
 	function handleOnClickLaunch() {
 		embeddedApps.forEach((app) => (app.render = false));
@@ -15,25 +14,22 @@
 		const app = embeddedApps.find((app) => app.id === embeddedApp.id);
 		if (app) {
 			app.render = true;
-			appsShown = false;
 		}
 	}
 </script>
 
-{#if appsShown}
-	<figure>
-		<figcaption>
-			<h2>
-				{embeddedApp.title}
-			</h2>
-			<p>{embeddedApp.description}</p>
-			<a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a>
-		</figcaption>
-		<section>
-			<button onclick={() => handleOnClickLaunch()}>Launch</button>
-		</section>
-	</figure>
-{/if}
+<figure>
+	<figcaption>
+		<h2>
+			{embeddedApp.title}
+		</h2>
+		<p>{embeddedApp.description}</p>
+		<a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a>
+	</figcaption>
+	<section>
+		<button onclick={() => handleOnClickLaunch()}>Launch</button>
+	</section>
+</figure>
 
 <style>
 	figure {

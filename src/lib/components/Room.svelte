@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { userState, peerState, embeddedApps } from '$lib/state.svelte';
+	import { userState, peerState } from '$lib/state.svelte';
 	import { disconnectUser } from '$lib/utils/disconnectUser';
 
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
 	import AppsPicker from '$lib/components/AppsPicker.svelte';
-	import AppCard from '$lib/components/AppCard.svelte';
 	import {
 		Button,
 		ButtonDisconnect,
@@ -39,6 +38,7 @@
 			}
 		});
 	});
+
 	function getUsernameFromStream(streamId: string): string {
 		const socketId = Object.keys(peerState.remoteStreamIdentifier).find(
 			(key) => peerState.remoteStreamIdentifier[key] === streamId
@@ -59,28 +59,21 @@
 		<div id="room__top-buttons">
 			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>Apps</Button>
 		</div>
+
 		<div id="room__main-content">
-			<div id="room__videos-apps">
-				{#each embeddedApps as embeddedApp (embeddedApp.id)}
-					{#if embeddedApp.render}
-						<div id="room__apps">
-							<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
-						</div>
-					{/if}
+			<div id="room__videos">
+				<Video username={userState.username} videoStream={userState.localStream} muted={true} />
+				{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
+					<Video
+						username={getUsernameFromStream(remoteStream.id)}
+						videoStream={remoteStream}
+						muted={false}
+					/>
 				{/each}
-				<div id="room__videos">
-					<Video username={userState.username} videoStream={userState.localStream} muted={true} />
-					{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-						<Video
-							username={getUsernameFromStream(remoteStream.id)}
-							videoStream={remoteStream}
-							muted={false}
-						/>
-					{/each}
-				</div>
 			</div>
 			<Chat />
 		</div>
+
 		<div id="room__buttons">
 			<div id="room__buttons-left">
 				<div class="room__buttons-pill">
@@ -123,20 +116,6 @@
 		min-height: 0;
 	}
 
-	#room__videos-apps {
-		display: flex;
-		flex: 1;
-		min-height: 0;
-		height: 100%;
-		width: 100%;
-		gap: 0.5rem;
-	}
-
-	#room__apps {
-		display: flex;
-		flex: 1;
-	}
-
 	#room__videos {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -176,14 +155,10 @@
 		gap: 0.25rem;
 	}
 
-	@media screen and (max-width: 768px) {
-		#room__videos-apps {
-			flex-direction: column;
-		}
-
+	@media screen and (max-width: 1200px) {
 		#room__videos {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		}
 	}
 </style>
