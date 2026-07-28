@@ -20,17 +20,33 @@
 				><CloseX width={24} height={24} /></button
 			>
 			<div id="apps-picker__content-top">
-				<h1>Apps</h1>
-			</div>
-			<div id="apps-picker__content-bottom">
-				{#each embeddedApps as embeddedApp (embeddedApp.id)}
-					{#if !embeddedApp.render}
-						<AppLaunchCard {embeddedApp} {embeddedApps} />
+				<h1>
+					{#if !userState.appLaunched}
+						Apps
 					{:else}
-						<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
+						{#each embeddedApps as embeddedApp (embeddedApp.id)}
+							{#if embeddedApp.render}
+								{embeddedApp.title}
+							{/if}
+						{/each}
 					{/if}
-				{/each}
+				</h1>
 			</div>
+			{#if !userState.appLaunched}
+				<div id="apps-picker__launch-cards">
+					{#each embeddedApps as embeddedApp (embeddedApp.id)}
+						<AppLaunchCard {embeddedApp} {embeddedApps} />
+					{/each}
+				</div>
+			{:else}
+				<div id="apps-picker__app-cards">
+					{#each embeddedApps as embeddedApp (embeddedApp.id)}
+						{#if embeddedApp.render}
+							<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
+						{/if}
+					{/each}
+				</div>
+			{/if}
 		</div>
 	</section>
 {/if}
@@ -82,7 +98,7 @@
 		padding: 0.25rem;
 	}
 
-	#apps-picker__content-bottom {
+	#apps-picker__launch-cards {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		background-color: var(--bg-secondary);
@@ -90,14 +106,22 @@
 		border-top: 1px solid var(--border);
 		gap: 0.5rem;
 		width: 25rem;
+		height: 25rem;
+	}
+
+	#apps-picker__app-cards {
+		display: flex;
+		flex-direction: column;
+		width: 25rem;
+		height: 25rem;
 	}
 
 	@media screen and (max-width: 768px) {
-		#apps-picker__content-bottom {
+		#apps-picker__launch-cards {
 			width: 16rem;
 		}
 
-		#apps-picker__content-bottom {
+		#apps-picker__launch-cards {
 			grid-template-columns: 1fr;
 		}
 	}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { userState } from '$lib/state.svelte';
 	import type { embeddedApp as embeddedAppType } from '$lib/state.svelte';
 
 	interface Props {
@@ -14,6 +15,7 @@
 		const app = embeddedApps.find((app) => app.id === embeddedApp.id);
 		if (app) {
 			app.render = true;
+			userState.appLaunched = true;
 		}
 	}
 </script>

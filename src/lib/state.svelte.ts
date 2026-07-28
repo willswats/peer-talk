@@ -10,6 +10,7 @@ interface userState {
 	localVideoEnabled: boolean;
 	deafened: boolean;
 	chatToggled: boolean;
+	appLaunched: boolean;
 	localStream: MediaStream | null;
 }
 
@@ -42,6 +43,7 @@ export const userState: userState = $state({
 	localVideoEnabled: false,
 	deafened: false,
 	chatToggled: false,
+	appLaunched: false,
 	localStream: null
 });
 
@@ -78,6 +80,7 @@ export function resetUserState() {
 	userState.localVideoEnabled = false;
 	userState.deafened = false;
 	userState.chatToggled = false;
+	userState.appLaunched = false;
 
 	userState.localStream?.getTracks().forEach((track) => track.stop());
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { userState } from '$lib/state.svelte';
 	import type { embeddedApp as embeddedAppType } from '$lib/state.svelte';
 
 	interface Props {
@@ -13,6 +14,7 @@
 
 	function handleOnClickClose() {
 		embeddedApps.forEach((app) => (app.render = false));
+		userState.appLaunched = false;
 	}
 
 	function handleOnClickFullScreen() {
@@ -48,11 +50,7 @@
 		text-align: center;
 		width: 100%;
 		height: 100%;
-		min-width: 0;
-		min-height: 20rem;
-		border-radius: var(--border-radius-normal);
 		background-color: #fff;
-		border: 1px solid var(--border);
 	}
 
 	:fullscreen {
