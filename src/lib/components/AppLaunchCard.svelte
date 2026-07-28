@@ -4,9 +4,10 @@
 	interface Props {
 		embeddedApp: embeddedAppType;
 		embeddedApps: embeddedAppType[];
+		appsShown: boolean;
 	}
 
-	let { embeddedApp, embeddedApps }: Props = $props();
+	let { embeddedApp, embeddedApps, appsShown = $bindable() }: Props = $props();
 
 	function handleOnClickLaunch() {
 		embeddedApps.forEach((app) => (app.render = false));
@@ -14,22 +15,25 @@
 		const app = embeddedApps.find((app) => app.id === embeddedApp.id);
 		if (app) {
 			app.render = true;
+			appsShown = false;
 		}
 	}
 </script>
 
-<figure>
-	<figcaption>
-		<h2>
-			{embeddedApp.title}
-		</h2>
-		<!-- <p>{embeddedApp.description}</p> -->
-		<a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a>
-	</figcaption>
-	<section>
-		<button onclick={() => handleOnClickLaunch()}>Launch</button>
-	</section>
-</figure>
+{#if appsShown}
+	<figure>
+		<figcaption>
+			<h2>
+				{embeddedApp.title}
+			</h2>
+			<p>{embeddedApp.description}</p>
+			<a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a>
+		</figcaption>
+		<section>
+			<button onclick={() => handleOnClickLaunch()}>Launch</button>
+		</section>
+	</figure>
+{/if}
 
 <style>
 	figure {
@@ -37,7 +41,6 @@
 		flex-direction: column;
 		text-align: center;
 		width: 100%;
-		height: 10rem;
 		border-radius: var(--border-radius-normal);
 		overflow: hidden;
 		background-color: var(--bg-secondary);

@@ -22,7 +22,7 @@
 			</div>
 			<div id="apps-picker__content-bottom">
 				{#each embeddedApps as embeddedApp (embeddedApp.id)}
-					<AppLaunchCard {embeddedApp} {embeddedApps} />
+					<AppLaunchCard bind:appsShown {embeddedApp} {embeddedApps} />
 				{/each}
 			</div>
 		</div>
@@ -48,9 +48,6 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 25rem;
-		max-height: 40rem;
-		overflow: scroll;
 	}
 
 	#apps-picker__content {
@@ -58,10 +55,9 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--bg-tertiary);
-		width: 100%;
-		overflow: hidden;
 		border-radius: var(--border-radius-normal);
 		border: 1px solid var(--border);
+		overflow: scroll;
 	}
 
 	#apps-picker__content-top {
@@ -71,10 +67,6 @@
 	#apps-picker__content-top h1 {
 		font-size: 1.4rem;
 		text-decoration: underline;
-	}
-
-	#apps-picker__content-top p {
-		font-size: 1rem;
 	}
 
 	#apps-picker__content-close-btn {
@@ -91,10 +83,11 @@
 		padding: 0.5rem;
 		border-top: 1px solid var(--border);
 		gap: 0.5rem;
+		width: 25rem;
 	}
 
 	@media screen and (max-width: 768px) {
-		#apps-picker {
+		#apps-picker__content-bottom {
 			width: 16rem;
 		}
 

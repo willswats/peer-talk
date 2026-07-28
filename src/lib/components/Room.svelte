@@ -60,19 +60,20 @@
 			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>Apps</Button>
 		</div>
 		<div id="room__videos-chat">
-			<div id="room__videos">
-				<Video username={userState.username} videoStream={userState.localStream} muted={true} />
-				{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
-					<Video
-						username={getUsernameFromStream(remoteStream.id)}
-						videoStream={remoteStream}
-						muted={false}
-					/>
-				{/each}
-
+			<div id="room__videos-apps">
 				{#each embeddedApps as embeddedApp (embeddedApp.id)}
 					<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
 				{/each}
+				<div id="room__videos">
+					<Video username={userState.username} videoStream={userState.localStream} muted={true} />
+					{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
+						<Video
+							username={getUsernameFromStream(remoteStream.id)}
+							videoStream={remoteStream}
+							muted={false}
+						/>
+					{/each}
+				</div>
 			</div>
 			<Chat />
 		</div>
@@ -118,6 +119,15 @@
 		min-height: 0;
 	}
 
+	#room__videos-apps {
+		display: flex;
+		flex: 1;
+		min-height: 0;
+		height: 100%;
+		width: 100%;
+		gap: 0.5rem;
+	}
+
 	#room__videos {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -158,9 +168,9 @@
 	}
 
 	@media screen and (max-width: 768px) {
-		#room__videos {
-			display: grid;
-			grid-template-columns: 1fr;
+		#room__videos-apps {
+			display: flex;
+			flex-direction: column;
 		}
 	}
 </style>

@@ -48,8 +48,9 @@
 		text-align: center;
 		width: 100%;
 		height: 100%;
+		min-width: 0;
+		min-height: 25rem;
 		border-radius: var(--border-radius-normal);
-		overflow: hidden;
 		background-color: #fff;
 		border: 1px solid var(--border);
 	}
