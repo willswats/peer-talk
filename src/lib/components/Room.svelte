@@ -59,10 +59,14 @@
 		<div id="room__top-buttons">
 			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>Apps</Button>
 		</div>
-		<div id="room__videos-chat">
+		<div id="room__main-content">
 			<div id="room__videos-apps">
 				{#each embeddedApps as embeddedApp (embeddedApp.id)}
-					<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
+					{#if embeddedApp.render}
+						<div id="room__apps">
+							<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
+						</div>
+					{/if}
 				{/each}
 				<div id="room__videos">
 					<Video username={userState.username} videoStream={userState.localStream} muted={true} />
@@ -112,7 +116,7 @@
 		margin: 1rem;
 	}
 
-	#room__videos-chat {
+	#room__main-content {
 		display: flex;
 		flex: 2;
 		position: relative;
@@ -128,9 +132,14 @@
 		gap: 0.5rem;
 	}
 
+	#room__apps {
+		display: flex;
+		flex: 1;
+	}
+
 	#room__videos {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 		flex: 1;
 		min-height: 0;
 		height: 100%;
@@ -169,8 +178,12 @@
 
 	@media screen and (max-width: 768px) {
 		#room__videos-apps {
-			display: flex;
 			flex-direction: column;
+		}
+
+		#room__videos {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 		}
 	}
 </style>

@@ -49,7 +49,7 @@
 		width: 100%;
 		height: 100%;
 		min-width: 0;
-		min-height: 25rem;
+		min-height: 20rem;
 		border-radius: var(--border-radius-normal);
 		background-color: #fff;
 		border: 1px solid var(--border);
