@@ -9,47 +9,65 @@
 		appsShown: boolean;
 	}
 
+	let appPickerOverlayElement: HTMLElement | null = $state(null);
+	let appPickerElement: HTMLElement | null = $state(null);
+
+	$effect(() => {
+		if (appPickerElement && appPickerOverlayElement) {
+			if (!appsShown) {
+				appPickerOverlayElement.classList.add('hidden');
+				appPickerElement.classList.add('hidden');
+			} else {
+				appPickerOverlayElement.classList.remove('hidden');
+				appPickerElement.classList.remove('hidden');
+			}
+		}
+	});
+
 	let { appsShown = $bindable() }: Props = $props();
 </script>
 
-{#if appsShown}
-	<button aria-label="overlay" id="overlay" onclick={() => (appsShown = false)}></button>
-	<section id="apps-picker">
-		<div id="apps-picker__content">
-			<button id="apps-picker__content-close-btn" onclick={() => (appsShown = false)}
-				><CloseX width={24} height={24} /></button
-			>
-			<div id="apps-picker__content-top">
-				<h1>
-					{#if !userState.appLaunched}
-						Apps
-					{:else}
-						{#each embeddedApps as embeddedApp (embeddedApp.id)}
-							{#if embeddedApp.render}
-								{embeddedApp.title}
-							{/if}
-						{/each}
-					{/if}
-				</h1>
-			</div>
-			{#if !userState.appLaunched}
-				<div id="apps-picker__launch-cards">
-					{#each embeddedApps as embeddedApp (embeddedApp.id)}
-						<AppLaunchCard {embeddedApp} {embeddedApps} />
-					{/each}
-				</div>
-			{:else}
-				<div id="apps-picker__app-cards">
+<button
+	bind:this={appPickerOverlayElement}
+	aria-label="overlay"
+	id="overlay"
+	onclick={() => (appsShown = false)}
+></button>
+<section bind:this={appPickerElement} id="apps-picker">
+	<div id="apps-picker__content">
+		<button id="apps-picker__content-close-btn" onclick={() => (appsShown = false)}
+			><CloseX width={24} height={24} /></button
+		>
+		<div id="apps-picker__content-top">
+			<h1>
+				{#if !userState.appLaunched}
+					Apps
+				{:else}
 					{#each embeddedApps as embeddedApp (embeddedApp.id)}
 						{#if embeddedApp.render}
-							<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
+							{embeddedApp.title}
 						{/if}
 					{/each}
-				</div>
-			{/if}
+				{/if}
+			</h1>
 		</div>
-	</section>
-{/if}
+		{#if !userState.appLaunched}
+			<div id="apps-picker__launch-cards">
+				{#each embeddedApps as embeddedApp (embeddedApp.id)}
+					<AppLaunchCard {embeddedApp} {embeddedApps} />
+				{/each}
+			</div>
+		{:else}
+			<div id="apps-picker__app-cards">
+				{#each embeddedApps as embeddedApp (embeddedApp.id)}
+					{#if embeddedApp.render}
+						<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
+					{/if}
+				{/each}
+			</div>
+		{/if}
+	</div>
+</section>
 
 <style>
 	#overlay {
