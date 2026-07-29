@@ -107,8 +107,6 @@
 	#room {
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
-		height: calc(100vh - 5rem);
 	}
 
 	#room__talk {

@@ -26,20 +26,18 @@
 			{embeddedApp.title}
 		</h2>
 		<p>{embeddedApp.description}</p>
-		<a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a>
 	</figcaption>
 	<section>
 		<button onclick={() => handleOnClickLaunch()}>Launch</button>
+		<!-- <a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a> -->
 	</section>
 </figure>
 
 <style>
 	figure {
 		display: flex;
-		flex-direction: column;
-		text-align: center;
 		width: 100%;
-		min-height: 15rem;
+		min-height: 4rem;
 		border-radius: var(--border-radius-normal);
 		overflow: hidden;
 		background-color: var(--bg-secondary);
@@ -48,45 +46,47 @@
 
 	figure figcaption {
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
 		align-items: center;
 		height: 100%;
+		overflow: hidden;
+		min-width: 0;
+		flex: 1;
+		gap: 0.5rem;
+		padding: 0.5rem;
 	}
 
 	figure figcaption h2 {
-		font-size: 2rem;
+		font-size: 1.4rem;
 		color: var(--blue);
-	}
-
-	figure figcaption a:hover {
-		text-decoration: underline;
+		white-space: nowrap;
+		flex-shrink: 0;
 	}
 
 	figure figcaption p {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		min-width: 0;
+		flex: 1;
 		font-size: 1.2rem;
 	}
 
 	figure section {
 		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		padding: 0.5rem;
 	}
 
 	figure section button {
 		text-align: center;
-		width: 100%;
 		color: var(--text);
 		background-color: var(--bg-tertiary);
-		padding: 0.5rem;
+		padding: 0.5rem 1rem;
 		transition: background-color 0.1s;
 		font-size: 1rem;
-		border-radius: 0;
-		border: 0;
-		border-top: 1px solid var(--border);
-	}
-
-	a {
-		font-size: 1.2rem;
-		color: var(--mauve);
+		border-radius: var(--border-radius-normal);
+		border: 1px solid var(--border);
 	}
 
 	@media screen and (max-width: 768px) {

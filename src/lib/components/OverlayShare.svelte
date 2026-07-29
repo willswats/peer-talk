@@ -72,7 +72,6 @@
 
 	#share__content-top h1 {
 		font-size: 1.4rem;
-		text-decoration: underline;
 	}
 
 	#share__content-top p {

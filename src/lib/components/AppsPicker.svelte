@@ -87,7 +87,6 @@
 
 	#apps-picker__content-top h1 {
 		font-size: 1.4rem;
-		text-decoration: underline;
 	}
 
 	#apps-picker__content-close-btn {
@@ -104,28 +103,19 @@
 		padding: 0.5rem;
 		border-top: 1px solid var(--border);
 		gap: 0.5rem;
-		width: 25rem;
-		height: 25rem;
+		width: 80vw;
+		height: 80vh;
 		overflow: scroll;
 	}
 
 	#apps-picker__app-cards {
 		display: flex;
 		flex-direction: column;
-		width: 25rem;
-		height: 25rem;
+		width: 80vw;
+		height: 80vh;
 	}
 
 	@media screen and (max-width: 768px) {
-		#apps-picker__launch-cards {
-			width: 16rem;
-			height: 25rem;
-		}
-		#apps-picker__app-cards {
-			width: 16rem;
-			height: 25rem;
-		}
-
 		#apps-picker__launch-cards {
 			grid-template-columns: 1fr;
 		}
