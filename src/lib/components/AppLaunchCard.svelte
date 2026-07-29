@@ -38,10 +38,12 @@
 
 <figure>
 	<figcaption>
-		<h2>
-			{embeddedApp.title}
+		<div>
+			<h2>
+				{embeddedApp.title}
+			</h2>
 			<a href={embeddedApp.git} target="_blank" rel="external noreferrer">(source)</a>
-		</h2>
+		</div>
 		<p>
 			{#if !isMobile}
 				{embeddedApp.description}
@@ -78,11 +80,20 @@
 		padding: 0.5rem;
 	}
 
-	figure figcaption h2 {
-		font-size: 1.4rem;
-		color: var(--blue);
+	figure div {
+		display: flex;
+		align-items: center;
 		white-space: nowrap;
 		flex-shrink: 0;
+	}
+
+	figure div h2 {
+		font-size: 1.4rem;
+		color: var(--blue);
+	}
+
+	figure div a {
+		margin-left: 0.2rem;
 	}
 
 	figure figcaption p {
