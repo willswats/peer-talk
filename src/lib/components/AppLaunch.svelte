@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { userState } from '$lib/state.svelte';
-	import type { embeddedApp as embeddedAppType } from '$lib/state.svelte';
+	import type { marketplaceApp as marketplaceAppType } from '$lib/state.svelte';
 
 	interface Props {
-		embeddedApp: embeddedAppType;
-		embeddedApps: embeddedAppType[];
+		marketplaceApp: marketplaceAppType;
+		marketplaceApps: marketplaceAppType[];
 	}
 
-	let { embeddedApp, embeddedApps }: Props = $props();
+	let { marketplaceApp, marketplaceApps }: Props = $props();
 
 	function handleOnClickLaunch() {
-		embeddedApps.forEach((app) => (app.render = false));
+		marketplaceApps.forEach((app) => (app.render = false));
 
-		const app = embeddedApps.find((app) => app.id === embeddedApp.id);
+		const app = marketplaceApps.find((app) => app.id === marketplaceApp.id);
 		if (app) {
 			app.render = true;
 			userState.appLaunched = true;
@@ -40,15 +40,15 @@
 	<figcaption>
 		<div>
 			<h2>
-				{embeddedApp.title}
+				{marketplaceApp.title}
 			</h2>
-			<a href={embeddedApp.git} target="_blank" rel="external noreferrer">(source)</a>
+			<a href={marketplaceApp.git} target="_blank" rel="external noreferrer">(source)</a>
 		</div>
 		<p>
 			{#if !isMobile}
-				{embeddedApp.description}
+				{marketplaceApp.description}
 			{:else}
-				{embeddedApp.short_description}
+				{marketplaceApp.short_description}
 			{/if}
 		</p>
 	</figcaption>

@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { userState, peerState, embeddedApps } from '$lib/state.svelte';
+	import { userState, peerState, marketplaceApps } from '$lib/state.svelte';
 	import { disconnectUser } from '$lib/utils/disconnectUser';
 
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
-	import AppsPicker from '$lib/components/AppsPicker.svelte';
+	import AppPicker from '$lib/components/AppPicker.svelte';
 	import {
 		Button,
 		ButtonDisconnect,
 		ButtonMuteMic,
 		ButtonDeafen,
 		ButtonToggleVideo,
-		ButtonRoomCopy,
+		ButtonShare,
 		ButtonChatToggle
 	} from '$lib/components/Buttons';
 	import CustomAlert from '$lib/components/CustomAlert.svelte';
@@ -54,16 +54,16 @@
 	<CustomAlert confirmFunction={disconnectUser} bind:alertShown
 		>Are you sure you want to disconnect from this room?</CustomAlert
 	>
-	<AppsPicker bind:appsShown />
+	<AppPicker bind:appsShown />
 	<section id="room__talk">
 		<div id="room__top-buttons">
 			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>
 				{#if !userState.appLaunched}
 					Apps
 				{:else}
-					{#each embeddedApps as embeddedApp (embeddedApp.id)}
-						{#if embeddedApp.render}
-							{embeddedApp.title}
+					{#each marketplaceApps as marketplaceApp (marketplaceApp.id)}
+						{#if marketplaceApp.render}
+							{marketplaceApp.title}
 						{/if}
 					{/each}
 				{/if}
@@ -87,7 +87,7 @@
 		<div id="room__buttons">
 			<div id="room__buttons-left">
 				<div class="room__buttons-pill">
-					<ButtonRoomCopy />
+					<ButtonShare />
 				</div>
 			</div>
 			<div class="room__buttons-pill">
