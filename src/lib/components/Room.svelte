@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { userState, peerState } from '$lib/state.svelte';
+	import { userState, peerState, embeddedApps } from '$lib/state.svelte';
 	import { disconnectUser } from '$lib/utils/disconnectUser';
 
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
-	import EmbeddedApps from '$lib/components/EmbeddedApps.svelte';
+	import AppsPicker from '$lib/components/AppsPicker.svelte';
 	import {
+		Button,
 		ButtonDisconnect,
 		ButtonMuteMic,
 		ButtonDeafen,
@@ -13,27 +14,12 @@
 		ButtonRoomCopy,
 		ButtonChatToggle
 	} from '$lib/components/Buttons';
-	import RoomTopButtons from '$lib/components/RoomTopButtons.svelte';
 	import CustomAlert from '$lib/components/CustomAlert.svelte';
 
 	import { beforeNavigate } from '$app/navigation';
 
-	let roomToggle: boolean = $state(false);
-	let roomTalkElement: HTMLElement;
-	let roomAppsElement: HTMLElement;
-
 	// CustomAlert variables
 	let alertShown = $state(false);
-
-	$effect(() => {
-		if (!roomToggle) {
-			roomAppsElement.classList.add('hidden');
-			roomTalkElement.classList.remove('hidden');
-		} else {
-			roomAppsElement.classList.remove('hidden');
-			roomTalkElement.classList.add('hidden');
-		}
-	});
 
 	beforeNavigate(({ type, cancel }) => {
 		// Allow user to refresh or leave page without default browser prompt
@@ -52,6 +38,7 @@
 			}
 		});
 	});
+
 	function getUsernameFromStream(streamId: string): string {
 		const socketId = Object.keys(peerState.remoteStreamIdentifier).find(
 			(key) => peerState.remoteStreamIdentifier[key] === streamId
@@ -59,15 +46,31 @@
 
 		return socketId ? peerState.usernames[socketId] || 'Unknown User' : 'Unknown User';
 	}
+
+	let appsShown: boolean = $state(false);
 </script>
 
 <main id="room">
 	<CustomAlert confirmFunction={disconnectUser} bind:alertShown
 		>Are you sure you want to disconnect from this room?</CustomAlert
 	>
-	<section id="room__talk" bind:this={roomTalkElement}>
-		<RoomTopButtons bind:roomToggle />
-		<div id="room__videos-chat">
+	<AppsPicker bind:appsShown />
+	<section id="room__talk">
+		<div id="room__top-buttons">
+			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>
+				{#if !userState.appLaunched}
+					Apps
+				{:else}
+					{#each embeddedApps as embeddedApp (embeddedApp.id)}
+						{#if embeddedApp.render}
+							{embeddedApp.title}
+						{/if}
+					{/each}
+				{/if}
+			</Button>
+		</div>
+
+		<div id="room__main-content">
 			<div id="room__videos">
 				<Video username={userState.username} videoStream={userState.localStream} muted={true} />
 				{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
@@ -80,6 +83,7 @@
 			</div>
 			<Chat />
 		</div>
+
 		<div id="room__buttons">
 			<div id="room__buttons-left">
 				<div class="room__buttons-pill">
@@ -97,18 +101,12 @@
 			</div>
 		</div>
 	</section>
-	<section id="room__apps" bind:this={roomAppsElement}>
-		<RoomTopButtons bind:roomToggle />
-		<EmbeddedApps />
-	</section>
 </main>
 
 <style>
 	#room {
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
-		height: calc(100vh - 5rem);
 	}
 
 	#room__talk {
@@ -119,7 +117,7 @@
 		margin: 1rem;
 	}
 
-	#room__videos-chat {
+	#room__main-content {
 		display: flex;
 		flex: 2;
 		position: relative;
@@ -128,7 +126,7 @@
 
 	#room__videos {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 		flex: 1;
 		min-height: 0;
 		height: 100%;
@@ -159,17 +157,16 @@
 		flex: 1;
 	}
 
-	#room__apps {
+	#room__top-buttons {
 		display: flex;
-		flex-direction: column;
-		flex-grow: 1;
-		margin: 1rem;
+		margin-bottom: 0.5rem;
+		gap: 0.25rem;
 	}
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 1200px) {
 		#room__videos {
 			display: grid;
-			grid-template-columns: 1fr;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		}
 	}
 </style>

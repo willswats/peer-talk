@@ -4,6 +4,7 @@
       "id": "wbo",
       "title": "WBO",
       "description": "Online collaborative Whiteboard that is simple, free, easy to use and to deploy.",
+      "short_description": "Whiteboard",
       "url": "https://wbo.ophir.dev/boards/",
       "git": "https://github.com/lovasoa/whitebophir"
     },
@@ -11,6 +12,7 @@
       "id": "etherpad",
       "title": "Etherpad",
       "description": "Etherpad: A modern really-real-time collaborative document editor.",
+      "short_description": "Document Editor",
       "url": "https://etherpad.communitydata.science/p/",
       "git": "https://github.com/ether/etherpad-lite"
     }

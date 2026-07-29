@@ -35,6 +35,8 @@
 		if (messageInput === null) return;
 
 		messageInput.value += emojiChar;
+		showEmojiPicker = false;
+		messageInput.focus();
 	}
 
 	function handleClickOutside(event: MouseEvent) {

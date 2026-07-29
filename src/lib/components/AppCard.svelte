@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { userState } from '$lib/state.svelte';
 	import type { embeddedApp as embeddedAppType } from '$lib/state.svelte';
 
 	interface Props {
@@ -11,11 +12,9 @@
 
 	let embeddedAppElement: HTMLIFrameElement | null = $state(null);
 
-	function handleOnClickRender() {
-		const app = embeddedApps.find((app) => app.id === embeddedApp.id);
-		if (app) {
-			app.render = !app.render;
-		}
+	function handleOnClickClose() {
+		embeddedApps.forEach((app) => (app.render = false));
+		userState.appLaunched = false;
 	}
 
 	function handleOnClickFullScreen() {
@@ -25,15 +24,9 @@
 	}
 </script>
 
-<figure>
-	<figcaption>
-		{#if !embeddedApp.render}
-			<h2>
-				{embeddedApp.title}
-			</h2>
-			<p>{embeddedApp.description}</p>
-			<a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a>
-		{:else}
+{#if embeddedApp.render}
+	<figure>
+		<figcaption>
 			<iframe
 				id={embeddedApp.id}
 				title={embeddedApp.title}
@@ -42,17 +35,13 @@
 				bind:this={embeddedAppElement}
 			>
 			</iframe>
-		{/if}
-	</figcaption>
-	<section>
-		{#if !embeddedApp.render}
-			<button onclick={handleOnClickRender}>Run app</button>
-		{:else}
-			<button onclick={handleOnClickRender}>Close app</button>
+		</figcaption>
+		<section>
+			<button onclick={handleOnClickClose}>Close app</button>
 			<button onclick={handleOnClickFullScreen}>Fullscreen</button>
-		{/if}
-	</section>
-</figure>
+		</section>
+	</figure>
+{/if}
 
 <style>
 	figure {
@@ -60,11 +49,12 @@
 		flex-direction: column;
 		text-align: center;
 		width: 100%;
-		height: 30em;
-		border-radius: var(--border-radius-normal);
-		overflow: hidden;
-		background-color: var(--bg-secondary);
-		border: 1px solid var(--border);
+		height: 100%;
+		background-color: #fff;
+	}
+
+	:fullscreen {
+		background-color: #fff;
 	}
 
 	figure figcaption {
@@ -73,20 +63,6 @@
 		justify-content: center;
 		align-items: center;
 		height: 100%;
-		padding: 1rem;
-	}
-
-	figure figcaption h2 {
-		font-size: 2rem;
-		color: var(--blue);
-	}
-
-	figure figcaption a:hover {
-		text-decoration: underline;
-	}
-
-	figure figcaption p {
-		font-size: 1.2rem;
 	}
 
 	figure section {
@@ -113,24 +89,5 @@
 	iframe {
 		width: 100%;
 		height: 100%;
-	}
-
-	a {
-		font-size: 1.2rem;
-		color: var(--mauve);
-	}
-
-	@media screen and (max-width: 768px) {
-		figure figcaption h2 {
-			font-size: 1.4rem;
-		}
-
-		figure figcaption p {
-			font-size: 1rem;
-		}
-
-		a {
-			font-size: 1rem;
-		}
 	}
 </style>
