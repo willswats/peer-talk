@@ -39,6 +39,7 @@
 		flex-direction: column;
 		text-align: center;
 		width: 100%;
+		min-height: 15rem;
 		border-radius: var(--border-radius-normal);
 		overflow: hidden;
 		background-color: var(--bg-secondary);
@@ -82,15 +83,6 @@
 		border-radius: 0;
 		border: 0;
 		border-top: 1px solid var(--border);
-	}
-
-	figure section button:nth-of-type(2) {
-		border-left: 1px solid var(--border);
-	}
-
-	iframe {
-		width: 100%;
-		height: 100%;
 	}
 
 	a {

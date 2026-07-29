@@ -79,7 +79,6 @@
 		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-normal);
 		border: 1px solid var(--border);
-		overflow: scroll;
 	}
 
 	#apps-picker__content-top {
@@ -99,14 +98,15 @@
 	}
 
 	#apps-picker__launch-cards {
-		display: grid;
-		grid-template-columns: 1fr;
+		display: flex;
+		flex-direction: column;
 		background-color: var(--bg-secondary);
 		padding: 0.5rem;
 		border-top: 1px solid var(--border);
 		gap: 0.5rem;
 		width: 25rem;
 		height: 25rem;
+		overflow: scroll;
 	}
 
 	#apps-picker__app-cards {
