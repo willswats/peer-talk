@@ -146,6 +146,10 @@
 		max-width: 60rem;
 	}
 
+	#home__room h2 {
+		color: var(--blue);
+	}
+
 	#home__room p {
 		font-size: 1.2rem;
 	}
@@ -163,6 +167,7 @@
 	#home__features h2 {
 		font-size: 2rem;
 		text-align: center;
+		color: var(--blue);
 	}
 
 	#home__features p {
