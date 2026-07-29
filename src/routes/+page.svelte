@@ -49,7 +49,7 @@
 		</form>
 	</section>
 	<div id="home__features">
-		<h2>Peer Talk's Unique Features Set</h2>
+		<h2>Unique Features Set</h2>
 		<p>Peer Talk was built from the ground up to be private, open and transparent.</p>
 		<div id="home__features-grid">
 			<div class="home__features-grid-item">
