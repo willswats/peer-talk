@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { userState, peerState } from '$lib/state.svelte';
+	import { userState, peerState, embeddedApps } from '$lib/state.svelte';
 	import { disconnectUser } from '$lib/utils/disconnectUser';
 
 	import Video from '$lib/components/Video.svelte';
@@ -57,7 +57,17 @@
 	<AppsPicker bind:appsShown />
 	<section id="room__talk">
 		<div id="room__top-buttons">
-			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>Apps</Button>
+			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>
+				{#if !userState.appLaunched}
+					Apps
+				{:else}
+					{#each embeddedApps as embeddedApp (embeddedApp.id)}
+						{#if embeddedApp.render}
+							{embeddedApp.title}
+						{/if}
+					{/each}
+				{/if}
+			</Button>
 		</div>
 
 		<div id="room__main-content">
