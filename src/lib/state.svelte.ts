@@ -60,6 +60,7 @@ export interface embeddedApp {
 	id: string;
 	title: string;
 	description: string;
+	short_description: string;
 	url: string;
 	git: string;
 	render: boolean;

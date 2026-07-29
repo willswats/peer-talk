@@ -18,6 +18,22 @@
 			userState.appLaunched = true;
 		}
 	}
+
+	let windowWidth = $state(0);
+	let isMobile = $derived(windowWidth <= 768);
+
+	$effect(() => {
+		const updateWidth = () => {
+			windowWidth = window.innerWidth;
+		};
+
+		updateWidth();
+		window.addEventListener('resize', updateWidth);
+
+		return () => {
+			window.removeEventListener('resize', updateWidth);
+		};
+	});
 </script>
 
 <figure>
@@ -26,7 +42,13 @@
 			{embeddedApp.title}
 			<a href={embeddedApp.git} target="_blank" rel="external noreferrer">(source)</a>
 		</h2>
-		<p>{embeddedApp.description}</p>
+		<p>
+			{#if !isMobile}
+				{embeddedApp.description}
+			{:else}
+				{embeddedApp.short_description}
+			{/if}
+		</p>
 	</figcaption>
 	<section>
 		<button onclick={() => handleOnClickLaunch()}>Launch</button>
