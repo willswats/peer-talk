@@ -52,7 +52,6 @@
 		justify-content: center;
 		align-items: center;
 		height: 100%;
-		padding: 1rem;
 	}
 
 	figure figcaption h2 {
