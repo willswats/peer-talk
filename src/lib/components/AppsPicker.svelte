@@ -100,7 +100,7 @@
 
 	#apps-picker__launch-cards {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr;
 		background-color: var(--bg-secondary);
 		padding: 0.5rem;
 		border-top: 1px solid var(--border);
@@ -119,6 +119,11 @@
 	@media screen and (max-width: 768px) {
 		#apps-picker__launch-cards {
 			width: 16rem;
+			height: 25rem;
+		}
+		#apps-picker__app-cards {
+			width: 16rem;
+			height: 25rem;
 		}
 
 		#apps-picker__launch-cards {
