@@ -71,6 +71,7 @@
 	figure figcaption {
 		display: flex;
 		flex-direction: column;
+		justify-content: start;
 		align-items: start;
 		height: 100%;
 		overflow: hidden;
@@ -82,7 +83,6 @@
 
 	figure div {
 		display: flex;
-		align-items: center;
 		white-space: nowrap;
 		flex-shrink: 0;
 	}
@@ -133,6 +133,14 @@
 	}
 
 	@media screen and (max-width: 768px) {
+		figure div {
+			flex-direction: column;
+		}
+
+		figure div a {
+			margin-left: 0;
+		}
+
 		figure figcaption h2 {
 			font-size: 1.4rem;
 		}
