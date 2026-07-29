@@ -24,12 +24,12 @@
 	<figcaption>
 		<h2>
 			{embeddedApp.title}
+			<a href={embeddedApp.git} target="_blank" rel="external noreferrer">(source)</a>
 		</h2>
 		<p>{embeddedApp.description}</p>
 	</figcaption>
 	<section>
 		<button onclick={() => handleOnClickLaunch()}>Launch</button>
-		<!-- <a href={embeddedApp.git} target="_blank" rel="external noreferrer">Source</a> -->
 	</section>
 </figure>
 
@@ -46,7 +46,8 @@
 
 	figure figcaption {
 		display: flex;
-		align-items: center;
+		flex-direction: column;
+		align-items: start;
 		height: 100%;
 		overflow: hidden;
 		min-width: 0;
@@ -87,6 +88,15 @@
 		font-size: 1rem;
 		border-radius: var(--border-radius-normal);
 		border: 1px solid var(--border);
+	}
+
+	a {
+		font-size: 1.2rem;
+		color: var(--mauve);
+	}
+
+	a:hover {
+		text-decoration: underline;
 	}
 
 	@media screen and (max-width: 768px) {
