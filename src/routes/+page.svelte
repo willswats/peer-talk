@@ -29,7 +29,7 @@
 					call, share ideas, and work together instantly - no account required.
 				</p>
 				<div>
-					<button class="btn-blue" onclick={createRoom}>Create Room</button>
+					<button class="btn-animated" onclick={createRoom}>Create Room</button>
 				</div>
 			</div>
 
@@ -186,6 +186,7 @@
 		flex-direction: column;
 		max-width: 50rem;
 		padding: 4rem 1rem;
+		animation: fadeIn 0.8s ease-out forwards;
 	}
 
 	#home {
@@ -225,6 +226,14 @@
 		border-radius: var(--border-radius-normal);
 		max-width: 100%;
 		max-height: 100%;
+		transition:
+			transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	#home__img img:hover {
+		transform: translateY(-10px) scale(1.02);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 	}
 
 	#home__grid {
@@ -241,6 +250,13 @@
 		background-color: var(--bg-secondary);
 		padding: 1rem;
 		height: 14rem;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.home__grid-item:hover {
+		transform: translateY(-4px) scale(1.02);
+		border-color: var(--mauve);
+		background-color: var(--bg-tertiary);
 	}
 
 	.home__grid-item-svg {
@@ -279,6 +295,17 @@
 	#home__footer a:hover {
 		color: var(--mauve);
 		text-decoration: underline;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	@media screen and (max-width: 768px) {

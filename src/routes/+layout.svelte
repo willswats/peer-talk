@@ -133,6 +133,55 @@
 			color: #11111b;
 		}
 
+		.btn-animated {
+			position: relative;
+			background-color: var(--bg-tertiary);
+			border-radius: var(--border-radius-normal);
+			transition: transform 0.3s;
+			z-index: 1;
+		}
+
+		.btn-animated::before {
+			content: '';
+			position: absolute;
+			inset: -1px;
+			border-radius: var(--border-radius-normal);
+			background: linear-gradient(
+				90deg,
+				transparent,
+				var(--peach),
+				var(--mauve),
+				var(--blue),
+				transparent
+			);
+			background-size: 300% 100%;
+			z-index: -1;
+			animation: flowing-glow 3s linear infinite;
+			filter: blur(1px);
+		}
+
+		.btn-animated::after {
+			content: '';
+			position: absolute;
+			inset: 1px;
+			border-radius: calc(var(--border-radius-normal) - 2px);
+			background: var(--bg-tertiary);
+			z-index: -1;
+		}
+
+		@keyframes flowing-glow {
+			0% {
+				background-position: -100% 0%;
+			}
+			100% {
+				background-position: 200% 0%;
+			}
+		}
+
+		.btn-animated:hover {
+			transform: scale(1.05);
+		}
+
 		input[type='number'] {
 			appearance: textfield;
 			/* Remove Firefox default browser style */
