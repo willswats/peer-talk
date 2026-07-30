@@ -70,7 +70,7 @@
 		<div id="home__features-grid">
 			<div class="home__features-grid-item">
 				<span>
-					<ChatPrivate width={128} height={128} />
+					<ChatPrivate width={80} height={80} />
 				</span>
 				<h3>Private Peer-to-Peer Calls</h3>
 				<p>
@@ -80,35 +80,35 @@
 			</div>
 			<div class="home__features-grid-item">
 				<span>
-					<Apps width={128} height={128} />
+					<Apps width={80} height={80} />
 				</span>
 				<h3>Collaborative Apps</h3>
 				<p>Use shared tools such as a Whiteboard or Document Editor together during a call.</p>
 			</div>
 			<div class="home__features-grid-item">
 				<span>
-					<Store width={128} height={128} />
+					<Store width={80} height={80} />
 				</span>
 				<h3>Open App Marketplace</h3>
 				<p>A community-driven library of apps. Contribute on GitHub!</p>
 			</div>
 			<div class="home__features-grid-item">
 				<span>
-					<ChatLine width={128} height={128} />
+					<ChatLine width={80} height={80} />
 				</span>
 				<h3>Rich Chat</h3>
 				<p>Send messages with full emoji support.</p>
 			</div>
 			<div class="home__features-grid-item">
 				<span>
-					<VideoChat width={128} height={128} />
+					<VideoChat width={80} height={80} />
 				</span>
 				<h3>Call Controls</h3>
 				<p>Mute, deafen, or hide your video with ease.</p>
 			</div>
 			<div class="home__features-grid-item">
 				<span>
-					<OpenSource width={128} height={128} />
+					<OpenSource width={80} height={80} />
 				</span>
 				<h3>Free & Open Source</h3>
 				<p>Licensed under AGPL 3.0. Always free, always transparent.</p>
@@ -142,7 +142,6 @@
 		text-align: center;
 		max-width: 60rem;
 		padding: 4rem;
-		height: calc(100vh - 5rem);
 	}
 
 	#home__intro-top {
@@ -192,7 +191,7 @@
 	#home__features {
 		display: flex;
 		flex-direction: column;
-		max-width: 80rem;
+		max-width: 60rem;
 		padding: 4rem;
 	}
 
@@ -212,7 +211,6 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 0.5rem;
-		max-width: 60rem;
 	}
 
 	.home__features-grid-item {
