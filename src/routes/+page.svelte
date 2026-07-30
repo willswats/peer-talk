@@ -6,6 +6,7 @@
 	import { createRoom } from '$lib/utils/createRoom';
 	import { Apps, Store, ChatPrivate, OpenSource, VideoChat, ChatLine } from '$lib/components/svg';
 	import Button from '@/lib/components/Buttons/Button.svelte';
+	import ImagePeerTalk from '$lib/assets/img/peer-talk.png';
 
 	let roomIdInput = $state('');
 </script>
@@ -50,9 +51,12 @@
 				</div>
 			</form>
 		</div>
+		<div id="home__intro-img">
+			<img src={ImagePeerTalk} alt="Screenshot of Peer Talk" />
+		</div>
 	</section>
 
-	<div id="home__features">
+	<section id="home__features">
 		<h2>Unique Features Set</h2>
 		<p>Peer Talk was built from the ground up to be private, open and transparent.</p>
 		<div id="home__features-grid">
@@ -102,7 +106,7 @@
 				<p>Licensed under AGPL 3.0. Always free, always transparent.</p>
 			</div>
 		</div>
-	</div>
+	</section>
 </main>
 
 <style>
@@ -111,21 +115,17 @@
 		flex-direction: column;
 		flex-grow: 1;
 		align-items: center;
-		margin: 2rem;
-	}
-
-	#home > * {
-		margin-top: 4rem;
 	}
 
 	#home__intro {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		text-align: center;
 		background-color: var(--bg-primary);
 		border-radius: var(--border-radius-normal);
 		max-width: 60rem;
+		padding: 4rem;
+		height: calc(100vh - 5rem);
 	}
 
 	#home__intro-top {
@@ -148,6 +148,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin-bottom: 2rem;
 	}
 
 	#home__intro-bottom p {
@@ -157,6 +158,18 @@
 
 	#home__intro-bottom input {
 		background-color: var(--bg-secondary);
+	}
+
+	#home__intro-img {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#home__intro-img img {
+		border: 1px solid var(--border);
+		border-radius: var(--border-radius-normal);
+		max-width: 100%;
+		max-height: 100%;
 	}
 
 	#home__features {
