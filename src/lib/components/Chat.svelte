@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { slide } from 'svelte/transition';
 	import EmojiPicker from '$lib/components/EmojiPicker.svelte';
 	import EmoticonLine from '$lib/components/svg/EmoticonLine.svelte';
 
@@ -57,7 +58,7 @@
 <svelte:document onclick={handleClickOutside} />
 
 {#if userState.chatToggled}
-	<section id="chat">
+	<section id="chat" transition:slide={{ duration: 300, axis: 'x' }}>
 		<div id="chat__message-container">
 			{#each peerState.messages as message, index (index + message)}
 				<p>{message}</p>
