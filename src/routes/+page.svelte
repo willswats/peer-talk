@@ -11,43 +11,47 @@
 </script>
 
 <main id="home">
-	<section id="home__description">
-		<h1>PeerTalk</h1>
-		<p>
-			Real-time video calls with built-in collaborative tools. Start a private peer-to-peer call,
-			share ideas, and work together instantly - no account required.
-		</p>
-	</section>
-
-	<section id="home__room">
-		<h2>Create a Room</h2>
-		<p id="home__room-instruction">Create a room to get started, or join a room with a link.</p>
-		<div>
-			<button class="btn-blue" onclick={createRoom}>Create Room</button>
-		</div>
-		<form
-			onsubmit={(event) => {
-				event.preventDefault();
-				const uuid = roomIdInput.split('/').pop();
-				if (uuid) {
-					const roomValid = setUserRoomIdAndUserName(uuid);
-
-					if (roomValid) {
-						goto(resolve(`/room/${userState.roomId}`));
-					}
-				}
-			}}
-		>
-			<input type="text" placeholder="Room link..." bind:value={roomIdInput} />
+	<section id="home__intro">
+		<div id="home__intro-top">
+			<h1>PeerTalk</h1>
+			<p>
+				Real-time video calls with built-in collaborative tools. Start a private peer-to-peer call,
+				share ideas, and work together instantly - no account required.
+			</p>
 			<div>
-				<Button
-					--btn-bg-colour="var(--bg-tertiary)"
-					--btn-bg-hover="var(--bg-tertiary)"
-					--btn-border="var(--border)">Enter</Button
-				>
+				<button class="btn-blue" onclick={createRoom}>Create Room</button>
 			</div>
-		</form>
+		</div>
+
+		<div id="home__intro-bottom">
+			<p>Have a room link already? Enter it below to join the room.</p>
+			<form
+				onsubmit={(event) => {
+					event.preventDefault();
+					const uuid = roomIdInput.split('/').pop();
+					if (uuid) {
+						const roomValid = setUserRoomIdAndUserName(uuid);
+
+						if (roomValid) {
+							goto(resolve(`/room/${userState.roomId}`));
+						}
+					}
+				}}
+			>
+				<div>
+					<input type="text" placeholder="Room link..." bind:value={roomIdInput} />
+				</div>
+				<div>
+					<Button
+						--btn-bg-colour="var(--bg-secondary)"
+						--btn-bg-hover="var(--bg-tertiary)"
+						--btn-border="var(--border)">Enter</Button
+					>
+				</div>
+			</form>
+		</div>
 	</section>
+
 	<div id="home__features">
 		<h2>Unique Features Set</h2>
 		<p>Peer Talk was built from the ground up to be private, open and transparent.</p>
@@ -114,48 +118,45 @@
 		margin-top: 4rem;
 	}
 
-	#home__description {
+	#home__intro {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background-color: var(--bg-primary);
-		padding: 2rem;
-		border-radius: var(--border-radius-normal);
 		text-align: center;
-		max-width: 45rem;
+		background-color: var(--bg-primary);
+		border-radius: var(--border-radius-normal);
+		max-width: 60rem;
 	}
 
-	#home__description h1 {
+	#home__intro-top {
+		margin-bottom: 2rem;
+	}
+
+	#home__intro-top h1 {
 		font-size: 3rem;
 		background-image: linear-gradient(120deg, var(--peach), var(--mauve));
 		background-clip: text;
 		color: transparent;
 	}
 
-	#home__description p {
-		font-size: 1.5rem;
+	#home__intro-top p {
+		font-size: 1.4rem;
+		margin-bottom: 0.5rem;
 	}
 
-	#home__room {
+	#home__intro-bottom {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--bg-secondary);
-		border-radius: var(--border-radius-normal);
-		padding: 2rem;
-		border: 1px solid var(--border);
-		max-width: 60rem;
+		align-items: center;
 	}
 
-	#home__room h2 {
-		color: var(--blue);
-	}
-
-	#home__room p {
+	#home__intro-bottom p {
 		font-size: 1.2rem;
+		margin-bottom: 0.5rem;
 	}
 
-	#home__room > * {
-		margin-bottom: 0.5rem;
+	#home__intro-bottom input {
+		background-color: var(--bg-secondary);
 	}
 
 	#home__features {
@@ -180,7 +181,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 0.5rem;
-		max-width: 80rem;
+		max-width: 60rem;
 	}
 
 	.home__features-grid-item {
