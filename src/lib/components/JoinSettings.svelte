@@ -152,6 +152,7 @@
 		align-items: center;
 		flex-grow: 1;
 		margin: 2rem;
+		animation: fade-in 0.8s ease-out forwards;
 	}
 
 	h1 {

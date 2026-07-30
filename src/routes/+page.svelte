@@ -186,7 +186,7 @@
 		flex-direction: column;
 		max-width: 50rem;
 		padding: 4rem 1rem;
-		animation: fadeIn 0.8s ease-out forwards;
+		animation: fade-in 0.8s ease-out forwards;
 	}
 
 	#home {
@@ -295,17 +295,6 @@
 	#home__footer a:hover {
 		color: var(--mauve);
 		text-decoration: underline;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
 	}
 
 	@media screen and (max-width: 768px) {

@@ -107,6 +107,7 @@
 	#room {
 		display: flex;
 		flex-direction: column;
+		animation: fade-in 0.8s ease-out forwards;
 	}
 
 	#room__talk {

@@ -178,6 +178,15 @@
 			}
 		}
 
+		@keyframes fade-in {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+
 		.btn-animated:hover {
 			transform: scale(1.05);
 		}
