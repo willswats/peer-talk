@@ -230,10 +230,6 @@
 		color: var(--mauve);
 	}
 
-	.home__features-grid-item p {
-		font-size: 1.2rem;
-	}
-
 	#home__footer {
 		display: flex;
 		align-items: center;
@@ -269,6 +265,25 @@
 		#home__features-grid {
 			display: grid;
 			grid-template-columns: 1fr;
+		}
+
+		#home__intro-top p {
+			font-size: 1.2rem;
+		}
+
+		#home__intro-bottom p {
+			font-size: 1rem;
+		}
+
+		#home__features h2 {
+			font-size: 1.6rem;
+		}
+		.home__features-grid-item h3 {
+			font-size: 1.2rem;
+		}
+
+		#home__features p {
+			font-size: 1rem;
 		}
 	}
 </style>
