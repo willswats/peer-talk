@@ -141,7 +141,7 @@
 		flex-direction: column;
 		text-align: center;
 		max-width: 60rem;
-		padding: 4rem;
+		padding: 4rem 1rem;
 	}
 
 	#home__intro-top {
@@ -192,7 +192,7 @@
 		display: flex;
 		flex-direction: column;
 		max-width: 60rem;
-		padding: 4rem;
+		padding: 4rem 1rem;
 	}
 
 	#home__features h2 {
