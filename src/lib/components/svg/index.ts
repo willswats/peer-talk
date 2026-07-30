@@ -15,3 +15,4 @@ export { default as VideoOffLine } from './VideoOffLine.svelte';
 export { default as VideoOnLine } from './VideoOnLine.svelte';
 export { default as VolumeMuteLine } from './VolumeMuteLine.svelte';
 export { default as VolumeUpLine } from './VolumeUpLine.svelte';
+export { default as SvgGitHub } from './SvgGitHub.svelte';

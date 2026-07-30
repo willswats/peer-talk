@@ -4,7 +4,15 @@
 	import { userState } from '@/lib/state.svelte';
 	import { setUserRoomIdAndUserName } from '$lib/utils/setUserRoomIdAndUsername';
 	import { createRoom } from '$lib/utils/createRoom';
-	import { Apps, Store, ChatPrivate, OpenSource, VideoChat, ChatLine } from '$lib/components/svg';
+	import {
+		Apps,
+		Store,
+		ChatPrivate,
+		OpenSource,
+		VideoChat,
+		ChatLine,
+		SvgGitHub
+	} from '$lib/components/svg';
 	import Button from '@/lib/components/Buttons/Button.svelte';
 	import ImagePeerTalk from '$lib/assets/img/peer-talk.png';
 
@@ -107,6 +115,17 @@
 			</div>
 		</div>
 	</section>
+	<footer id="home__footer">
+		<a
+			class="svg-link"
+			href="https://github.com/willswats/peer-talk"
+			target="_blank"
+			rel="noopener noreferrer"><SvgGitHub width={24} height={24} /></a
+		>
+		<a href="https://williamwatson.dev" target="_blank" rel="noopener noreferrer"
+			>williamwatson.dev</a
+		>
+	</footer>
 </main>
 
 <style>
@@ -121,8 +140,6 @@
 		display: flex;
 		flex-direction: column;
 		text-align: center;
-		background-color: var(--bg-primary);
-		border-radius: var(--border-radius-normal);
 		max-width: 60rem;
 		padding: 4rem;
 		height: calc(100vh - 5rem);
@@ -175,7 +192,8 @@
 	#home__features {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		max-width: 80rem;
+		padding: 4rem;
 	}
 
 	#home__features h2 {
@@ -216,6 +234,26 @@
 
 	.home__features-grid-item p {
 		font-size: 1.2rem;
+	}
+
+	#home__footer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 3rem;
+		width: 100%;
+		background-color: var(--bg-secondary);
+		border-top: 1px solid var(--border);
+	}
+
+	#home__footer a {
+		color: var(--mauve);
+		margin-right: 5px;
+		text-align: center;
+	}
+
+	#home__footer a:hover {
+		text-decoration: underline;
 	}
 
 	button {
