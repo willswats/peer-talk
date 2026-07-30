@@ -4,80 +4,254 @@
 	import { userState } from '@/lib/state.svelte';
 	import { setUserRoomIdAndUserName } from '$lib/utils/setUserRoomIdAndUsername';
 	import { createRoom } from '$lib/utils/createRoom';
+	import {
+		Apps,
+		Store,
+		ChatPrivate,
+		OpenSource,
+		VideoChat,
+		ChatLine,
+		SvgGitHub
+	} from '$lib/components/svg';
 	import Button from '@/lib/components/Buttons/Button.svelte';
+	import ImagePeerTalk from '$lib/assets/img/peer-talk.png';
 
 	let roomIdInput = $state('');
 </script>
 
-<main>
-	<section>
-		<h1>PeerTalk</h1>
-		<p>A web app for peer-to-peer group calls with collaborative applications.</p>
-		<div>
-			<button class="btn-blue" onclick={createRoom}>Create Room</button>
-		</div>
-		<form
-			onsubmit={(event) => {
-				event.preventDefault();
-				const uuid = roomIdInput.split('/').pop();
-				if (uuid) {
-					const roomValid = setUserRoomIdAndUserName(uuid);
-
-					if (roomValid) {
-						goto(resolve(`/room/${userState.roomId}`));
-					}
-				}
-			}}
-		>
-			<input type="text" placeholder="Room link..." bind:value={roomIdInput} />
+<main id="home">
+	<section id="home__intro">
+		<div id="home__intro-top">
+			<h1>PeerTalk</h1>
+			<p>
+				Real-time video calls with built-in collaborative tools. Start a private peer-to-peer call,
+				share ideas, and work together instantly - no account required.
+			</p>
 			<div>
-				<Button
-					--btn-bg-colour="var(--bg-tertiary)"
-					--btn-bg-hover="var(--bg-tertiary)"
-					--btn-border="var(--border)">Enter</Button
-				>
+				<button class="btn-blue" onclick={createRoom}>Create Room</button>
 			</div>
-		</form>
+		</div>
+
+		<div id="home__intro-bottom">
+			<p>Have a room link already? Enter it below to join the room.</p>
+			<form
+				onsubmit={(event) => {
+					event.preventDefault();
+					const uuid = roomIdInput.split('/').pop();
+					if (uuid) {
+						const roomValid = setUserRoomIdAndUserName(uuid);
+
+						if (roomValid) {
+							goto(resolve(`/room/${userState.roomId}`));
+						}
+					}
+				}}
+			>
+				<div>
+					<input type="text" placeholder="Room link..." bind:value={roomIdInput} />
+				</div>
+				<div>
+					<Button
+						--btn-bg-colour="var(--bg-secondary)"
+						--btn-bg-hover="var(--bg-tertiary)"
+						--btn-border="var(--border)">Enter</Button
+					>
+				</div>
+			</form>
+		</div>
+		<div id="home__intro-img">
+			<img src={ImagePeerTalk} alt="Screenshot of Peer Talk" />
+		</div>
 	</section>
+
+	<section id="home__features">
+		<h2>Unique Features Set</h2>
+		<p>Peer Talk was built from the ground up to be private, open and transparent.</p>
+		<div id="home__features-grid">
+			<div class="home__features-grid-item">
+				<span>
+					<ChatPrivate width={80} height={80} />
+				</span>
+				<h3>Private Peer-to-Peer Calls</h3>
+				<p>
+					WebRTC encryption keeps your conversations secure. PeerTalk never collects or shares your
+					personal information.
+				</p>
+			</div>
+			<div class="home__features-grid-item">
+				<span>
+					<Apps width={80} height={80} />
+				</span>
+				<h3>Collaborative Apps</h3>
+				<p>Use shared tools such as a Whiteboard or Document Editor together during a call.</p>
+			</div>
+			<div class="home__features-grid-item">
+				<span>
+					<Store width={80} height={80} />
+				</span>
+				<h3>Open App Marketplace</h3>
+				<p>A community-driven library of apps. Contribute on GitHub!</p>
+			</div>
+			<div class="home__features-grid-item">
+				<span>
+					<ChatLine width={80} height={80} />
+				</span>
+				<h3>Rich Chat</h3>
+				<p>Send messages with full emoji support.</p>
+			</div>
+			<div class="home__features-grid-item">
+				<span>
+					<VideoChat width={80} height={80} />
+				</span>
+				<h3>Call Controls</h3>
+				<p>Mute, deafen, or hide your video with ease.</p>
+			</div>
+			<div class="home__features-grid-item">
+				<span>
+					<OpenSource width={80} height={80} />
+				</span>
+				<h3>Free & Open Source</h3>
+				<p>Licensed under AGPL 3.0. Always free, always transparent.</p>
+			</div>
+		</div>
+	</section>
+	<footer id="home__footer">
+		<a
+			class="svg-link"
+			href="https://github.com/willswats/peer-talk"
+			target="_blank"
+			rel="noopener noreferrer"><SvgGitHub width={24} height={24} /></a
+		>
+		<a href="https://williamwatson.dev" target="_blank" rel="noopener noreferrer"
+			>williamwatson.dev</a
+		>
+	</footer>
 </main>
 
 <style>
-	main {
+	#home {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 		flex-grow: 1;
-		margin: 2rem;
+		align-items: center;
 	}
 
-	h1 {
+	#home__intro {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		max-width: 60rem;
+		padding: 4rem;
+	}
+
+	#home__intro-top {
+		margin-bottom: 2rem;
+	}
+
+	#home__intro-top h1 {
 		font-size: 3rem;
 		background-image: linear-gradient(120deg, var(--peach), var(--mauve));
 		background-clip: text;
 		color: transparent;
 	}
 
-	p {
-		font-size: 1.5rem;
-	}
-
-	section > * {
+	#home__intro-top p {
+		font-size: 1.4rem;
 		margin-bottom: 0.5rem;
 	}
 
-	section {
+	#home__intro-bottom {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--bg-secondary);
-		padding: 2rem;
-		border-radius: var(--border-radius-normal);
-		width: 45rem;
-		border: 1px solid var(--border);
+		align-items: center;
+		margin-bottom: 2rem;
 	}
 
-	div {
+	#home__intro-bottom p {
+		font-size: 1.2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	#home__intro-bottom input {
+		background-color: var(--bg-secondary);
+	}
+
+	#home__intro-img {
 		display: flex;
+		flex-direction: column;
+	}
+
+	#home__intro-img img {
+		border: 1px solid var(--border);
+		border-radius: var(--border-radius-normal);
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+	#home__features {
+		display: flex;
+		flex-direction: column;
+		max-width: 60rem;
+		padding: 4rem;
+	}
+
+	#home__features h2 {
+		font-size: 2rem;
+		text-align: center;
+		color: var(--blue);
+	}
+
+	#home__features p {
+		font-size: 1.2rem;
+		margin-bottom: 0.5rem;
+		text-align: center;
+	}
+
+	#home__features-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.5rem;
+	}
+
+	.home__features-grid-item {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		border: 1px solid var(--border);
+		border-radius: var(--border-radius-large);
+		background-color: var(--bg-secondary);
+		padding: 1rem;
+	}
+
+	.home__features-grid-item h3 {
+		font-size: 1.4rem;
+		color: var(--mauve);
+	}
+
+	.home__features-grid-item p {
+		font-size: 1.2rem;
+	}
+
+	#home__footer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 3rem;
+		width: 100%;
+		background-color: var(--bg-secondary);
+		border-top: 1px solid var(--border);
+	}
+
+	#home__footer a {
+		color: var(--mauve);
+		margin-right: 5px;
+		text-align: center;
+	}
+
+	#home__footer a:hover {
+		text-decoration: underline;
 	}
 
 	button {
@@ -92,21 +266,9 @@
 	}
 
 	@media screen and (max-width: 768px) {
-		h1 {
-			font-size: 2rem;
-		}
-
-		p {
-			font-size: 1rem;
-		}
-
-		form {
-			flex-direction: column;
-		}
-
-		section {
-			width: 18rem;
-			padding: 1rem;
+		#home__features-grid {
+			display: grid;
+			grid-template-columns: 1fr;
 		}
 	}
 </style>

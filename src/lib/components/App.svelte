@@ -1,38 +1,38 @@
 <script lang="ts">
 	import { userState } from '$lib/state.svelte';
-	import type { embeddedApp as embeddedAppType } from '$lib/state.svelte';
+	import type { marketplaceApp as marketplaceAppType } from '$lib/state.svelte';
 
 	interface Props {
-		embeddedApp: embeddedAppType;
-		embeddedApps: embeddedAppType[];
+		marketplaceApp: marketplaceAppType;
+		marketplaceApps: marketplaceAppType[];
 		roomId: string | undefined;
 	}
 
-	let { embeddedApp, embeddedApps, roomId }: Props = $props();
+	let { marketplaceApp, marketplaceApps, roomId }: Props = $props();
 
-	let embeddedAppElement: HTMLIFrameElement | null = $state(null);
+	let marketplaceAppElement: HTMLIFrameElement | null = $state(null);
 
 	function handleOnClickClose() {
-		embeddedApps.forEach((app) => (app.render = false));
+		marketplaceApps.forEach((app) => (app.render = false));
 		userState.appLaunched = false;
 	}
 
 	function handleOnClickFullScreen() {
-		if (embeddedAppElement) {
-			embeddedAppElement.requestFullscreen();
+		if (marketplaceAppElement) {
+			marketplaceAppElement.requestFullscreen();
 		}
 	}
 </script>
 
-{#if embeddedApp.render}
+{#if marketplaceApp.render}
 	<figure>
 		<figcaption>
 			<iframe
-				id={embeddedApp.id}
-				title={embeddedApp.title}
+				id={marketplaceApp.id}
+				title={marketplaceApp.title}
 				allow="fullscreen"
-				src={`${embeddedApp.url}${roomId}`}
-				bind:this={embeddedAppElement}
+				src={`${marketplaceApp.url}${roomId}`}
+				bind:this={marketplaceAppElement}
 			>
 			</iframe>
 		</figcaption>

@@ -56,7 +56,7 @@ export const peerState: peerState = $state({
 	messages: []
 });
 
-export interface embeddedApp {
+export interface marketplaceApp {
 	id: string;
 	title: string;
 	description: string;
@@ -66,11 +66,11 @@ export interface embeddedApp {
 	render: boolean;
 }
 
-export const embeddedApps: embeddedApp[] = $state([]);
+export const marketplaceApps: marketplaceApp[] = $state([]);
 
 // Init the embededApps state with the data from apps.json
 for (const app of apps) {
-	embeddedApps.push({ ...app, render: false });
+	marketplaceApps.push({ ...app, render: false });
 }
 
 export function resetUserState() {

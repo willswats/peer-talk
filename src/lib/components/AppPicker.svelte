@@ -1,25 +1,25 @@
 <script lang="ts">
-	import { embeddedApps, userState } from '$lib/state.svelte';
+	import { marketplaceApps, userState } from '$lib/state.svelte';
 
-	import AppCard from '$lib/components/AppCard.svelte';
-	import AppLaunchCard from '$lib/components/AppLaunchCard.svelte';
+	import App from '$lib/components/App.svelte';
+	import AppLaunch from '$lib/components/AppLaunch.svelte';
 	import CloseX from '$lib/components/svg/CloseX.svelte';
 
 	interface Props {
 		appsShown: boolean;
 	}
 
-	let appPickerOverlayElement: HTMLElement | null = $state(null);
 	let appPickerElement: HTMLElement | null = $state(null);
+	let appPickerOverlayElement: HTMLElement | null = $state(null);
 
 	$effect(() => {
 		if (appPickerElement && appPickerOverlayElement) {
 			if (!appsShown) {
-				appPickerOverlayElement.classList.add('hidden');
 				appPickerElement.classList.add('hidden');
+				appPickerOverlayElement.classList.add('hidden');
 			} else {
-				appPickerOverlayElement.classList.remove('hidden');
 				appPickerElement.classList.remove('hidden');
+				appPickerOverlayElement.classList.remove('hidden');
 			}
 		}
 	});
@@ -33,7 +33,7 @@
 	id="overlay"
 	onclick={() => (appsShown = false)}
 ></button>
-<section bind:this={appPickerElement} id="apps-picker">
+<section id="apps-picker" bind:this={appPickerElement}>
 	<div id="apps-picker__content">
 		<button id="apps-picker__content-close-btn" onclick={() => (appsShown = false)}
 			><CloseX width={24} height={24} /></button
@@ -43,9 +43,9 @@
 				{#if !userState.appLaunched}
 					Apps
 				{:else}
-					{#each embeddedApps as embeddedApp (embeddedApp.id)}
-						{#if embeddedApp.render}
-							{embeddedApp.title}
+					{#each marketplaceApps as marketplaceApp (marketplaceApp.id)}
+						{#if marketplaceApp.render}
+							{marketplaceApp.title}
 						{/if}
 					{/each}
 				{/if}
@@ -53,15 +53,15 @@
 		</div>
 		{#if !userState.appLaunched}
 			<div id="apps-picker__launch-cards">
-				{#each embeddedApps as embeddedApp (embeddedApp.id)}
-					<AppLaunchCard {embeddedApp} {embeddedApps} />
+				{#each marketplaceApps as marketplaceApp (marketplaceApp.id)}
+					<AppLaunch {marketplaceApp} {marketplaceApps} />
 				{/each}
 			</div>
 		{:else}
 			<div id="apps-picker__app-cards">
-				{#each embeddedApps as embeddedApp (embeddedApp.id)}
-					{#if embeddedApp.render}
-						<AppCard {embeddedApp} {embeddedApps} roomId={userState.roomId} />
+				{#each marketplaceApps as marketplaceApp (marketplaceApp.id)}
+					{#if marketplaceApp.render}
+						<App {marketplaceApp} {marketplaceApps} roomId={userState.roomId} />
 					{/if}
 				{/each}
 			</div>
