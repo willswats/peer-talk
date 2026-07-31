@@ -13,16 +13,19 @@
 	$effect(() => {
 		if (videoStream) {
 			videoElement.srcObject = videoStream;
-
 			hasVideo = videoStream.getVideoTracks().length > 0;
-			if (!hasVideo) {
-				videoElement.classList.add('hidden');
-			}
 		}
 	});
 </script>
 
-<video bind:this={videoElement} autoplay playsinline controls={false} {muted}>
+<video
+	class:hidden={!hasVideo}
+	bind:this={videoElement}
+	autoplay
+	playsinline
+	controls={false}
+	{muted}
+>
 	<track kind="captions" />
 </video>
 {#if !hasVideo}
