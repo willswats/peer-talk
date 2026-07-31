@@ -108,6 +108,7 @@
 <style>
 	#chat {
 		background-color: var(--bg-secondary);
+		scrollbar-color: var(--text) var(--bg-secondary);
 		display: flex;
 		flex-direction: column;
 		border-radius: 0 var(--border-radius-normal) var(--border-radius-normal) 0;
@@ -180,6 +181,7 @@
 			position: absolute;
 			right: 0;
 			background-color: var(--bg-tertiary-opaque);
+			scrollbar-color: var(--text) var(--bg-tertiary);
 		}
 	}
 
