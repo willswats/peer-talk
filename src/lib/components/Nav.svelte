@@ -39,7 +39,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 1rem;
+		padding: 0.5rem 1rem;
 		font-size: 1.2rem;
 		transition: background-color 0.1s;
 		border-radius: var(--border-radius-normal);
@@ -57,6 +57,7 @@
 		.nav-menu a,
 		button {
 			font-size: 1rem;
+			padding: 0.25rem 0.5rem;
 		}
 	}
 </style>

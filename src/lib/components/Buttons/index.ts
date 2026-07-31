@@ -5,3 +5,4 @@ export { default as ButtonMuteMic } from './ButtonMuteMic.svelte';
 export { default as ButtonShare } from './ButtonShare.svelte';
 export { default as ButtonToggleVideo } from './ButtonToggleVideo.svelte';
 export { default as ButtonChatToggle } from './ButtonChatToggle.svelte';
+export { default as ButtonCopy } from './ButtonCopy.svelte';

@@ -1,10 +1,10 @@
 <script lang="ts">
+	import { ButtonCopy } from '$lib/components/Buttons';
+	import CloseX from '$lib/components/svg/CloseX.svelte';
+
 	interface Props {
 		shareShown: boolean;
 	}
-
-	import { Button } from '$lib/components/Buttons';
-	import CloseX from '$lib/components/svg/CloseX.svelte';
 
 	let { shareShown = $bindable() }: Props = $props();
 </script>
@@ -22,12 +22,7 @@
 			</div>
 			<div id="share__content-bottom">
 				<input readonly value={window.location.href} />
-				<Button
-					--btn-bg-colour="var(--bg-tertiary)"
-					--btn-bg-hover="var(--bg-tertiary)"
-					--btn-border="var(--border)"
-					onclick={() => navigator.clipboard.writeText(window.location.href)}>Copy</Button
-				>
+				<ButtonCopy copy={window.location.href} textBefore="Copy" textAfter="Copied ✓" />
 			</div>
 		</div>
 	</section>
