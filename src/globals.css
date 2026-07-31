@@ -71,6 +71,17 @@
 		border: 1px solid var(--border);
 	}
 
+	textarea {
+		width: 100%;
+		color: var(--text);
+		background-color: var(--bg-tertiary);
+		border-radius: var(--border-radius-normal);
+		font-size: 1.2rem;
+		padding: 0.5rem;
+		border: 1px solid var(--border);
+		resize: none;
+	}
+
 	.hidden {
 		position: fixed;
 		top: 0;

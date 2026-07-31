@@ -5,7 +5,7 @@
 
 	import { userState, peerState } from '$lib/state.svelte';
 
-	let messageInput: HTMLInputElement | null = $state(null);
+	let messageTextArea: HTMLTextAreaElement | null = $state(null);
 	let showEmojiPicker = $state(false);
 	let emojiButton: HTMLButtonElement | null = $state(null);
 	let emojiPickerWrapper: HTMLDivElement | null = $state(null);
@@ -16,9 +16,9 @@
 
 	function handleMessageSubmit(event: SubmitEvent) {
 		event.preventDefault();
-		if (messageInput === null) return;
+		if (messageTextArea === null) return;
 
-		const message = messageInput!.value;
+		const message = messageTextArea!.value;
 
 		if (message.length > 0) {
 			// Show the message in your chat window
@@ -28,16 +28,16 @@
 			peerState.socket.emit('send-chat-message', message);
 
 			// Clear the input box
-			messageInput.value = '';
+			messageTextArea.value = '';
 		}
 	}
 
 	function addEmojiToInput(emojiChar: string) {
-		if (messageInput === null) return;
+		if (messageTextArea === null) return;
 
-		messageInput.value += emojiChar;
+		messageTextArea.value += emojiChar;
 		showEmojiPicker = false;
-		messageInput.focus();
+		messageTextArea.focus();
 	}
 
 	function handleClickOutside(event: MouseEvent) {
@@ -66,7 +66,7 @@
 		</div>
 		<div id="chat__message-input-container">
 			<form onsubmit={handleMessageSubmit}>
-				<input placeholder="Send message..." bind:this={messageInput} />
+				<textarea placeholder="Send message..." rows="1" bind:this={messageTextArea}></textarea>
 				<button
 					type="button"
 					id="chat__btn-show-emoji"
@@ -118,7 +118,7 @@
 		margin: 1rem;
 	}
 
-	#chat__message-input-container input {
+	#chat__message-input-container textarea {
 		padding-right: 50px;
 	}
 
@@ -153,7 +153,7 @@
 			background-color: var(--bg-tertiary-opaque);
 		}
 
-		#chat__message-input-container input {
+		#chat__message-input-container textarea {
 			padding-right: 40px;
 		}
 	}
