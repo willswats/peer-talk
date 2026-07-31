@@ -87,13 +87,12 @@
 
 <style>
 	#chat {
+		background-color: var(--bg-secondary);
 		display: flex;
 		flex-direction: column;
-		background-color: var(--bg-secondary);
-		border-radius: var(--border-radius-normal);
-		padding: 1rem;
+		border-radius: 0 var(--border-radius-normal) var(--border-radius-normal) 0;
 		height: 100%;
-		max-width: 25rem;
+		width: 25rem;
 		border: 1px solid var(--border);
 		margin-left: 0.5rem;
 	}
@@ -108,9 +107,15 @@
 		overflow-wrap: break-word;
 	}
 
+	#chat__message-container p {
+		padding: 0.5rem;
+		border-bottom: 1px solid var(--border);
+	}
+
 	#chat__message-input-container {
 		display: flex;
 		gap: 0.5rem;
+		margin: 1rem;
 	}
 
 	#chat__message-input-container input {
@@ -142,6 +147,7 @@
 
 	@media screen and (max-width: 1200px) {
 		#chat {
+			width: 20rem;
 			position: absolute;
 			right: 0;
 			background-color: var(--bg-tertiary-opaque);
