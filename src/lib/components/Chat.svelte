@@ -153,9 +153,7 @@
 		border-radius: var(--border-radius-normal);
 		position: absolute;
 		right: 0.5rem;
-		top: 50%;
-		transform: translateY(-50%);
-		padding: 0.25rem;
+		bottom: 0.5rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
