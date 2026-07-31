@@ -77,10 +77,10 @@
 	}
 
 	span {
-		font-size: 1.2rem;
+		font-size: 2rem;
 		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-large);
-		padding: 0.5rem 1rem;
+		padding: 1rem;
 		overflow: hidden;
 		border: 1px solid var(--border);
 	}
