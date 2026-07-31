@@ -185,7 +185,7 @@
 		display: flex;
 		flex-direction: column;
 		max-width: 50rem;
-		padding: 4rem 1rem;
+		margin: 4rem 1rem;
 		animation: fade-in 0.8s ease-out forwards;
 	}
 

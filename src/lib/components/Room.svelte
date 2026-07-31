@@ -103,9 +103,9 @@
 	#room__talk {
 		display: flex;
 		flex-direction: column;
-		height: calc(100vh - 5rem);
+		height: calc(100vh - 4rem);
 		flex-grow: 1;
-		margin: 1rem;
+		margin: 0.5rem;
 	}
 
 	#room__main-content {

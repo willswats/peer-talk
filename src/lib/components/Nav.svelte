@@ -43,10 +43,14 @@
 		font-size: 1.2rem;
 		transition: background-color 0.1s;
 		border-radius: var(--border-radius-normal);
-		margin-left: 0.25rem;
 		background-color: var(--bg-secondary);
 		margin-top: 0.1rem;
 		border: 1px solid var(--border);
+		margin-right: 0.5rem;
+	}
+
+	a:first-child {
+		margin-left: 0.5rem;
 	}
 
 	.nav-menu-a-enabled {
