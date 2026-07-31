@@ -122,7 +122,7 @@
 		flex-direction: column-reverse;
 		width: 100%;
 		height: 100%;
-		overflow-y: scroll;
+		overflow-y: auto;
 		overflow-wrap: break-word;
 	}
 
@@ -151,6 +151,7 @@
 		field-sizing: content;
 		padding-right: 50px;
 		max-height: 10rem;
+		word-break: break-all;
 	}
 
 	#chat__message-input-container form {
@@ -167,7 +168,7 @@
 		background-color: transparent;
 		border-radius: var(--border-radius-normal);
 		position: absolute;
-		right: 0.5rem;
+		right: 1.5rem;
 		bottom: 0.5rem;
 		display: flex;
 		align-items: center;
@@ -179,10 +180,6 @@
 			position: absolute;
 			right: 0;
 			background-color: var(--bg-tertiary-opaque);
-		}
-
-		#chat__message-input-container textarea {
-			padding-right: 40px;
 		}
 	}
 

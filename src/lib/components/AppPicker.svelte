@@ -111,7 +111,6 @@
 		gap: 0.5rem;
 		width: 80vw;
 		height: 80vh;
-		overflow: scroll;
 	}
 
 	#apps-picker__app-cards {
