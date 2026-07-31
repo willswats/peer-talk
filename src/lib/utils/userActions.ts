@@ -7,8 +7,9 @@ export function toggleLocalAudio(localStream: MediaStream | null, localMicEnable
 }
 
 export function toggleDeafen(deafened: boolean, remoteStreams: MediaStream[]) {
+	deafened = !deafened;
+
 	if (remoteStreams.length >= 1) {
-		deafened = !deafened;
 		if (deafened) {
 			// Disable remote audio streams
 			for (const remoteStream of remoteStreams) {
@@ -21,6 +22,7 @@ export function toggleDeafen(deafened: boolean, remoteStreams: MediaStream[]) {
 			}
 		}
 	}
+
 	return deafened;
 }
 

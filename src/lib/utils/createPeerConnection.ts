@@ -33,6 +33,10 @@ export function createPeerConnection(socket: Socket, socketId: string) {
 		if (!peerState.remoteStreams.includes(remoteStream)) {
 			peerState.remoteStreams.push(remoteStream);
 			peerState.remoteStreamIdentifier[socketId] = remoteStream.id;
+
+			if (userState.deafened) {
+				remoteStream.getAudioTracks()[0].enabled = false;
+			}
 		}
 	};
 
