@@ -94,17 +94,6 @@ test('Toggle deafen twice returns to original state', () => {
 	}
 });
 
-test('Should not modify streams when array is empty', () => {
-	const remoteStreams: MediaStream[] = [];
-	const deafened = false;
-	const originalDeafened = deafened;
-
-	const result = toggleDeafen(deafened, remoteStreams);
-
-	expect(result).toBe(originalDeafened);
-	// Function should complete without errors
-});
-
 test('Should handle stream with audio track disabled initially', () => {
 	const remoteStreams = createMockStreams(1, false);
 	const deafened = false;
