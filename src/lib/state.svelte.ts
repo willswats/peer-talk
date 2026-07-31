@@ -26,13 +26,19 @@ interface peerUsernames {
 	[key: string]: string; // socketId - username
 }
 
+interface peerMessage {
+	name: string;
+	time: string;
+	message: string;
+}
+
 interface peerState {
 	socket: Socket;
 	peers: peers;
 	remoteStreams: MediaStream[];
 	remoteStreamIdentifier: remoteStreamIdentifier;
 	usernames: peerUsernames;
-	messages: string[];
+	messages: peerMessage[];
 }
 
 export const userState: userState = $state({

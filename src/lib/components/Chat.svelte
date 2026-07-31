@@ -28,11 +28,11 @@
 		event.preventDefault();
 		if (messageTextArea === null) return;
 
-		const message = messageTextArea!.value;
+		const message = messageTextArea.value;
 
 		if (message.length > 0) {
 			// Show the message in your chat window
-			peerState.messages.unshift(`${userState.username} (${getTime()}): ${message}`);
+			peerState.messages.unshift({ name: userState.username, time: getTime(), message });
 
 			// Send the message to the server
 			peerState.socket.emit('send-chat-message', message);
@@ -70,8 +70,13 @@
 {#if userState.chatToggled}
 	<section id="chat" transition:slide={{ duration: 300, axis: 'x' }}>
 		<div id="chat__message-container">
-			{#each peerState.messages as message, index (index + message)}
-				<p>{message}</p>
+			{#each peerState.messages as message, index (index)}
+				<div id="chat__message-content">
+					<p id="chat__message-title">
+						{message.name} <span id="chat__message-time">({message.time})</span>
+					</p>
+					<p>{message.message}</p>
+				</div>
 			{/each}
 		</div>
 		<div id="chat__message-input-container">
@@ -115,16 +120,25 @@
 	#chat__message-container {
 		display: flex;
 		flex-direction: column-reverse;
-		font-size: 1.2rem;
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
 		overflow-wrap: break-word;
 	}
 
-	#chat__message-container p {
+	#chat__message-content {
 		padding: 0.5rem;
 		border-bottom: 1px solid var(--border);
+	}
+
+	#chat__message-title {
+		font-weight: bold;
+		font-size: 1.2rem;
+	}
+
+	#chat__message-time {
+		font-weight: normal;
+		font-size: 1rem;
 	}
 
 	#chat__message-input-container {
@@ -162,7 +176,6 @@
 
 	@media screen and (max-width: 1200px) {
 		#chat {
-			width: 18rem;
 			position: absolute;
 			right: 0;
 			background-color: var(--bg-tertiary-opaque);
@@ -170,6 +183,12 @@
 
 		#chat__message-input-container textarea {
 			padding-right: 40px;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		#chat {
+			width: 18rem;
 		}
 	}
 </style>

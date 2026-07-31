@@ -74,7 +74,7 @@ export function createSocketWithListeners() {
 	});
 
 	socket.on('chat-message', (data) => {
-		peerState.messages.unshift(`${data.name} (${data.time}): ${data.message}`);
+		peerState.messages.unshift({ name: data.name, time: data.time, message: data.message });
 	});
 
 	socket.on('user-disconnected', (socketId) => {
