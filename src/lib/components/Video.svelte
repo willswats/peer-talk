@@ -29,21 +29,10 @@
 	<video bind:this={videoElement} autoplay playsinline controls={false} {muted}>
 		<track kind="captions" />
 	</video>
-	{#if !muted}
-		<input
-			min="0"
-			max="100"
-			step="1"
-			type="range"
-			bind:value={volume}
-			oninput={handleVolumeChange}
-		/>
-	{/if}
-</div>
-{#if !hasVideo}
-	<div>
-		<span>{username}</span>
-		{#if !muted}
+	{#if muted}
+		<div id="input-container"></div>
+	{:else}
+		<div id="input-container">
 			<input
 				min="0"
 				max="100"
@@ -52,6 +41,25 @@
 				bind:value={volume}
 				oninput={handleVolumeChange}
 			/>
+		</div>
+	{/if}
+</div>
+{#if !hasVideo}
+	<div>
+		<span>{username}</span>
+		{#if muted}
+			<div id="input-container"></div>
+		{:else}
+			<div id="input-container">
+				<input
+					min="0"
+					max="100"
+					step="1"
+					type="range"
+					bind:value={volume}
+					oninput={handleVolumeChange}
+				/>
+			</div>
 		{/if}
 	</div>
 {/if}
@@ -70,10 +78,10 @@
 		min-width: 0;
 		min-height: 0;
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		border: 1px solid var(--border);
-		position: relative;
 	}
 
 	span {
@@ -87,8 +95,14 @@
 
 	input {
 		position: absolute;
-		bottom: 0;
-		border: 0;
+	}
+
+	#input-container {
+		position: relative;
+		display: flex;
+		height: 1.5rem;
+		background-color: transparent;
+		border: none;
 	}
 
 	@media screen and (max-width: 768px) {
