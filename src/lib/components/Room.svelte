@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { userState, peerState, marketplaceApps } from '$lib/state.svelte';
+	import { userState, peerState } from '$lib/state.svelte';
 	import { disconnectUser } from '$lib/utils/disconnectUser';
 
 	import Video from '$lib/components/Video.svelte';
@@ -127,7 +127,7 @@
 
 	#room__buttons {
 		display: flex;
-		margin: 0.5rem 0;
+		margin-top: 0.5rem;
 		flex-shrink: 0;
 	}
 
