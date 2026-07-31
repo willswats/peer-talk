@@ -88,8 +88,8 @@
 				<div class="home__grid-item-text">
 					<h3>Collaborative Apps</h3>
 					<p>
-						Launch apps like a whiteboard or document editor that everyone in the call can use
-						together in real time.
+						Launch apps from the marketplace that everyone in the call can use together in real
+						time.
 					</p>
 				</div>
 			</div>
@@ -98,10 +98,9 @@
 					<SvgStore width={80} height={80} />
 				</span>
 				<div class="home__grid-item-text">
-					<h3>Open App Marketplace</h3>
+					<h3>App Marketplace</h3>
 					<p>
-						The marketplace is community-driven, open to all developers and stored in a simple JSON
-						file. Contribute on
+						Community-driven app marketplace, stored in a simple JSON file. Contribute on
 						<a
 							class="svg-link"
 							href="https://github.com/willswats/peer-talk"
@@ -135,9 +134,7 @@
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Free & Open Source</h3>
-					<p>
-						Licensed under AGPL 3.0. Always free, always transparent, and built for the community.
-					</p>
+					<p>Licensed under AGPL 3.0.</p>
 				</div>
 			</div>
 		</div>
