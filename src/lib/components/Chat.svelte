@@ -136,6 +136,7 @@
 	#chat__message-input-container textarea {
 		field-sizing: content;
 		padding-right: 50px;
+		max-height: 10rem;
 	}
 
 	#chat__message-input-container form {
