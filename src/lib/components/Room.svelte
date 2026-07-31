@@ -148,13 +148,13 @@
 		flex: 1;
 	}
 
-	@media screen and (max-width: 1240px) {
+	@media screen and (max-width: 1650px) {
 		#room__videos {
 			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 		}
 	}
 
-	@media screen and (max-width: 850px) {
+	@media screen and (max-width: 1250px) {
 		#room__videos {
 			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		}
