@@ -25,8 +25,8 @@
 			<div id="home__info-top">
 				<h1>PeerTalk</h1>
 				<p>
-					Real-time video calls with built-in collaborative tools. Start a private peer-to-peer
-					call, share ideas, and work together instantly - no account required.
+					Private peer-to-peer video calls with an open marketplace of collaborative tools. Start a
+					call, share a link, and collaborate in real time.
 				</p>
 				<div>
 					<button class="btn-animated" onclick={createRoom}>Create Room</button>
@@ -67,8 +67,7 @@
 	</section>
 
 	<section class="page">
-		<h2>Unique Features Set</h2>
-		<p>Peer Talk was built from the ground up to be private, open and transparent.</p>
+		<h2>Built for privacy. Built to be extended.</h2>
 		<div id="home__grid">
 			<div class="home__grid-item">
 				<span class="home__grid-item-svg">
@@ -77,8 +76,8 @@
 				<div class="home__grid-item-text">
 					<h3>Private Peer-to-Peer Calls</h3>
 					<p>
-						WebRTC encryption keeps your conversations secure. PeerTalk never collects or shares
-						your personal information.
+						WebRTC encryption keeps your voice, video, and messages secure. They flow directly
+						between participants. PeerTalk doesn't store or share your data.
 					</p>
 				</div>
 			</div>
@@ -88,7 +87,10 @@
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Collaborative Apps</h3>
-					<p>Use shared tools such as a Whiteboard or Document Editor together during a call.</p>
+					<p>
+						Launch apps like a whiteboard or document editor that everyone in the call can use
+						together in real time.
+					</p>
 				</div>
 			</div>
 			<div class="home__grid-item">
@@ -97,7 +99,16 @@
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Open App Marketplace</h3>
-					<p>A community-driven library of apps. Contribute on GitHub!</p>
+					<p>
+						The marketplace is community-driven, open to all developers and stored in a simple JSON
+						file. Contribute on
+						<a
+							class="svg-link"
+							href="https://github.com/willswats/peer-talk"
+							target="_blank"
+							rel="noopener noreferrer">GitHub</a
+						>!
+					</p>
 				</div>
 			</div>
 			<div class="home__grid-item">
@@ -115,7 +126,7 @@
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Call Controls</h3>
-					<p>Mute, deafen, or hide your video with ease.</p>
+					<p>Mute, deafen, or hide your video with a single click.</p>
 				</div>
 			</div>
 			<div class="home__grid-item">
@@ -124,7 +135,9 @@
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Free & Open Source</h3>
-					<p>Licensed under AGPL 3.0. Always free, always transparent.</p>
+					<p>
+						Licensed under AGPL 3.0. Always free, always transparent, and built for the community.
+					</p>
 				</div>
 			</div>
 		</div>
@@ -179,6 +192,11 @@
 	form {
 		display: flex;
 		gap: 0.5rem;
+	}
+
+	a:hover {
+		color: var(--mauve);
+		text-decoration: underline;
 	}
 
 	.page {
@@ -290,11 +308,6 @@
 	#home__footer a {
 		margin-right: 5px;
 		text-align: center;
-	}
-
-	#home__footer a:hover {
-		color: var(--mauve);
-		text-decoration: underline;
 	}
 
 	@media screen and (max-width: 768px) {
