@@ -117,7 +117,7 @@
 
 	#room__videos {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
 		flex: 1;
 		min-height: 0;
 		height: 100%;
@@ -148,7 +148,19 @@
 		flex: 1;
 	}
 
-	@media screen and (max-width: 1200px) {
+	@media screen and (max-width: 1240px) {
+		#room__videos {
+			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		}
+	}
+
+	@media screen and (max-width: 850px) {
+		#room__videos {
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		}
+	}
+
+	@media screen and (max-width: 768px) {
 		#room__videos {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
