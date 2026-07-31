@@ -43,10 +43,11 @@
 		position: absolute;
 		bottom: 100%;
 		right: 0;
-		margin-bottom: 2.6rem;
+		margin-bottom: 4rem;
+		margin-right: 1rem;
 		z-index: 1000;
-		width: 310px;
-		height: 400px;
+		width: 20rem;
+		height: 25rem;
 	}
 
 	:global(emoji-picker) {
@@ -61,8 +62,8 @@
 
 	@media screen and (max-width: 768px) {
 		.emoji-picker-container {
-			width: 100%;
-			height: 400px;
+			width: 18rem;
+			height: 25rem;
 		}
 	}
 </style>
