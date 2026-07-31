@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ButtonCopy } from '$lib/components/Buttons';
-	import CloseX from '$lib/components/svg/CloseX.svelte';
+	import { SvgCloseX } from '$lib/components/svg';
 
 	interface Props {
 		shareShown: boolean;
@@ -14,7 +14,7 @@
 	<section id="share">
 		<div id="share__content">
 			<button id="share__content-close-btn" onclick={() => (shareShown = false)}
-				><CloseX width={24} height={24} /></button
+				><SvgCloseX width={24} height={24} /></button
 			>
 			<div id="share__content-top">
 				<h1>Invite Others</h1>

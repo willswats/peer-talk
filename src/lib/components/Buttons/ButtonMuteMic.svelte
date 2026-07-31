@@ -1,6 +1,5 @@
 <script lang="ts">
-	import MicLine from '$lib/components/svg/MicLine.svelte';
-	import MicOffLine from '$lib/components/svg/MicOffLine.svelte';
+	import { SvgMicLine, SvgMicOffLine } from '$lib/components/svg';
 	import { userState } from '$lib/state.svelte';
 	import { toggleLocalAudio } from '$lib/utils/userActions';
 	import { Button } from '$lib/components/Buttons';
@@ -12,8 +11,8 @@
 	}}
 >
 	{#if userState.localMicEnabled}
-		<MicLine width={24} height={24} />
+		<SvgMicLine width={24} height={24} />
 	{:else}
-		<MicOffLine width={24} height={24} />
+		<SvgMicOffLine width={24} height={24} />
 	{/if}
 </Button>

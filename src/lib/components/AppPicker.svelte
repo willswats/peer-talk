@@ -3,7 +3,7 @@
 
 	import App from '$lib/components/App.svelte';
 	import AppLaunch from '$lib/components/AppLaunch.svelte';
-	import CloseX from '$lib/components/svg/CloseX.svelte';
+	import { SvgCloseX } from '$lib/components/svg';
 
 	interface Props {
 		appsShown: boolean;
@@ -36,7 +36,7 @@
 <section id="apps-picker" bind:this={appPickerElement}>
 	<div id="apps-picker__content">
 		<button id="apps-picker__content-close-btn" onclick={() => (appsShown = false)}
-			><CloseX width={24} height={24} /></button
+			><SvgCloseX width={24} height={24} /></button
 		>
 		<div id="apps-picker__content-top">
 			<h1>

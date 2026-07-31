@@ -1,6 +1,5 @@
 <script lang="ts">
-	import VolumeUpLine from '$lib/components/svg/VolumeUpLine.svelte';
-	import VolumeMuteLine from '$lib/components/svg/VolumeMuteLine.svelte';
+	import { SvgVolumeUpLine, SvgVolumeMuteLine } from '$lib/components/svg';
 	import { userState } from '$lib/state.svelte';
 	import { peerState } from '$lib/state.svelte';
 	import { toggleDeafen } from '$lib/utils/userActions';
@@ -13,8 +12,8 @@
 	}}
 >
 	{#if userState.deafened}
-		<VolumeMuteLine width={24} height={24} />
+		<SvgVolumeMuteLine width={24} height={24} />
 	{:else}
-		<VolumeUpLine width={24} height={24} />
+		<SvgVolumeUpLine width={24} height={24} />
 	{/if}
 </Button>

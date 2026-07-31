@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import EmojiPicker from '$lib/components/EmojiPicker.svelte';
-	import EmoticonLine from '$lib/components/svg/EmoticonLine.svelte';
+	import { SvgEmoticonLine } from '$lib/components/svg';
 
 	import { userState, peerState } from '$lib/state.svelte';
 
@@ -73,7 +73,7 @@
 					bind:this={emojiButton}
 					onclick={() => (showEmojiPicker = !showEmojiPicker)}
 				>
-					<EmoticonLine width={24} height={24} />
+					<SvgEmoticonLine width={24} height={24} />
 				</button>
 			</form>
 		</div>

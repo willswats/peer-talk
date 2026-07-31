@@ -5,12 +5,12 @@
 	import { setUserRoomIdAndUserName } from '$lib/utils/setUserRoomIdAndUsername';
 	import { createRoom } from '$lib/utils/createRoom';
 	import {
-		Apps,
-		Store,
-		ChatPrivate,
-		OpenSource,
-		VideoChat,
-		ChatLine,
+		SvgApps,
+		SvgStore,
+		SvgChatPrivate,
+		SvgOpenSource,
+		SvgVideoChat,
+		SvgChatLine,
 		SvgGitHub
 	} from '$lib/components/svg';
 	import Button from '@/lib/components/Buttons/Button.svelte';
@@ -72,7 +72,7 @@
 		<div id="home__grid">
 			<div class="home__grid-item">
 				<span class="home__grid-item-svg">
-					<ChatPrivate width={80} height={80} />
+					<SvgChatPrivate width={80} height={80} />
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Private Peer-to-Peer Calls</h3>
@@ -84,7 +84,7 @@
 			</div>
 			<div class="home__grid-item">
 				<span class="home__grid-item-svg">
-					<Apps width={80} height={80} />
+					<SvgApps width={80} height={80} />
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Collaborative Apps</h3>
@@ -93,7 +93,7 @@
 			</div>
 			<div class="home__grid-item">
 				<span class="home__grid-item-svg">
-					<Store width={80} height={80} />
+					<SvgStore width={80} height={80} />
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Open App Marketplace</h3>
@@ -102,7 +102,7 @@
 			</div>
 			<div class="home__grid-item">
 				<span class="home__grid-item-svg">
-					<ChatLine width={80} height={80} />
+					<SvgChatLine width={80} height={80} />
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Rich Chat</h3>
@@ -111,7 +111,7 @@
 			</div>
 			<div class="home__grid-item">
 				<span class="home__grid-item-svg">
-					<VideoChat width={80} height={80} />
+					<SvgVideoChat width={80} height={80} />
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Call Controls</h3>
@@ -120,7 +120,7 @@
 			</div>
 			<div class="home__grid-item">
 				<span class="home__grid-item-svg">
-					<OpenSource width={80} height={80} />
+					<SvgOpenSource width={80} height={80} />
 				</span>
 				<div class="home__grid-item-text">
 					<h3>Free & Open Source</h3>
