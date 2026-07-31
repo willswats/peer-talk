@@ -32,6 +32,7 @@
 	button {
 		background-color: var(--bg-tertiary);
 		border-radius: var(--border-radius-normal);
+		border: 1px solid var(--border);
 		padding: 0.5rem 1rem;
 		white-space: pre;
 	}
