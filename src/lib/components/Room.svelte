@@ -14,6 +14,7 @@
 		ButtonShare,
 		ButtonChatToggle
 	} from '$lib/components/Buttons';
+	import { SvgApps } from '$lib/components/svg';
 	import CustomAlert from '$lib/components/CustomAlert.svelte';
 
 	import { beforeNavigate } from '$app/navigation';
@@ -56,20 +57,6 @@
 	>
 	<AppPicker bind:appsShown />
 	<section id="room__talk">
-		<div id="room__top-buttons">
-			<Button --btn-border="var(--border)" onclick={() => (appsShown = true)}>
-				{#if !userState.appLaunched}
-					Apps
-				{:else}
-					{#each marketplaceApps as marketplaceApp (marketplaceApp.id)}
-						{#if marketplaceApp.render}
-							{marketplaceApp.title}
-						{/if}
-					{/each}
-				{/if}
-			</Button>
-		</div>
-
 		<div id="room__main-content">
 			<div id="room__videos">
 				<Video username={userState.username} videoStream={userState.localStream} muted={true} />
@@ -94,6 +81,9 @@
 				<ButtonMuteMic />
 				<ButtonDeafen />
 				<ButtonToggleVideo />
+				<Button onclick={() => (appsShown = true)}>
+					<SvgApps width={24} height={24} />
+				</Button>
 				<ButtonDisconnect />
 			</div>
 			<div id="room__buttons-right">
@@ -156,12 +146,6 @@
 		display: flex;
 		justify-content: flex-end;
 		flex: 1;
-	}
-
-	#room__top-buttons {
-		display: flex;
-		margin-bottom: 0.5rem;
-		gap: 0.25rem;
 	}
 
 	@media screen and (max-width: 1200px) {
