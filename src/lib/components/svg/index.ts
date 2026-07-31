@@ -6,7 +6,7 @@ export { default as SvgCloseX } from './SvgCloseX.svelte';
 export { default as SvgEmoticonLine } from './SvgEmoticonLine.svelte';
 export { default as SvgHangUp } from './SvgHangUp.svelte';
 export { default as SvgMicLine } from './SvgMicLine.svelte';
-export { default as SvgMicOffLine } from './SvgMicLine.svelte';
+export { default as SvgMicOffLine } from './SvgMicOffLine.svelte';
 export { default as SvgOpenSource } from './SvgOpenSource.svelte';
 export { default as SvgStore } from './SvgStore.svelte';
 export { default as SvgUserAddLine } from './SvgUserAddLine.svelte';
