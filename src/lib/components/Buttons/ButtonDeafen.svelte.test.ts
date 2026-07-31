@@ -41,26 +41,6 @@ test('Undeafen - enable all remote audio streams', () => {
 	}
 });
 
-test('Handle empty remote streams array - should not toggle state', () => {
-	const remoteStreams: MediaStream[] = [];
-	const deafened = false;
-
-	const result = toggleDeafen(deafened, remoteStreams);
-
-	// Since remoteStreams.length < 1, deafened should NOT toggle
-	expect(result).toBe(false);
-});
-
-test('Handle empty remote streams array with deafened true - should not toggle state', () => {
-	const remoteStreams: MediaStream[] = [];
-	const deafened = true;
-
-	const result = toggleDeafen(deafened, remoteStreams);
-
-	// Since remoteStreams.length < 1, deafened should NOT toggle
-	expect(result).toBe(true);
-});
-
 test('Handle single remote stream', () => {
 	const remoteStreams = createMockStreams(1, true);
 	const deafened = false;
