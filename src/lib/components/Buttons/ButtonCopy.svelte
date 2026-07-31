@@ -5,7 +5,7 @@
 		textAfter: string;
 	}
 
-	function handleButtonRoomCopy(
+	export function handleButtonRoomCopy(
 		buttonEl: HTMLButtonElement,
 		copy: string,
 		textAfter: string,
