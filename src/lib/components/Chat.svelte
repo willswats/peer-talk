@@ -6,12 +6,22 @@
 	import { userState, peerState } from '$lib/state.svelte';
 
 	let messageTextArea: HTMLTextAreaElement | null = $state(null);
+	let messageForm: HTMLFormElement | null = $state(null);
 	let showEmojiPicker = $state(false);
 	let emojiButton: HTMLButtonElement | null = $state(null);
 	let emojiPickerWrapper: HTMLDivElement | null = $state(null);
 
 	function getTime() {
 		return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+	}
+
+	function handleTextAreaKeyDown(event: KeyboardEvent) {
+		if (event.key === 'Enter' && !event.shiftKey) {
+			event.preventDefault();
+			if (messageForm) {
+				messageForm.requestSubmit();
+			}
+		}
 	}
 
 	function handleMessageSubmit(event: SubmitEvent) {
@@ -65,8 +75,13 @@
 			{/each}
 		</div>
 		<div id="chat__message-input-container">
-			<form onsubmit={handleMessageSubmit}>
-				<textarea placeholder="Send message..." rows="1" bind:this={messageTextArea}></textarea>
+			<form onsubmit={handleMessageSubmit} bind:this={messageForm}>
+				<textarea
+					onkeydown={handleTextAreaKeyDown}
+					placeholder="Send message..."
+					rows="1"
+					bind:this={messageTextArea}
+				></textarea>
 				<button
 					type="button"
 					id="chat__btn-show-emoji"
@@ -119,6 +134,7 @@
 	}
 
 	#chat__message-input-container textarea {
+		field-sizing: content;
 		padding-right: 50px;
 	}
 
