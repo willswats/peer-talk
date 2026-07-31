@@ -85,7 +85,7 @@
 	}
 
 	#alert-content p {
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		padding: 1rem;
 	}
 
