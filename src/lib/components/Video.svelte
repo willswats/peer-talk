@@ -9,6 +9,7 @@
 
 	let videoElement: HTMLVideoElement;
 	let hasVideo = $state(false);
+	let volume = $state(100);
 
 	$effect(() => {
 		if (videoStream) {
@@ -16,21 +17,42 @@
 			hasVideo = videoStream.getVideoTracks().length > 0;
 		}
 	});
+
+	function handleVolumeChange() {
+		if (videoElement) {
+			videoElement.volume = volume / 100;
+		}
+	}
 </script>
 
-<video
-	class:hidden={!hasVideo}
-	bind:this={videoElement}
-	autoplay
-	playsinline
-	controls={false}
-	{muted}
->
-	<track kind="captions" />
-</video>
+<div class:hidden={!hasVideo}>
+	<video bind:this={videoElement} autoplay playsinline controls={false} {muted}>
+		<track kind="captions" />
+	</video>
+	{#if !muted}
+		<input
+			min="0"
+			max="100"
+			step="1"
+			type="range"
+			bind:value={volume}
+			oninput={handleVolumeChange}
+		/>
+	{/if}
+</div>
 {#if !hasVideo}
 	<div>
 		<span>{username}</span>
+		{#if !muted}
+			<input
+				min="0"
+				max="100"
+				step="1"
+				type="range"
+				bind:value={volume}
+				oninput={handleVolumeChange}
+			/>
+		{/if}
 	</div>
 {/if}
 
@@ -38,11 +60,6 @@
 	video {
 		width: 100%;
 		height: 100%;
-		background-color: var(--background-color, var(--bg-secondary));
-		border-radius: var(--border-radius-normal);
-		min-width: 0;
-		min-height: 0;
-		border: 1px solid var(--border);
 	}
 
 	div {
@@ -56,6 +73,7 @@
 		justify-content: center;
 		align-items: center;
 		border: 1px solid var(--border);
+		position: relative;
 	}
 
 	span {
@@ -65,6 +83,12 @@
 		padding: 0.5rem 1rem;
 		overflow: hidden;
 		border: 1px solid var(--border);
+	}
+
+	input {
+		position: absolute;
+		bottom: 0;
+		border: 0;
 	}
 
 	@media screen and (max-width: 768px) {

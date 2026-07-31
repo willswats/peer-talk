@@ -191,37 +191,34 @@
 		transform: scale(1.05);
 	}
 
-	input[type='number'] {
-		appearance: textfield;
-		/* Remove Firefox default browser style */
-		outline: none;
-	}
-
-	/* Remove WebKit default browser style */
-	input[type='number']::-webkit-outer-spin-button,
-	input[type='number']::-webkit-inner-spin-button {
-		appearance: none;
-		margin: 0;
-	}
-
 	input[type='range'] {
 		cursor: pointer;
 		appearance: none;
-		/* Remove WebKit default browser style */
+		background-color: transparent;
 	}
 
 	input[type='range']::-webkit-slider-thumb {
 		cursor: pointer;
 		appearance: none;
-		/* Remove WebKit default browser style */
 		background-color: var(--text);
 	}
 
 	input[type='range']::-moz-range-thumb {
 		cursor: pointer;
 		border: none;
-		/* Remove Firefox default browser style */
 		background-color: var(--text);
+	}
+
+	input[type='range']::-webkit-slider-runnable-track {
+		background: var(--bg-tertiary);
+		height: 0.5rem;
+		border-radius: var(--border-radius-normal);
+	}
+
+	input[type='range']::-moz-range-track {
+		background: var(--bg-tertiary);
+		height: 0.5rem;
+		border-radius: var(--border-radius-normal);
 	}
 
 	@media screen and (max-width: 768px) {
