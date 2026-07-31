@@ -3,7 +3,7 @@
 	import { peerState, resetUserState, userState } from '$lib/state.svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { Button, ButtonToggleVideo, ButtonMuteMic } from '$lib/components/Buttons';
+	import { Button, ButtonToggleVideo, ButtonMuteMic, ButtonDeafen } from '$lib/components/Buttons';
 	import CustomAlert from '$lib/components/CustomAlert.svelte';
 
 	let hasLocalVideo = $state(false);
@@ -117,6 +117,11 @@
 		<input id="input-username" type="text" bind:value={userState.username} />
 		<div>
 			<ButtonMuteMic
+				--btn-bg-colour="var(--bg-tertiary)"
+				--btn-bg-hover="var(--bg-tertiary)"
+				--btn-border="var(--border)"
+			/>
+			<ButtonDeafen
 				--btn-bg-colour="var(--bg-tertiary)"
 				--btn-bg-hover="var(--bg-tertiary)"
 				--btn-border="var(--border)"
