@@ -162,7 +162,7 @@
 
 	@media screen and (max-width: 1200px) {
 		#chat {
-			width: 20rem;
+			width: 18rem;
 			position: absolute;
 			right: 0;
 			background-color: var(--bg-tertiary-opaque);
