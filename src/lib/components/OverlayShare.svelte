@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ButtonCopy } from '$lib/components/Buttons';
 	import { SvgCloseX } from '$lib/components/svg';
+	import { fade } from 'svelte/transition';
 
 	interface Props {
 		shareShown: boolean;
@@ -10,8 +11,13 @@
 </script>
 
 {#if shareShown}
-	<button aria-label="overlay" id="overlay" onclick={() => (shareShown = false)}></button>
-	<section id="share">
+	<button
+		transition:fade={{ duration: 300 }}
+		aria-label="overlay"
+		id="overlay"
+		onclick={() => (shareShown = false)}
+	></button>
+	<section transition:fade={{ duration: 300 }} id="share">
 		<div id="share__content">
 			<button id="share__content-close-btn" onclick={() => (shareShown = false)}
 				><SvgCloseX width={24} height={24} /></button

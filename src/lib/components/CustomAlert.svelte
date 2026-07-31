@@ -6,6 +6,7 @@
 		alertShown: boolean;
 	}
 
+	import { fade } from 'svelte/transition';
 	import { Button } from '$lib/components/Buttons';
 	import type { Snippet } from 'svelte';
 
@@ -26,8 +27,13 @@
 </script>
 
 {#if alertShown}
-	<button aria-label="overlay" id="overlay" onclick={() => (alertShown = false)}></button>
-	<section id="alert">
+	<button
+		transition:fade={{ duration: 300 }}
+		aria-label="overlay"
+		id="overlay"
+		onclick={() => (alertShown = false)}
+	></button>
+	<section transition:fade={{ duration: 300 }} id="alert">
 		<div id="alert-content">
 			<p>
 				{@render children()}

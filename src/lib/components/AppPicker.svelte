@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { marketplaceApps, userState } from '$lib/state.svelte';
+	import { fade } from 'svelte/transition';
 
 	import App from '$lib/components/App.svelte';
 	import AppLaunch from '$lib/components/AppLaunch.svelte';
@@ -9,31 +10,18 @@
 		appsShown: boolean;
 	}
 
-	let appPickerElement: HTMLElement | null = $state(null);
-	let appPickerOverlayElement: HTMLElement | null = $state(null);
-
-	$effect(() => {
-		if (appPickerElement && appPickerOverlayElement) {
-			if (!appsShown) {
-				appPickerElement.classList.add('hidden');
-				appPickerOverlayElement.classList.add('hidden');
-			} else {
-				appPickerElement.classList.remove('hidden');
-				appPickerOverlayElement.classList.remove('hidden');
-			}
-		}
-	});
-
 	let { appsShown = $bindable() }: Props = $props();
 </script>
 
-<button
-	bind:this={appPickerOverlayElement}
-	aria-label="overlay"
-	id="overlay"
-	onclick={() => (appsShown = false)}
-></button>
-<section id="apps-picker" bind:this={appPickerElement}>
+{#if appsShown}
+	<button
+		transition:fade={{ duration: 300 }}
+		aria-label="overlay"
+		id="overlay"
+		onclick={() => (appsShown = false)}
+	></button>
+{/if}
+<section class:hidden={!appsShown} id="apps-picker">
 	<div id="apps-picker__content">
 		<button id="apps-picker__content-close-btn" onclick={() => (appsShown = false)}
 			><SvgCloseX width={24} height={24} /></button
