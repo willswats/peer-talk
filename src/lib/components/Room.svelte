@@ -59,12 +59,18 @@
 	<section id="room__talk">
 		<div id="room__main-content">
 			<div id="room__videos">
-				<Video username={userState.username} videoStream={userState.localStream} muted={true} />
+				<Video
+					username={userState.username}
+					videoStream={userState.localStream}
+					muted={true}
+					showUsername={true}
+				/>
 				{#each peerState.remoteStreams as remoteStream (remoteStream.id)}
 					<Video
 						username={getUsernameFromStream(remoteStream.id)}
 						videoStream={remoteStream}
 						muted={false}
+						showUsername={true}
 					/>
 				{/each}
 			</div>

@@ -112,6 +112,7 @@
 					username={userState.username}
 					videoStream={userState.localStream}
 					muted={true}
+					showUsername={false}
 					--background-color="var(--bg-tertiary)"
 				/>
 			{:else}

@@ -5,9 +5,10 @@
 		username: string;
 		videoStream: MediaStream | undefined;
 		muted: boolean;
+		showUsername: boolean;
 	}
 
-	let { username, videoStream, muted }: Props = $props();
+	let { username, videoStream, muted, showUsername }: Props = $props();
 
 	let videoElement: HTMLVideoElement | null = $state(null);
 	let hasVideo = $state(false);
@@ -31,8 +32,12 @@
 	>
 		<track kind="captions" />
 	</video>
-	{#if !hasVideo}
-		<span>{username}</span>
+	{#if showUsername}
+		{#if !hasVideo}
+			<span class="username-no-video">{username}</span>
+		{:else}
+			<span class="username-video">{username}</span>
+		{/if}
 	{/if}
 	{#if !muted}
 		<div id="volume-container">
@@ -62,18 +67,24 @@
 		position: relative;
 	}
 
-	span {
+	.username-video {
+		font-size: 1rem;
+		background-color: var(--bg-tertiary-opaque);
+		border-radius: var(--border-radius-large);
+		padding: 0.5rem;
+		overflow: hidden;
+		border: 1px solid var(--border);
+		position: absolute;
+		top: 0.25rem;
+		right: 0.25rem;
+	}
+
+	.username-no-video {
 		font-size: 2rem;
-		background-color: var(--bg-tertiary);
+		background-color: var(--bg-tertiary-opaque);
 		border-radius: var(--border-radius-large);
 		padding: 1rem;
 		overflow: hidden;
 		border: 1px solid var(--border);
-	}
-
-	@media screen and (max-width: 768px) {
-		span {
-			font-size: 1rem;
-		}
 	}
 </style>
