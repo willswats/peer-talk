@@ -69,13 +69,15 @@
 	input[type='range']::-webkit-slider-thumb {
 		cursor: pointer;
 		appearance: none;
-		background-color: var(--border);
+		color: var(--blue);
+		background-color: var(--blue);
 		border-radius: var(--border-radius-large);
 	}
 
 	input[type='range']::-moz-range-thumb {
 		cursor: pointer;
 		border: none;
+		color: var(--blue);
 		background-color: var(--blue);
 		border-radius: var(--border-radius-large);
 	}
