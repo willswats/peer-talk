@@ -69,6 +69,7 @@
 	input[type='range']::-webkit-slider-thumb {
 		cursor: pointer;
 		appearance: none;
+		-webkit-appearance: none;
 		color: var(--blue);
 		background-color: var(--blue);
 		border-radius: var(--border-radius-large);
