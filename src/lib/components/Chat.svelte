@@ -171,8 +171,8 @@
 		background-color: transparent;
 		border-radius: var(--border-radius-normal);
 		position: absolute;
-		right: 1.5rem;
-		bottom: 0.5rem;
+		right: 1rem;
+		bottom: 0.4rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
