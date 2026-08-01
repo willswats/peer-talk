@@ -5,10 +5,14 @@
 		muted: boolean;
 	}
 
+	import { slide } from 'svelte/transition';
+	import { SvgVolumeUpLine } from '$lib/components/svg';
+
 	let { username, videoStream, muted }: Props = $props();
 
 	let videoElement: HTMLVideoElement;
 	let hasVideo = $state(false);
+	let displayVolume = $state(false);
 	let volume = $state(100);
 
 	$effect(() => {
@@ -25,30 +29,39 @@
 	}
 </script>
 
-<div class:hidden={!hasVideo}>
+<div class:hidden={!hasVideo} id="video-container">
 	<video bind:this={videoElement} autoplay playsinline controls={false} {muted}>
 		<track kind="captions" />
 	</video>
-	{#if muted}
-		<div id="input-container"></div>
-	{:else}
-		<div id="input-container">
-			<input
-				min="0"
-				max="100"
-				step="1"
-				type="range"
-				bind:value={volume}
-				oninput={handleVolumeChange}
-			/>
+	{#if !muted}
+		<div id="button-container">
+			<button
+				onclick={() => {
+					displayVolume = !displayVolume;
+				}}><SvgVolumeUpLine width={24} height={24} /></button
+			>
 		</div>
+		{#if displayVolume}
+			<div id="input-container" transition:slide={{ duration: 300, axis: 'y' }}>
+				<input
+					min="0"
+					max="100"
+					step="1"
+					type="range"
+					bind:value={volume}
+					oninput={handleVolumeChange}
+				/>
+			</div>
+		{/if}
 	{/if}
 </div>
 {#if !hasVideo}
-	<div>
+	<div id="video-container">
 		<span>{username}</span>
 		{#if muted}
-			<div id="input-container"></div>
+			<div id="button-container">
+				<SvgVolumeUpLine width={24} height={24} />
+			</div>
 		{:else}
 			<div id="input-container">
 				<input
@@ -70,7 +83,7 @@
 		height: 100%;
 	}
 
-	div {
+	#video-container {
 		width: 100%;
 		height: 100%;
 		background-color: var(--background-color, var(--bg-secondary));
@@ -82,6 +95,7 @@
 		justify-content: center;
 		align-items: center;
 		border: 1px solid var(--border);
+		position: relative;
 	}
 
 	span {
@@ -93,16 +107,24 @@
 		border: 1px solid var(--border);
 	}
 
+	button {
+		padding: 1rem;
+	}
+
 	input {
-		position: absolute;
+		padding: 0;
 	}
 
 	#input-container {
-		position: relative;
 		display: flex;
-		height: 1.5rem;
 		background-color: transparent;
 		border: none;
+	}
+
+	#button-container {
+		position: absolute;
+		bottom: 0;
+		right: 0;
 	}
 
 	@media screen and (max-width: 768px) {
