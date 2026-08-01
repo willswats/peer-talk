@@ -191,37 +191,6 @@
 		transform: scale(1.05);
 	}
 
-	input[type='range'] {
-		cursor: pointer;
-		appearance: none;
-		background-color: transparent;
-		border: none;
-	}
-
-	input[type='range']::-webkit-slider-thumb {
-		cursor: pointer;
-		appearance: none;
-		background-color: var(--text);
-	}
-
-	input[type='range']::-moz-range-thumb {
-		cursor: pointer;
-		border: none;
-		background-color: var(--text);
-	}
-
-	input[type='range']::-webkit-slider-runnable-track {
-		background: var(--bg-tertiary);
-		height: 0.5rem;
-		border-radius: var(--border-radius-normal);
-	}
-
-	input[type='range']::-moz-range-track {
-		background: var(--bg-tertiary);
-		height: 0.5rem;
-		border-radius: var(--border-radius-normal);
-	}
-
 	@media screen and (max-width: 768px) {
 		button {
 			font-size: 1rem;
