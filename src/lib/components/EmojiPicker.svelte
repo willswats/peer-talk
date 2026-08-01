@@ -1,42 +1,13 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	interface EmojiPicker {
 		onEmojiSelect: (emoji: string) => void;
 	}
 
 	let { onEmojiSelect }: EmojiPicker = $props();
-
-	let emojiPickerContainer: HTMLDivElement;
-	let picker: any = $state(null);
-
-	onMount(async () => {
-		const { Picker } = await import('emoji-picker-element');
-
-		picker = new Picker({
-			locale: 'en'
-		});
-
-		if (emojiPickerContainer) {
-			emojiPickerContainer.appendChild(picker);
-		}
-
-		picker.addEventListener('emoji-click', (event: any) => {
-			onEmojiSelect(event.detail.unicode);
-		});
-	});
-
-	$effect(() => {
-		return () => {
-			if (picker) {
-				picker.remove();
-				picker = null;
-			}
-		};
-	});
+	import { emojiPicker } from '$lib/actions/emojiPicker';
 </script>
 
-<div bind:this={emojiPickerContainer} class="emoji-picker-container"></div>
+<div use:emojiPicker={onEmojiSelect} class="emoji-picker-container"></div>
 
 <style>
 	.emoji-picker-container {
