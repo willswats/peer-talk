@@ -11,7 +11,7 @@ interface userState {
 	deafened: boolean;
 	chatToggled: boolean;
 	appLaunched: boolean;
-	localStream: MediaStream | null;
+	localStream: MediaStream | undefined;
 }
 
 interface peers {
@@ -50,7 +50,7 @@ export const userState: userState = $state({
 	deafened: false,
 	chatToggled: false,
 	appLaunched: false,
-	localStream: null
+	localStream: undefined
 });
 
 export const peerState: peerState = $state({
@@ -91,7 +91,7 @@ export function resetUserState() {
 
 	userState.localStream?.getTracks().forEach((track) => track.stop());
 
-	userState.localStream = null;
+	userState.localStream = undefined;
 }
 
 export function resetPeerState() {

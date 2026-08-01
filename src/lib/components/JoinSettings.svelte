@@ -27,22 +27,27 @@
 			userState.localMicEnabled = true;
 
 			return stream;
-		} catch (error: any) {
-			if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
-				try {
-					const audioStream = await navigator.mediaDevices.getUserMedia({
-						audio: {
-							autoGainControl: true,
-							echoCancellation: true,
-							noiseSuppression: true
-						}
-					});
+		} catch (error: unknown) {
+			if (error instanceof DOMException) {
+				if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
+					try {
+						const audioStream = await navigator.mediaDevices.getUserMedia({
+							audio: {
+								autoGainControl: true,
+								echoCancellation: true,
+								noiseSuppression: true
+							}
+						});
 
-					userState.localMicEnabled = true;
+						userState.localMicEnabled = true;
 
-					return audioStream;
-				} catch (audioError) {
-					throw new Error('Could not access any media devices');
+						return audioStream;
+					} catch (audioError: unknown) {
+						const finalError = new Error('Could not access any media devices');
+						finalError.cause = audioError;
+
+						throw finalError;
+					}
 				}
 			} else {
 				throw error;
@@ -59,7 +64,7 @@
 	}
 
 	function handleOnClickJoinRoom() {
-		if (userState.localStream === null) {
+		if (userState.localStream === undefined) {
 			alertShown = true;
 			customAlertText =
 				'You must grant permissions and have an available microphone/camera to join the room.';

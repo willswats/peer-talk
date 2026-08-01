@@ -1,5 +1,5 @@
-export function toggleLocalAudio(localStream: MediaStream | null, localMicEnabled: boolean) {
-	if (localStream !== null) {
+export function toggleLocalAudio(localStream: MediaStream | undefined, localMicEnabled: boolean) {
+	if (localStream !== undefined) {
 		localMicEnabled = !localMicEnabled;
 		localStream.getAudioTracks()[0].enabled = localMicEnabled;
 	}

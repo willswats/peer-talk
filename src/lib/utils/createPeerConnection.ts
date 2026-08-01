@@ -10,9 +10,9 @@ export function createPeerConnection(socket: Socket, socketId: string) {
 		]
 	});
 
-	if (userState.localStream !== null) {
+	if (userState.localStream !== undefined) {
 		userState.localStream.getTracks().forEach((track: MediaStreamTrack) => {
-			if (userState.localStream === null) return;
+			if (userState.localStream === undefined) return;
 			pc.addTrack(track, userState.localStream);
 		});
 	}

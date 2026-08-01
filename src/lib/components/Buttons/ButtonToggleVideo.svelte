@@ -4,7 +4,7 @@
 	import { Button } from '$lib/components/Buttons';
 
 	function toggleLocalVideo() {
-		if (userState.localStream !== null && userState.localStream?.getVideoTracks().length > 0) {
+		if (userState.localStream !== undefined && userState.localStream?.getVideoTracks().length > 0) {
 			userState.localVideoEnabled = !userState.localVideoEnabled;
 			userState.localStream.getVideoTracks()[0].enabled = userState.localVideoEnabled;
 		}

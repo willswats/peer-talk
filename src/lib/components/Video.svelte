@@ -3,7 +3,7 @@
 
 	interface Props {
 		username: string;
-		videoStream: MediaStream | null;
+		videoStream: MediaStream | undefined;
 		muted: boolean;
 	}
 
