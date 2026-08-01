@@ -81,6 +81,7 @@
 		color: var(--blue);
 		background-color: var(--blue);
 		border-radius: var(--border-radius-large);
+		margin-top: -0.25rem;
 	}
 
 	input[type='range']::-moz-range-thumb {
