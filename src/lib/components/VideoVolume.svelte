@@ -3,7 +3,7 @@
 	import { SvgVolumeUpLine } from '$lib/components/svg';
 
 	interface Props {
-		videoElement: HTMLVideoElement;
+		videoElement: HTMLVideoElement | null;
 	}
 
 	let { videoElement }: Props = $props();

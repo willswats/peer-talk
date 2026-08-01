@@ -20,22 +20,26 @@
 	});
 </script>
 
-<div class:hidden={!hasVideo} id="video-container">
-	<video bind:this={videoElement} autoplay playsinline controls={false} {muted}>
+<div id="video-container">
+	<video
+		class:hidden={!hasVideo}
+		bind:this={videoElement}
+		autoplay
+		playsinline
+		controls={false}
+		{muted}
+	>
 		<track kind="captions" />
 	</video>
+	{#if !hasVideo}
+		<span>{username}</span>
+	{/if}
 	{#if !muted}
-		<VideoVolume {videoElement} />
+		<div id="volume-container">
+			<VideoVolume {videoElement} />
+		</div>
 	{/if}
 </div>
-{#if !hasVideo}
-	<div id="video-container">
-		<span>{username}</span>
-		{#if !muted}
-			<VideoVolume {videoElement} />
-		{/if}
-	</div>
-{/if}
 
 <style>
 	video {
