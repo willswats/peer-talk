@@ -25,15 +25,17 @@
 		}}><SvgVolumeUpLine width={24} height={24} /></button
 	>
 	{#if displayVolume}
-		<input
-			transition:blur={{ duration: 300 }}
-			min="0"
-			max="100"
-			step="10"
-			type="range"
-			bind:value={volume}
-			oninput={handleVolumeChange}
-		/>
+		<div id="video-volume__input">
+			<input
+				transition:blur={{ duration: 300 }}
+				min="0"
+				max="100"
+				step="10"
+				type="range"
+				bind:value={volume}
+				oninput={handleVolumeChange}
+			/>
+		</div>
 	{/if}
 </div>
 
@@ -46,6 +48,13 @@
 		bottom: 0.5rem;
 	}
 
+	#video-volume__input {
+		display: flex;
+		background-color: var(--bg-tertiary-opaque);
+		padding: 0.5rem;
+		border-radius: var(--border-radius-normal);
+	}
+
 	button {
 		display: flex;
 		padding: 0.5rem;
@@ -56,11 +65,8 @@
 	}
 
 	input[type='range'] {
-		display: flex;
-		background-color: var(--bg-tertiary-opaque);
-		padding: 0.5rem;
-		border-radius: var(--border-radius-normal);
 		width: 10rem;
+		height: 1rem;
 		cursor: pointer;
 		appearance: none;
 		border: none;
