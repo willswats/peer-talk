@@ -67,6 +67,8 @@
 	}
 
 	input[type='range']::-webkit-slider-thumb {
+		height: 1rem;
+		width: 1rem;
 		cursor: pointer;
 		appearance: none;
 		-webkit-appearance: none;
@@ -76,6 +78,8 @@
 	}
 
 	input[type='range']::-moz-range-thumb {
+		height: 1rem;
+		width: 1rem;
 		cursor: pointer;
 		border: none;
 		color: var(--blue);
