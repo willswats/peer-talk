@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { userState, peerState } from '$lib/state.svelte';
 	import { disconnectUser } from '$lib/utils/disconnectUser';
+	import Toast from '$lib/components/Toast.svelte';
 
 	import Video from '$lib/components/Video.svelte';
 	import Chat from '$lib/components/Chat.svelte';
@@ -56,6 +57,7 @@
 		>Are you sure you want to disconnect from this room?</CustomAlert
 	>
 	<AppPicker bind:appsShown />
+	<Toast text="Click the button in the bottom left to share the room link with friends!" />
 	<section id="room__talk">
 		<div id="room__main-content">
 			<div id="room__videos">
