@@ -82,7 +82,9 @@
 				<ButtonDeafen />
 				<ButtonToggleVideo />
 				<Button onclick={() => (appsShown = true)}>
-					<SvgApps width={24} height={24} />
+					<span class="svg-container--small">
+						<SvgApps />
+					</span>
 				</Button>
 				<ButtonDisconnect />
 			</div>

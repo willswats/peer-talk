@@ -70,9 +70,11 @@
 		<h2>Built for privacy. Built to be extended.</h2>
 		<div id="home__grid">
 			<div class="home__grid-item">
-				<span class="home__grid-item-svg">
-					<SvgChatPrivate width={80} height={80} />
-				</span>
+				<div class="home__grid-item-svg">
+					<span class="svg-container--large">
+						<SvgChatPrivate />
+					</span>
+				</div>
 				<div class="home__grid-item-text">
 					<h3>Private Peer-to-Peer Calls</h3>
 					<p>
@@ -82,9 +84,11 @@
 				</div>
 			</div>
 			<div class="home__grid-item">
-				<span class="home__grid-item-svg">
-					<SvgApps width={80} height={80} />
-				</span>
+				<div class="home__grid-item-svg">
+					<span class="svg-container--large">
+						<SvgApps />
+					</span>
+				</div>
 				<div class="home__grid-item-text">
 					<h3>Collaborative Apps</h3>
 					<p>
@@ -94,9 +98,11 @@
 				</div>
 			</div>
 			<div class="home__grid-item">
-				<span class="home__grid-item-svg">
-					<SvgStore width={80} height={80} />
-				</span>
+				<div class="home__grid-item-svg">
+					<span class="svg-container--large">
+						<SvgStore />
+					</span>
+				</div>
 				<div class="home__grid-item-text">
 					<h3>App Marketplace</h3>
 					<p>
@@ -111,27 +117,33 @@
 				</div>
 			</div>
 			<div class="home__grid-item">
-				<span class="home__grid-item-svg">
-					<SvgChatLine width={80} height={80} />
-				</span>
+				<div class="home__grid-item-svg">
+					<span class="svg-container--large">
+						<SvgChatLine />
+					</span>
+				</div>
 				<div class="home__grid-item-text">
 					<h3>Rich Chat</h3>
 					<p>Send messages with full emoji support.</p>
 				</div>
 			</div>
 			<div class="home__grid-item">
-				<span class="home__grid-item-svg">
-					<SvgVideoChat width={80} height={80} />
-				</span>
+				<div class="home__grid-item-svg">
+					<span class="svg-container--large">
+						<SvgVideoChat />
+					</span>
+				</div>
 				<div class="home__grid-item-text">
 					<h3>Call Controls</h3>
 					<p>Mute, deafen, or hide your video with a single click.</p>
 				</div>
 			</div>
 			<div class="home__grid-item">
-				<span class="home__grid-item-svg">
-					<SvgOpenSource width={80} height={80} />
-				</span>
+				<div class="home__grid-item-svg">
+					<span class="svg-container--large">
+						<SvgOpenSource />
+					</span>
+				</div>
 				<div class="home__grid-item-text">
 					<h3>Free & Open Source</h3>
 					<p>Licensed under AGPL 3.0.</p>
@@ -144,8 +156,12 @@
 			class="svg-link"
 			href="https://github.com/willswats/peer-talk"
 			target="_blank"
-			rel="noopener noreferrer"><SvgGitHub width={24} height={24} /></a
+			rel="noopener noreferrer"
 		>
+			<span class="svg-container--small">
+				<SvgGitHub />
+			</span>
+		</a>
 		<a href="https://williamwatson.dev" target="_blank" rel="noopener noreferrer"
 			>williamwatson.dev</a
 		>

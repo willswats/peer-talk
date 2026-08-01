@@ -13,5 +13,9 @@
 <Button
 	onclick={() => {
 		alertShown = true;
-	}}><SvgHangUp width={24} height={24} /></Button
+	}}
 >
+	<span class="svg-container--small">
+		<SvgHangUp />
+	</span>
+</Button>

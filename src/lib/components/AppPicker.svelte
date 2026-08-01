@@ -23,9 +23,11 @@
 {/if}
 <section class:hidden={!appsShown} id="apps-picker">
 	<div id="apps-picker__content">
-		<button id="apps-picker__content-close-btn" onclick={() => (appsShown = false)}
-			><SvgCloseX width={24} height={24} /></button
-		>
+		<button id="apps-picker__content-close-btn" onclick={() => (appsShown = false)}>
+			<span class="svg-container--small">
+				<SvgCloseX />
+			</span>
+		</button>
 		<div id="apps-picker__content-top">
 			<h1>
 				{#if !userState.appLaunched}

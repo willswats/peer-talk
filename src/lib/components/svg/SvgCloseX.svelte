@@ -1,16 +1,5 @@
-<script lang="ts">
-	interface Props {
-		width: number;
-		height: number;
-	}
-
-	let { width, height }: Props = $props();
-</script>
-
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	{width}
-	{height}
 	viewBox="0 0 24 24"
 	fill="none"
 	stroke="currentColor"
@@ -20,3 +9,10 @@
 	class="feather feather-x"
 	><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg
 >
+
+<style>
+	svg {
+		width: 100%;
+		height: 100%;
+	}
+</style>

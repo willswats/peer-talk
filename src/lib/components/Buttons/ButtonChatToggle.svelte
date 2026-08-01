@@ -10,8 +10,12 @@
 	--btn-border="var(--border)"
 >
 	{#if userState.chatToggled}
-		<SvgChatOffLine width={24} height={24} />
+		<span class="svg-container--small">
+			<SvgChatOffLine />
+		</span>
 	{:else}
-		<SvgChatLine width={24} height={24} />
+		<span class="svg-container--small">
+			<SvgChatLine />
+		</span>
 	{/if}
 </Button>

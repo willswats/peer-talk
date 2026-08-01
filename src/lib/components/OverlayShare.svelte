@@ -19,9 +19,11 @@
 	></button>
 	<section transition:fade={{ duration: 300 }} id="share">
 		<div id="share__content">
-			<button id="share__content-close-btn" onclick={() => (shareShown = false)}
-				><SvgCloseX width={24} height={24} /></button
-			>
+			<button id="share__content-close-btn" onclick={() => (shareShown = false)}>
+				<span class="svg-container--small">
+					<SvgCloseX />
+				</span>
+			</button>
 			<div id="share__content-top">
 				<h1>Invite Others</h1>
 				<p>Send the link to others to invite them</p>

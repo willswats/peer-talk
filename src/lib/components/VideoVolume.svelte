@@ -22,8 +22,12 @@
 	<button
 		onclick={() => {
 			displayVolume = !displayVolume;
-		}}><SvgVolumeUpLine width={24} height={24} /></button
+		}}
 	>
+		<span class="svg-container--small">
+			<SvgVolumeUpLine />
+		</span>
+	</button>
 	{#if displayVolume}
 		<div id="video-volume__input">
 			<input

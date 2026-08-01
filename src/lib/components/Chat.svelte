@@ -93,7 +93,9 @@
 					bind:this={emojiButton}
 					onclick={() => (showEmojiPicker = !showEmojiPicker)}
 				>
-					<SvgEmoticonLine width={24} height={24} />
+					<span class="svg-container--small">
+						<SvgEmoticonLine />
+					</span>
 				</button>
 			</form>
 		</div>

@@ -12,8 +12,12 @@
 	}}
 >
 	{#if userState.deafened}
-		<SvgVolumeMuteLine width={24} height={24} />
+		<span class="svg-container--small">
+			<SvgVolumeMuteLine />
+		</span>
 	{:else}
-		<SvgVolumeUpLine width={24} height={24} />
+		<span class="svg-container--small">
+			<SvgVolumeUpLine />
+		</span>
 	{/if}
 </Button>

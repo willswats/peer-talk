@@ -7,4 +7,8 @@
 </script>
 
 <OverlayShare bind:shareShown />
-<Button onclick={() => (shareShown = true)}><SvgUserAddLine width={24} height={24} /></Button>
+<Button onclick={() => (shareShown = true)}>
+	<span class="svg-container--small">
+		<SvgUserAddLine />
+	</span>
+</Button>

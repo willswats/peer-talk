@@ -86,6 +86,18 @@
 		outline: 2px solid var(--blue);
 	}
 
+	.svg-container--small {
+		display: flex;
+		width: 24px;
+		height: 24px;
+	}
+
+	.svg-container--large {
+		display: flex;
+		width: 80px;
+		height: 80px;
+	}
+
 	.hidden {
 		position: fixed;
 		top: 0;

@@ -13,8 +13,12 @@
 
 <Button onclick={toggleLocalVideo}>
 	{#if userState.localVideoEnabled}
-		<SvgVideoOnLine width={24} height={24} />
+		<span class="svg-container--small">
+			<SvgVideoOnLine />
+		</span>
 	{:else}
-		<SvgVideoOffLine width={24} height={24} />
+		<span class="svg-container--small">
+			<SvgVideoOffLine />
+		</span>
 	{/if}
 </Button>

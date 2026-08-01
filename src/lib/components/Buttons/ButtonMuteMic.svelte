@@ -11,8 +11,12 @@
 	}}
 >
 	{#if userState.localMicEnabled}
-		<SvgMicLine width={24} height={24} />
+		<span class="svg-container--small">
+			<SvgMicLine />
+		</span>
 	{:else}
-		<SvgMicOffLine width={24} height={24} />
+		<span class="svg-container--small">
+			<SvgMicOffLine />
+		</span>
 	{/if}
 </Button>
