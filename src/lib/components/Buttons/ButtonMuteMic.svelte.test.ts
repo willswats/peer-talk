@@ -30,7 +30,7 @@ test('Mute mic', () => {
 	expect(localStream.getAudioTracks()[0].enabled).toBe(false);
 });
 
-test('Handle null stream', () => {
-	const result = toggleLocalAudio(null, true);
+test('Handle undefined stream', () => {
+	const result = toggleLocalAudio(undefined, true);
 	expect(result).toBe(true);
 });
