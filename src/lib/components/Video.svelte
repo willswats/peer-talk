@@ -65,6 +65,7 @@
 		align-items: center;
 		border: 1px solid var(--border);
 		position: relative;
+		overflow: hidden;
 	}
 
 	.username-video {
@@ -80,11 +81,17 @@
 	}
 
 	.username-no-video {
-		font-size: 2rem;
+		font-size: 1.2rem;
 		background-color: var(--bg-tertiary-opaque);
 		border-radius: var(--border-radius-large);
 		padding: 1rem;
 		overflow: hidden;
 		border: 1px solid var(--border);
+	}
+
+	@media screen and (max-width: 768px) {
+		.username-no-video {
+			font-size: 1rem;
+		}
 	}
 </style>
