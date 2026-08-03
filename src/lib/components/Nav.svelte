@@ -11,10 +11,14 @@
 	<section class="nav-menu">
 		<a class:nav-menu-a-enabled={userOnPage(`/`)} href={resolve('/')}>Home</a>
 		{#if userState.roomId}
-			<a
-				class:nav-menu-a-enabled={userOnPage(`/room/${userState.roomId}`)}
-				href={resolve(`/room/${userState.roomId}`)}>Room</a
-			>
+			{#if userState.joinedRoom}
+				<button class:nav-menu-a-enabled={userOnPage(`/room/${userState.roomId}`)}>Room</button>
+			{:else}
+				<a
+					class:nav-menu-a-enabled={userOnPage(`/room/${userState.roomId}`)}
+					href={resolve(`/room/${userState.roomId}`)}>Room</a
+				>
+			{/if}
 		{:else}
 			<button onclick={createRoom}>Create Room</button>
 		{/if}
