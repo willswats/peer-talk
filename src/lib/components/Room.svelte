@@ -191,8 +191,15 @@
 		opacity: 1;
 	}
 
-	@media screen and (max-width: 1250px) {
+	@media screen and (max-width: 1700px) {
 		#room__videos {
+			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		}
+	}
+
+	@media screen and (max-width: 850px) {
+		#room__videos {
+			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		}
 	}

@@ -178,7 +178,7 @@
 		justify-content: center;
 	}
 
-	@media screen and (max-width: 1200px) {
+	@media screen and (max-width: 1250px) {
 		#chat {
 			position: absolute;
 			right: 0;
