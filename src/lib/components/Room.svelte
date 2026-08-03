@@ -7,7 +7,6 @@
 	import Chat from '$lib/components/Chat.svelte';
 	import AppPicker from '$lib/components/AppPicker.svelte';
 	import {
-		Button,
 		ButtonDisconnect,
 		ButtonMuteMic,
 		ButtonDeafen,
@@ -89,11 +88,11 @@
 				<ButtonMuteMic />
 				<ButtonDeafen />
 				<ButtonToggleVideo />
-				<Button onclick={() => (appsShown = true)}>
+				<button id="btn-apps" onclick={() => (appsShown = true)}>
 					<span class="svg-container--small">
 						<SvgApps />
 					</span>
-				</Button>
+				</button>
 				<ButtonDisconnect />
 			</div>
 			<div id="room__buttons-right">
@@ -158,10 +157,38 @@
 		flex: 1;
 	}
 
-	@media screen and (max-width: 1650px) {
-		#room__videos {
-			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-		}
+	#btn-apps {
+		position: relative;
+		background: var(--blue);
+		color: #fff;
+		border-radius: var(--border-radius-normal);
+		padding: 0.5rem;
+		transition: all 0.3s ease;
+		box-shadow: 0 0 10px var(--blue);
+	}
+
+	#btn-apps:hover {
+		box-shadow: 0 0 20px var(--blue);
+	}
+
+	#btn-apps::before {
+		content: 'APPS';
+		position: absolute;
+		top: -20px;
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 0.6rem;
+		background: var(--blue);
+		color: #fff;
+		padding: 2px 8px;
+		border-radius: 10px;
+		white-space: nowrap;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	#btn-apps:hover::before {
+		opacity: 1;
 	}
 
 	@media screen and (max-width: 1250px) {
@@ -174,6 +201,10 @@
 		#room__videos {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		}
+
+		#btn-apps {
+			padding: 0.25rem;
 		}
 	}
 </style>
